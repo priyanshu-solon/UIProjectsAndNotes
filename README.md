@@ -39,8 +39,3 @@ If you're curious about my broader learning journey:
 
 ## 🚧 Development Philosophy
 Learning happens through building. This repository reflects my growth as a developer—from writing reactive interfaces to debugging intricate UI behaviors. Each commit here carries learnings, mistakes, improvements, and a story.
-
----
-
-## 📁 Folder Structure
-Structure evolves as needed, but generally:
