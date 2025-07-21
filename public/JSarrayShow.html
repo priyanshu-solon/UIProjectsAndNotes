@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var categories = ["All", "Electronics", "Footwear", "Kids Fashion", "Women Fashion"];
+        function bodyload(){
+            categories.map(function(category){
+                  var li = document.createElement("li");
+                  li.textContent = category;
+                  document.querySelector("ol").appendChild(li);
+
+                  var option = document.createElement("option");
+                  option.text  = category;
+                  option.value =  category;
+                  document.querySelector("select").appendChild(option);
+
+                  var navItem = document.createElement("span");
+                  navItem.innerHTML = `<a href='${category}.html'> ${category} </a>`;
+                  navItem.style.marginRight = "30px";
+
+                  document.querySelector("nav").appendChild(navItem);
+
+                  var ulLi = document.createElement("li");
+                  ulLi.innerHTML = `<input type="checkbox"> <label>${category}</label>`;
+                  document.querySelector("ul").appendChild(ulLi);
+
+            })
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <ol>
+
+    </ol>
+    <select>
+
+    </select>
+    <nav>
+        <h2>Amazon</h2>
+    </nav>
+    <ul>
+
+    </ul>
+</body>
+</html>

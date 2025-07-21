@@ -1,0 +1,2542 @@
+2/06
+====
+
+Databases
+- MongoDB
+- MySQL
+
+Server Side
+- Node JS
+- Express JS
+
+Project
+- Backend 
+- jQuery
+- Sass 
+- Tailwind
+
+1. Business Backend 
+- It is responsible for managing a business using various software tools. 
+- It includes domains like
+	a) Purchasing
+	b) Sales & Marketing 
+	c) HR & Relations
+	d) CRM & SRM
+	e) Finance Management 
+- It is often known as "ERP" [ Enterprise Resource Planning ]
+- Popular ERP
+	a) SAP	
+	b) Oracle
+	c) Ariba etc.
+- The technical and functional people are involved in business backend. 
+
+
+2. Application Backend 
+- Every business domain requires a software application. 
+- Software application is built by using various technologies like
+  	a) Java
+ 	b) .NET
+	c) Python
+	d) PHP
+	e) Node  etc.
+- Application is designed in layers and application runs in tiers. 
+
+3. Tiers 
+- Application runs in tiers. 
+- The data required for application is kept in data center, which is a data tier. 
+- The business logic is defined for application and kept in application tier.
+- The users use application from presentation tier.
+- All web applications are 3-tier applications. 
+
+
+4. Layers
+- Application is designed in layers.
+- Web applications use a 3 layer architecture
+	a) Database layer
+		- Creating database
+		- Inserting, updating, reading and deleting data. 
+	
+	b) Business Layer
+		- Writing logic to handle communication between client & database.
+		- Handling request from client
+		- Communicating with database
+		- Sending response to client
+		- Creating API
+
+	c) Presentation Layer
+		- Designing UI
+		- Consuming and presenting API
+
+FAQ: What is difference between layers & tiers?
+Ans:  Application is built in layers.
+         Application runs in tiers.
+
+
+		Database Layer
+
+3/06
+====
+
+Roles & Responsibility:
+- Creating database
+- Storing data into database
+- Querying data
+- Manipulating data
+- Automating the tasks
+
+Purpose of Database Layer:
+- Multitier applications maintain their data in database tier.
+- A database layer is required to manage data on database tier.
+
+What is Database?
+- Database is an entity where you can store relational data.
+- It provides simplified techniques for managing data dynamically.
+
+
+What are the various types of databases?
+
+- RDBMS                MySQL
+- Document Based        MongoDB
+- NoSQL Database        MongoDB
+- SQL Database        MySQL
+- Cloud Database         Firebase, Amazon RDS
+- Distributed Database    Cassandra, Couchbase
+- Data Warehouse        Snowflake, Redshift
+  etc..
+
+What are the database models?
+1. Conceptual Model
+    - It specifies the modules that require data.
+    - Developer designs a model that comprises of information about modules
+      in your application that require data.
+
+2. Physical Model
+    - It comprises of table name, fields, and their data types.
+    - Every module is represented with a table.
+    - Every table comprises of fields and their data types according business      
+      requirements.
+
+3. Logical Model
+    - It configures the relationship between modules.
+    - Developer need to identify the fields that have relation with other modules.
+    - A relationship is configured using Primary & Foreign key.
+    - Logical model comprises of table name, field name and relation.
+
+4. Entity Model
+    - It configures complete business model for application data.
+    - It comprises of table, field, data type and relationship.
+    - Developers working in database layer have to design database for application
+      by following ER Diagram [ Entity Relation Diagram]
+
+
+                             MongoDB Database
+- Mongo is a cloud service.
+- MongoDB provides "Atlas" as cloud database.
+- MongoDB provides local community servers to manage offline data.
+- MongoDB is NoSQL database management system.
+  [ It doesn't require SQL as language for database]
+- It uses BSON / JSON data type.
+- It is document database.
+- It is semi structured data.
+- It supports entity model data. [ORM]
+- It supports Ad-hoc querying.
+
+https://www.mongodb.com/try/download/community
+
+4/06
+====
+What is Database?
+Types of Databases?
+Database Models
+MongoDB
+- It is NoSQL
+- Document based
+- Semi Structured / Structure Less
+- Schema Less
+- ORM
+- Ad-hoc querying
+- Data Replications
+
+
+
+Setup MongoDB on your device:
+
+1. Download and Install MongoDB community server
+    https://www.mongodb.com/try/download/community
+
+2. Select "MongoDB Compass" while installing database
+    - It is a GUI tool used to manage database.
+
+3. Start MongoDB server   
+    - programs -> services -> right click on MongoDB server -> start
+    - MongoDB server address is
+       
+            mongodb://127.0.0.1:27017
+                     (or)
+            mongodb://localhost:27017
+
+4. Open "MongoDB Compass" which is a client tool required for communicating with MongoDB server.
+        Server            : It is the location where data is kept.
+        Client            : It is the location from where we manipulate the data.
+
+
+5. Click on "New Connection"
+
+6. Define connection string
+        mongodb://127.0.0.1:27017
+
+7. Save and connect
+
+
+8. You will find the default databases on server
+
+        a) admin    
+        b) local
+        c) config
+
+                        MongoDB Terminology
+
+1. Database            It is a store where data is kept.
+                    Every application stores its data in a database.
+
+2. Collection            It is the location where data for any specific module is stored.
+                    A single database can have multiple collections.
+                    Collection is structure less.
+                    [ It is similar to a table in structured database ]
+
+3. Document            In a collection every individual record is a document.
+                    Every document represents an object.
+                    Each document comprises of BSON data.
+
+4. Field                It refers to the key that stores a value.
+                    Keys are always string type.
+
+5. Embedded            It refers to a join.
+    Document
+
+
+                        MongoDB Shell  [mongosh]
+
+- It provides CLI [command line interface].
+- CLI is used to query and manipulate data through commands.
+- Select the connection name to open mongosh in MongoDB compass.
+- It opens a mongo terminal where you can execute the commands.
+
+1. To view the list of databases
+        > show dbs
+2. To view the current active database
+        > db
+3. To clear the current screen
+        > cls
+4. To create a new database
+        > use  database_name
+
+      It uses a logic, if database name exists then it will switch into the database.
+                         if database doesn't exist, then it creates a new database.
+
+
+    Note: Database is not displayed in the list if it doesn't contain any collection.
+
+5/06
+====
+
+Features & Issues with MongoDB
+Setup MongoDB
+Client & Server
+Terminology
+    - database
+    - collection
+    - document
+    - field
+    - embedded document
+MongoDB Compass
+Mongo Shell Commands [ CLI ]
+
+1. View list of all database
+
+        > show dbs
+
+2. View current active database
+
+        > db
+
+3. To create or switch into database
+       
+        > use  dbname
+
+   
+                        Creating Collection
+
+- MongoDB collection is an array of objects.
+- Collection is structure less or semi structured.
+- MongoDB provides the method "createCollection()" to create a new collection.
+- Current database related any command you have to invoke by using "db".
+
+            > db.createCollection()
+
+Syntax:
+             > db.createCollection(collectionName, { options });
+
+- Options are not mandatory you can skip options, however it takes the default values for options.
+
+- You can configure following options for a collection:
+
+    Option                Description
+    ---------------------------------------------------------------------------------------
+    autoIndexId [boolean]     It is a Boolean property that sets an unique ID for every
+                        document.
+                        It generates a unique ID automatically for every document
+                        when set to true.
+                        Its default value is true.
+   
+    max            [number]    It specifies the maximum number of records that a                                 collection can handle. You can limit the documents.
+
+
+    capped        [boolean]    It depends on the "max" property.
+
+                        If capped is set to true then it replaces the old document
+                        with new document when it reaches the max limit.
+
+                        If capped is false then it will not allow to add new docs
+                        after max limit.
+
+                        The default is false.
+   
+    size            [number]    It defines the memory allocated for collection.
+                        You can't store documents when allocated memory is full.
+               
+                        It varies according to device if not defined.
+                   
+                        It is defined in bytes.
+
+Syntax:
+  > db.createCollection("name", { autoIndexId: true/false,  max:number, size:number, capped:true/false })
+           
+
+                8 bits         =     1 byte
+                1024 bytes    =    1 kb
+                1024 kb        =     1 mb
+                1024 mb        =     1 gb
+                1024 gb        =     1 tb
+
+Ex:
+  > db.createCollection("categories", { autoIndexId: true, max:10, size:4194304, capped:true})
+ 
+  > db.createCollection("products")
+
+- To view the collections of current database
+
+  > show collections
+
+- To remove any specific collection you have to use "drop()" method
+
+  > db.collectionName.drop()
+  > db.customers.drop()
+
+- To remove any specific database, first switch into the database run the command
+   "dropDatabase()".
+
+   > db.dropDatabase()
+
+   
+                        Adding Documents
+
+- Every document represents an object.
+- Object is used to keep relative data together.
+- Object is a key and value collection.
+- Object keys are string type and value can be any type.
+
+        {
+           "key" : value,  
+           "key" : value
+        }
+
+- MongoDB value types can be Binary Stream type, which is often known as BSON.
+- BSON is similar to JSON types.
+- It supports all JavaScript types
+    a) Primitive
+    b) Non Primitive
+
+- To insert any document MongoDB provides the methods
+
+    a) insertOne()
+    b) insertMany()
+
+Syntax:
+    >db.collection.insertOne( {  } )
+    >db.collection.insertMany( [ { }, { },.. ] )
+
+Ex:
+      >db.products.insertOne( { id:1, name:"tv", cities:['delhi', 'hyd'], rating:{rate:4.2} })
+    >db.products.insertMany( [ { }, { } ] )
+
+9/06
+====
+
+- Creating Database
+- Creating Collection
+- Insert Documents into Collection
+
+                          Query Documents
+- MongoDB uses "find()" method to query documents from a collection.
+- Find can access and return one or multiple documents.
+
+Syntax:
+     > db.collection.find( { query } )
+     > db.products.find({ })                // returns all documents
+
+- You can configure query using various operators to filter and view the matching documents.
+
+         $eq            Equal to
+         $ne            Not Equal
+         $gt            Greater than
+         $gte        Greater than or equal
+         $lt            Less than
+         $lte            Less than or equal
+         $and        Logical AND
+         $or            Local OR
+
+Syntax:
+     > db.collection.find( { key: value } )        => return exact match
+
+Ex:
+     > db.fakestore.find( {id : 3} )
+     > db.fakestore.find( {category: 'electronics' } )
+
+Syntax: Query using condition
+
+      > db.collection.find( { field: {condition} } )
+     
+Ex:
+      > db.fakestore.find({ price:{$gte:600} })
+
+- You can query the documents with object type reference by enclosing in single quote.
+
+Syntax:
+     > db.collection.find( { 'field.key' : { condition } } )
+
+Ex:
+     > db.fakestore.find({ 'rating.rate': {$gte:4.5} })
+
+
+- You can add multiple expressions using "$and"  & "$or" operators.
+- "$and" returns the data only when all expressions evaluate to true.
+- "$or"  returns the data when any one expression evaluates to true.
+- Multiple expressions are enclosed in "[ ]".
+
+Syntax:
+      >db.collection.find({ $and: [ {exp1}, {exp2}, .. ] })
+
+Query: How to read all documents whose price is between 300 to 600.
+        - fakestore        : collection
+        - price            : field name
+
+ >db.fakestore.find({ $and: [ {price:{$gte:300}}, {price:{$lte:600}} ] })
+
+Query : Read all electronics with price above 500
+
+            category = electronics
+            price >= 500
+
+>db.fakestore.find({ $and: [ {category:"electronics"}, {price:{$gte:500}} ] })
+
+Query: Read all electronics & jewelery products from fakestore collection
+
+
+ > db.collection.find({ $or: [ { }, { } ] })
+
+Ex:	
+    >db.fakestore.find({$or: [ {category:"electronics"}, {category:"jewelery" } ]})
+
+
+Query: Read all electronics whose rating is above 4.6
+       
+        category: electronics
+        'rating.rate': 4.6
+
+    > db.fakestore.find({ $and: [ {category:"electronics"}, {'rating.rate': {&gt:4.6}} ] })
+
+Query: Read all jewelery products and other products whose rating is above 4.5
+
+   
+    > db.fakestore.find({ $or:[ {category:"jewelery"}, {'rating.rate':{$gt:4.5}} ] })
+
+Query: Read all jewelery & electronics between price 100 to 500.
+
+    >db.products.find({$and:[{$or:[{"category":"jewelery"},{"category":"electronics"}]},{"price":{$gte: 100,$lte: 500 } }] })
+    >db.products.find({$and:[{$or:[{"category":"jewelery"},{"category":"electronics"}]},{"price":{$gte:100}},{"price":{$lte:500}}]})
+
+10/06
+=====
+
+db.collection.find({
+$and: [
+{ price: { $gt: 500 } },
+{
+$or: [
+{ category: "electronics" },
+{ category: "jewellery" }
+]
+}
+]
+})
+
+Querying Data from Collection
+- find()
+- Operators
+   
+                        Querying Array Type
+
+- Array type is defined in a collection using array meta character "[ ]".
+
+Syntax:
+        {
+           shippedTo: [ 'Delhi', 'Hyd' ]
+        }
+
+- To search or query any content from array type MongoDB provides "$all" operator.
+- It can verify all elements and return only the matching documents from collection.
+
+Syntax:
+
+    >db.collection.find({ fieldname: { $all: ['element'] } })
+
+Ex:
+   > db.products.find({ shippedTo: { $all: [ 'Hyd' ] } })
+
+Ex:
+ collection : products
+
+{
+  "name": "Mobile",
+  "price": 15000,
+  "shippedTo": [
+    "Delhi",
+    "Mumbai"
+  ]
+},
+{
+  "name": "TV",
+  "price": 25000,
+  "shippedTo": [
+    "Hyd",
+    "Mumbai"
+  ]
+}
+
+                        Querying Date Type
+
+- MongoDB uses "$date" operator to configure a date type value.
+- Date must be in the format of ISO.
+   
+        "year-month-dateThours:minutes:seconds.milliSecondsZ"
+
+- Date is an object with ISO format and defined using  "$date" operator
+
+Syntax:
+       
+    {
+      "mfd" : {
+        "$date" : "yy-mm-ddThrs:min:sec.millSecZ"
+        }
+    }
+
+- To query date value MongoDB provides "ISODate()" function.
+- It is configured along with find() function.
+
+Syntax:
+   
+     >db.collection.find({ field: ISODate("yy-mm-ddThrs:min:sec.milliSec") })
+
+Ex:
+      >db.products.find({ mfd: ISODate("2025-04-22T14:20:41.000Z") })
+
+
+Ex:
+{
+    "name": "TV",
+  "price": 30000,
+  "mfd": {
+    "$date": "2025-03-22T14:20:41.000Z"
+  }
+},
+
+{
+  "name": "Mobile",
+  "price": 12000,
+  "mfd": {
+    "$date": "2025-04-22T14:20:41.000Z"
+  }
+}
+
+Note: You can search for any document and return only the first occurrence document that matches given condition.
+      It requires "findOne()" method to find and returns the first occurrence.
+
+Syntax:
+    > db.fakestore.find({category:"electronics"})            // returns all electronics
+    > db.fakestore.findOne({category: "electronics"})        // returns specific
+
+                           Updating Documents
+- MongoDB provides the methods
+    a) updateOne()
+    b) updateMany()
+- You have to find the relative document and update its data or fields.
+- Update requires following operators
+
+    $set            It sets a new value into specific field
+    $unset        It removes specific field
+    $rename        It allows to change field name.
+
+Syntax:
+    >db.collection.updateOne( { findQuery }, { updateQuery } )
+
+Ex: Change value in specific field
+
+       > db.fakestore.updateOne( {id:1}, { $set: { price: 400.44 } })
+
+Ex: Set rating as 4.6 for all products whose price is above 500
+
+    > db.fakestore.updateMany({price:{$gte:500}}, {$set:{'rating.rate':4.6}})
+
+- You can add new fields into document by using "$set"
+
+    >db.collection.updateOne({findQuery}, {$set: {newField:value}})
+
+Ex:
+    >db.products.updateOne({name:"TV"}, {$set: {stock:true}})
+
+- You can change the field name by using "$rename" operator
+
+Syntax
+    >db.collection.updateMany({}, {$rename:{ "old" : "new" }})    
+
+Ex:
+     >db.products.updateMany({},{$rename:{"mfd":"manufactured"}})
+
+- You can remove any specific field and its data by using "$unset" operator
+
+Syntax:
+    > db.collection.updateMany({ }, { $unset: "fieldname" })
+
+    note: Fieldname refers to name and value defined as object.
+   
+    > db.products.updateMany({}, { $unset: { stock: " " })
+
+                        Deleting Documents
+- MongoDB can remove documents by using
+
+    a) deleteOne()
+    b) deleteMany()
+
+- It uses find query to find and remove the data.
+
+Syntax:
+    >db.collection.deleteOne({ findQuery })
+
+    >db.fakestore.deleteMany({ category: "electronics" })
+    >db.fakestore.deleteOne({id:7})
+    >db.fakestore.deleteMany({'rating.rate':{$lte:3}})
+
+Basic CRUD
+- Creating Collection
+- Inserting Documents
+- Querying Documents
+- Updating Documents
+- Delete Documents
+
+11/06
+=====
+
+FAQ: How to drop collection and database?
+Ans:
+        >db.collection.drop()
+        >db.dropDatabase()
+
+
+                    MongoDB Schema Validation
+
+- Validation is the process of verifying user input.
+- Validation is required to ensure that contradictory and unauthorized data is not get stored into database.
+- MongoDB allows to configure a schema validation.
+- It is a validation defined for collection.
+- A collection can restrict the fields, data type and data limits.
+- Collection uses several options like
+        a) autoIndexId
+        b) max
+        c) size
+        d) capped
+- Collection also provides validation options like
+        a) validator
+        b) validationType / validationLevel
+        c) validationAction
+
+- Validator is used to define validation for fields
+- validationType defines strict or moderate validation.
+
+        a) strict        : It will not allow to by-pass the validation
+        b) moderate    : It allows to by-pass the validation with warning
+
+- validationAction defines the error return type, you can notify as
+
+        a) error        : As Error message    
+        b) warn        : As Warning message
+
+Syntax:
+  > db.createCollection("name", {  
+            validator:{ },
+            validationType:"strict",   | validationLevel: "strict"
+            validationAction:"error"
+        })
+
+- Validator is an object that configures validation schema by using "$jsonSchema"
+
+Syntax:
+   > db.createCollection("name", {
+
+             validator: {
+                $jsonSchema: { }
+             }
+        })
+
+- $jsonSchema is an object with following properties
+
+        a) bsonType
+        b) required
+        c) properties
+
+- Schema "bsonType" is always "object"  type.
+- Required is array that defines the fields allowed in collection.
+- Properties is an object with collection of fields and their validations.
+
+Syntax:
+    > db.createCollection("name", {
+
+          validator: {
+
+            $jsonSchema: {
+                   bsonType: "object",
+                   required: [ "field1", "field2",..],
+                   properties: { }
+            }            
+          }
+     })
+
+- Properties are configured for every field individually.
+- Each field comprises of data type, validation service, error message as description.
+
+Syntax:
+            properties : {
+                field1: {
+                bsonType: "data_type",
+                required: true,
+                minimum: value,
+                maximum: value,
+                description : "error message"
+                },
+                field2: { }
+                ....
+                ....
+            }
+
+- The bson types allowed by MongoDB for various data types are shown below
+
+Syntax:
+  > db.createCollection("users", {
+
+        validator: {
+            $jsonSchema: {
+                   bsonType: "object",
+                   required: [ "username", "age"  ],
+                   properties: {
+                    username: {
+                      bsonType: "string",
+                      description: "User Name Required"
+                    },
+                   age: {
+                     bsonType: "int",
+                     minimum:15,
+                     maximum:35,
+                     description: "Age 15 to 35 only"
+                   }
+                  }  // end of properties
+            }  // end of json schema
+          },  // end of validator
+         validationLevel: "strict",            // strict or moderate
+         validationAction: "error"            // error or warn
+           })
+
+                        MongoDB Aggregation
+
+12/06
+=====
+
+MongoDB Schema Validation
+- Configure Validation for New Collection
+
+Generate Rules for existing collection
+1. Create a new collection
+
+        > db.createCollection("products")
+
+2. Insert document into collection
+
+        > db.products.insertOne({id:1, name:"tv", price:4000, qty:2, stock:true})
+
+3. Go to database => select collection name  in MongoDB compass
+
+4. Go to "Validation" category
+
+5. Generate Rules
+ 
+Note: You can edit rules using edit option in Compass.
+
+
+                       MongoDB Aggregation
+- Aggregation is a framework use to filter, sort, group and perform various queries on data.
+- MongoDB provides different aggregation stages and operators.
+
+Stage                Description
+----------------------------------------------------------------------------------
+$match                It is used to filter documents [find]
+
+$group                It is used to group document based on specified key.
+                    Key refers to a field.
+
+$project                It is used to reshape the query. Such as including or excluding
+                    fields.
+
+$sort                It sorts documents. 1 for ascending -1 for descending.
+
+$limit                It limits the number of documents to display in result.
+
+$lookup                 It is used to group and fetch fields from multiple collections.
+
+
+Operators            Description
+---------------------------------------------------------------------------------------------------
+ $sum                finds the sum of values
+
+ $count                returns the count of values in a group
+
+ $multiply                returns the product
+
+ $avg                finds the average of values
+
+ etc..
+
+Syntax: Aggregation Stage
+
+    > db.collection.aggregate([ { } ])
+
+- Aggregate() is a method that comprises of collection of queries.
+
+Query: Get only id, title and price from products
+
+    > db.products.aggregate([ { $project: { id:1, title:1, price:1 } } ])
+
+Query: Get only electronic products
+
+    > db.products.aggregate([ { $match: {category: "electronics"} } ])
+
+Query: Get all electronics with only title and price
+
+        > db.products.aggregate([ { $match: {category: "electronics"} }, { $project: { title:1, price:1 } } ])
+
+FAQ: Without aggregation how you can access multiple categories?
+      [without using logical $and, $or]
+Ans:  By using "$in"
+
+    > db.products.find({category:{$in: ["electronics", "jewelery"]}})
+
+Query: Find all products whose category is electronics or jewelery and rating is
+        above 4.
+
+    > db.products.find({$and:[{category:{$in:["electronics", "jewelery"]}}, {'rating.rate':{$gte:4}}]})
+
+
+Query : Sort all the products in descending order of price
+
+    > db.products.aggregate([{$sort:{price:-1}}, {$limit:4}])
+
+       limit:4        => returns top 3 results [ up to 4 ]
+
+Query:  Returns all electronics with price in descending order and display only top 2.
+
+    > db.products.aggregate([{$match:{category:"electronics"}}, {$sort:{price:-1}}, {$limit:3}])
+
+Query : Return all electronics in descending order of their rating.
+
+    > db.products.aggregate([{$match:{category:"electronics"}}, {$sort: {'rating.rate':-1}}])
+
+Query:  Group all products by their category and find the average price of products
+         in every category.
+
+  - $group is used to group by any field.
+  - The field is referred with unique "_id".
+  - Field name in group is defined with "$name".
+
+Syntax:
+      >db.collection.aggregate([ {$group:{ _id:"$fieldName", total|avg|count:"$field" }} ])
+
+Ex:
+   >db.fakestore.aggregate([ {$group: {_id:"$category", avgPrice:{$avg:"$price"} } } ])
+   >db.fakestore.aggregate([ {$group: {_id:"$category", totalPrice:{$sum:"$price"} } } ])
+
+Query: Get the total count of products in every category
+
+   >db.fakestore.aggregate([ {$group: {_id:"$category", count:{ $sum:1} }} ])
+
+
+                            MySQL
+
+13/06
+=====
+
+MySQL
+- It is a SQL based database management system.
+- It is maintained and evolved by Oracle.
+- It is schema based or structured Relational Database Management System.
+
+
+MySQL Terminology:
+
+1. Database            : It is a store that comprises of data.
+
+2. Table                 : It is an entity where data for every module is stored.
+
+3. Record            : It refers to a row where every individual data is kept.
+
+4. Field                : It refers to the columns header. Data is accessed with
+                      reference of field name in a table.
+
+5. View                : It refers to a virtual table that comprises of data from
+                      various queries.
+
+6. Stored Procedure    : It is used to refactor the code.
+                      Refactor is the process of encapsulating a set of statements
+                      into a reference, so that you can easily reuse the statements.
+
+7. Function            : It is used to build expression.
+                      It performs specified operation and evaluates a value.
+
+8. Trigger                : It is used to trigger a procedure or function.
+
+Note: Database can also have various tools like forms, reports, BI etc.
+     
+      Forms            : For configuring UI to interact with data
+      Reports            : For querying and printing the desired data
+      BI                : For business analysis
+
+MySQL Tools:
+
+1. MySQL Community Server
+    - It is to set up a server where you can store data.
+    - Database management happens in a community server.
+
+2. MySQL Workbench
+    - It is a client tool.
+    - It provides a GUI to interact with the community server.
+
+
+Setup & Install:
+
+1. Visit   https://dev.mysql.com/downloads/mysql/
+
+2. Download and Install 8x version [ LTS ]
+
+3. Download MSI Installer for your OS [windows 64]
+
+4. Start the installer and select "Custom" [ allows to select what you want to install ]
+
+5. Make sure that  "Run MySQL Configurator" is selected.
+
+    a) Perform an  in-place upgrade and configuration
+
+    b) In Account configuration : set password
+
+6. It installs MySQL Server and MySQL Workbench
+
+7. Start MySQL Server from services
+
+8. Open MySQL Workbench
+
+9. Click "New connection [+] "
+
+10. Specify a name for connection  "root" => Click OK
+
+11. Click on the connection  => verify password  
+ 
+
+                        SQL Commands
+
+- SQL is "Structured Query Language"
+- It is a language used by developers to communicate and interact with the database.
+- SQL commands are categorized into 3 types
+
+    a) DDL
+    b) DML
+    c) DCL
+
+- DDL is Data Definition Language used to create database, views, triggers, procedures etc.
+
+- DML is Data Manipulation Language used to filter, sort, update, delete etc.
+
+- DCL is Data Control Language used to authorize and authenticate.
+
+14/06
+=====
+
+SQL DDL [ Data Definition Language ]
+
+1. Creating a new database
+ - Database is a schema that can handle structured data.
+ - You can create database using 2 keywords
+        a) database
+        b) schema
+ - The command "create" is a DDL command used to create database, view, table,
+    procedure etc.
+ - You can create database using GUI button or using Query.
+ 
+        create database  database_name;
+        create schema    database_name;
+
+- After writing query, you have to select & execute query.
+- Every database comprises of default objects
+        a) tables
+        b) views
+        c) stored procedures
+        d) functions
+
+2. Using Database
+- Database is not active by default.
+- Server comprises of several databases.
+- You have to set database as default in order to use the database.
+
+Syntax:
+        use database_name;
+
+
+3. Creating a database table
+- Table in MySQL comprises of structured data.
+- It have a schema based data arranged into rows and columns.
+
+Syntax:
+    create  table   table_name
+    (
+        fieldname  datatype  constraint;
+       )
+
+- Filed name refers to column header, It is a key to handle value in table.
+- Data Type defines the data structure, which includes the type and range of data.
+- The commonly used MySQL data types are show below
+
+1. Number Types
+
+
+
+2. Date Types
+
+3. String Types
+
+
+MySQL Constraints:
+1. Primary Key
+    - It is used to configure a unique field.
+    - Every record requires an unique identification.
+    - Primary key allows to set restriction for field so that the value must be unique.
+      It can't be used by any another record in current table.
+    - It is set to "not null", hence every primary key field must be defined with value.
+    - A record can have only one field set with primary key.
+
+2. Unique Key
+    - It is used to set a unique identification for field
+    - Table can't have multiple primary keys but it can have multiple unique keys.
+    - Value of specified field must be unique.
+
+3. Default
+    - If value is not defined into any field of table then it takes "null" as value.
+    - You can set a default value, which is stored into specific field when value
+       is not defined.
+
+4. Not Null
+    - It is used for mandatory fields.
+    - It set them as required fields.
+    - A required field can't be null.
+    - It must have a value.
+
+5. Check
+    - It checks for a condition to store the specified value.
+    - It is just like a validator.
+    - It checks the value before it is stored into field.
+    - It restricts the value if it is not according to specified condition.
+
+6. Foreign Key
+    - It is used to configure a relationship between tables.
+    - The primary key of a table can be used as foreign key in another table.
+    - It configures relationships, which include
+        a) One to One
+        b) One to Many
+        c) Many to Many
+
+7. Auto Increment
+    - It increments and assigns a value into new record.
+    - It doesn't require to define a value, It increments from previous and sets into
+      new field.
+
+Syntax: Primary Key
+
+       create table  tblproducts
+       (
+           ProductId   INT    PRIMARY KEY,
+           Name       VARCHAR(20),
+           Price          DECIMAL(6,2)
+       )
+
+Note: To view the table structure you can run the query
+
+       > describe table_name;
+
+
+Syntax: Unique Key
+
+    create table tblproducts
+    (
+       ProductId  int primary key,
+       Name varchar(20) unique key
+    )
+
+Syntax: Not Null
+
+       create table tblproducts
+    (
+       ProductId  int primary key,
+       Name varchar(20) UNIQUE KEY NOT NULL
+
+16/06
+=====
+
+SQL DDL
+- Create Database
+- use
+- Create Table
+- MySQL Data Types
+- Constraints
+
+1. Primary Key
+2. Unique
+3. Not Null
+
+4. Default Constraint
+- It is used to set a default value into any field if it is left empty.
+- SQL will verify field value null, and sets default value.
+- Default value type can be any one of MySQL types.
+- It is always overridden with the custom value defined.
+
+Syntax:
+create table tblproducts
+(
+   ProductId  int primary key,
+   Name varchar(20) unique not null,
+   Qty int default 1
+)
+
+5. Check Constraint
+- It is used to set validation criteria for a value in any specific field.
+- It uses various conditions to verify the input value.
+- Conditions are configured using Boolean operators
+
+        >    greater than
+        >=    greater than or equal
+        <    less than
+        <=    less than or equal
+        < >    not equal
+        =    equal
+        AND  Logical AND   &&
+        OR      Logical OR      ||
+        NOT      Logical  NOT   !
+
+Syntax:
+create table tblproducts
+(
+   ProductId  int primary key,
+   Name varchar(20) unique not null,
+   Qty int default 1  check( Qty < 5)
+)
+       
+6. Auto Increment
+- It allows to increment the current value by 1 and add to the new record.
+- Initially it starts with 1.
+- It increments the previous value by 1 and adds to new record.
+- It can be only for numeric type data.
+- It uses "Enum" technique. [Enumeration]
+
+Syntax:
+create table tblproducts
+(
+   ProductId  int primary key auto_increment,
+   Name varchar(20) unique not null,
+   Qty int default 1  check(Qty<5)
+)
+
+7. Foreign Key Constraint
+- It creates a constraint that configures relationship between tables.
+- Relational database can be configured with various types of relationships like
+
+    a) One to One
+    b) One to Many
+    c) Many to Many
+
+- Relations are configured by using Foreign key constraint.
+- Foreign key is a reference of field which is the primary key of another table.
+
+Syntax:
+    CONSTRAINT   constraint_name    Foreign Key (foreign_key_field)
+
+     REFERENCES   reference_tableName(reference_field_name)
+
+     ON UPDATE     reference_type
+   
+     ON DELETE        reference type;
+
+- Constraint name is required to modify or delete the foreign key.
+- Foreign key field is current table field name, which you want as foreign key.
+- Reference table is the parent from where the foreign key is derived.
+- "on update" & "on delete" are reference operations, which defines actions to
+    perform when the parent field is deleted or modified.
+- You can have 3 reference type on update & delete
+   
+        a) STRICT [RESTRICT]
+        b) CASCADE
+        c) SET NULL
+
+Ex:
+1. Create Parent Table
+
+create table tblcategories
+(
+   CategoryId int primary Key auto_increment,
+   CategoryName varchar(30)
+)
+
+2. Create Products table
+
+create table tblproducts
+(
+   ProductId int primary key auto_increment,
+   Name varchar(30),
+   CategoryId int,
+   constraint fk_category foreign key(CategoryId) references tblcategories(CategoryId)
+)
+
+Note: Default reference type is Strict [Restrict].
+
+17/06
+=====
+
+Foreign Key Constrains
+Constraint References
+    a) RESTRICT [strict]
+    b) CASCADE
+    c) SET NULL
+
+2. Cascade
+ - It is a reference type defined  on update & on delete.
+ - It removes all relative records form child table, when parent foreign key field is removed.
+- It updates all relative records in child table when parent field is updated.
+
+Syntax:
+create table tblproducts
+(
+   ProductId int primary key auto_increment,
+   Name varchar(30),
+   CategoryId int,
+   constraint fk_category foreign key(CategoryId) references tblcategories(CategoryId)
+   on delete cascade on update cascade
+)
+
+Note: You can define multiple reference types.
+
+        "on delete  RESTRICT   on update CASCADE"
+
+3. SET NULL
+- It is a reference type that sets null value into child table field.
+- If parent foreign key field is modified or deleted then child table data is set to null in all reference fields.
+
+Syntax:
+create table tblproducts
+(
+   ProductId int primary key auto_increment,
+   Name varchar(30),
+   CategoryId int,
+   constraint fk_category foreign key(CategoryId) references tblcategories(CategoryId)
+   on delete set null on update set null
+)
+
+FAQ: Can we configure multiple foreign key fields in table?
+Ans:  Yes. A record in child table can map to different tables.
+      It provides multiple filter conditions for a record.
+
+Syntax:
+create table tblproducts
+(
+   ProductId int primary key auto_increment,
+   Name varchar(30),
+   CategoryId int,
+   VendorId int,
+
+   constraint fk_category foreign key(CategoryId) references tblcategories(CategoryId)
+   on delete set null on update set null,
+ 
+  constraint fk_vendor foreign key(VendorId) references tblvendors(VendorId)
+   on delete cascade on update cascade
+)
+
+create table  tblVendors(
+    VendorId  int  primary key  auto_increment,
+     VendorName varchar(20)
+)
+
+Summary:
+- Creating table
+- MySQL Data Types
+- Constraints
+    - Primary Key
+    - Foreign Key
+    - Unique
+    - Not Null
+    - Default
+    - Check
+    - Auto_Increment
+
+                      Inserting Values into Table
+
+- SQL provides DML [ Data Manipulation Language ] to manipulate data.
+- It includes inserting data into table.
+- The SQL command "INSERT" is used to insert data "INTO" specific table.
+
+Syntax:
+    INSERT  INTO  table_name  (field1, field2,..)  VALUES (value1, value2)
+
+- Field name refers to exactly the name defined for field in table.
+- Value must match all the constraints defined in table design.
+- Value must also match the exact data type.
+
+        a) Number type is directly defined as numeric [ 20 ]
+        b) String type is enclosed in single quote [ 'string' ]
+        c) Date type is defined as string in 'yy-mm-dd' format.
+
+- You can insert multiple records into table, by separating with "," delimiter.
+
+Ex:
+insert into tblcategories (CategoryId, CategoryName) values (3, 'Mobiles'), (4, 'watches');
+
+                    Querying Data from tables
+
+- The SQL "select" command allows to select and query the data from table.
+- It requires the field name or wild card to query.
+
+Syntax:
+        SELECT   FieldName1, FieldName2 from table_name;
+
+        SELECT  *  from table_name;
+
+- Using "*" in production level queries is not recommended.
+
+Ex:
+    select CategoryId, CategoryName from tblcategories;
+
+- You can define alias names for fields while querying.
+- It requires to use "AS" for aliasing.
+- Aliasing allows you to define a friendly name to field.
+
+Syntax:
+SELECT CategoryId AS 'Product Category Id', CategoryName AS 'Product Category Name' FROM tblcategories
+
+18/06
+=====
+
+Create Database, Tables
+Inserting Records
+Querying Records
+    - SELECT
+    - Wild Card "*"  [ searching for all fields ]
+    - Aliasing [ AS ]
+
+Expression in Query:
+- SELECT command can use various operators and built-in functions to configure an expression in query.
+- Expression requires fields that are configured in table.
+
+Syntax:
+  SELECT  FieldName FROM table;            // without expression
+
+  SELECT  FieldName  (expression) AS  alias_name  from table;
+
+Ex:
+ select Name, Price, Qty as 'Quantity', (Qty * Price) as Total from tblproducts;
+
+- A select query can be configured with
+    a) wild card
+    b) field name
+    c) alias name
+    d) expression
+        - operator
+        - function
+
+Syntax:
+    select * from table;            
+    select field from table;
+    select  field as alias from table;
+    select  field, (expression) as alias from table;
+
+Filtering Data in table:
+- Select query requires "WHERE" command to filter the data.
+- WHERE command uses an expression to filter data.
+- Expression can be configured by using operators or built-in functions.
+
+Syntax:
+    SELECT  * FROM  table  WHERE  (expression);
+
+- Comparison and Logical operators used in expression
+
+        >        Greater than
+        >=        Greater than or equal
+        <        Less than
+        <=        Less than or equal
+        < >        Not Equal
+        =        Equal
+        OR        Logical OR    ||
+        AND        Logical AND    &&
+        NOT        Logical NOT   !
+
+Query: Exactly matching data
+
+     > select * from tblproducts  where  ProductId=2
+    >  select * from tblproducts   where Rating=5
+
+Note: Select commands returns one or multiple matching records.
+      You can limit the results using "LIMIT" operator.
+
+Syntax:
+     select * from tblproducts where  price>=5000  limit  2;     returns top 2
+     select * from tblproducts where  price>=5000  limit  2,4;     returns 3rd occurrence
+         select * from tblproducts where  price>=5000  limit  2,10;     returns 3rd to 9th
+
+Query: Set all electronic category products whose rating is above 4.
+
+     select * from tblproducts where Category='electronics' AND Rating>4
+
+Query: Select all electronic and jewelery products with price between 4000 to 10000.
+
+    select * from tblproducts where (Category='electronics'  OR Category='Jewelery') AND (Price>=4000 AND Price<=10000);
+
+- To find and returns values in any specified range your can use "BETWEEN" operator.
+
+Syntax:
+
+SELECT  * FROM table  WHERE  Field  BETWEEN  lower_bound AND upper_bound;
+
+        lower_bound    : Minimum value
+        upper_bound    : Maximum value
+Ex:
+   select * from tblproducts where  Price  between  4000 and 1000;
+
+   Note: It includes the lower and upper bound value.
+
+Query:  Select all products with rating between 4 & 5. [including 4 & 5 ]
+
+    > select * from tblproducts where  Rating BETWEEN 4 AND 5;
+
+- You can use "IN" operator to return exactly the matching values from the set the set of defined values.
+
+Syntax:
+     > SELECT  * FROM  table  WHERE  field  IN (value1, value2,..);
+
+Query: Select electronics and jewelery products only.
+
+    > SELECT * FROM  tblProducts  WHERE  Category IN ('Electronics', 'Jewelery');
+
+Query: Select products with rating 3 & 5.
+
+    > SELECT * FROM  tblProducts WHERE  Rating IN (3, 5);
+
+Query: Select electronics and jewelery products with price between 4000 & 10000.
+        use IN & between operator.
+
+    > select * from tblproducts  where Category IN ('Electronics', 'Jewelery') AND (Price BETWEEN 4000 AND 10000)
+
+
+- You can query data using string values that requires various wild cards.
+- SQL provides "LIKE" operator to search in a string using wild card like
+        a) %
+        b) _
+
+- "%" refers to zero or more occurrences of a char.
+- "_"  refers to one occurrence of char.
+
+Syntax:
+select * from tblproducts  where Name LIKE  "%Silver%";      contains word Silver
+select * from tblproducts  where Name LIKE  "Silver%";        starting with word Silver
+select * from tblproducts  where Name LIKE  "%Silver";        ending with word Silver
+   
+ cat
+ bat        =>  LIKE   "_at"        
+ rat
+
+Sorting & Aggregation
+
+19/06
+=====
+
+Select Query
+WHERE
+BETWEEN
+IN
+LIKE
+
+ORDER BY:
+ - It allows to sort the data in table by specified field.
+ - Sorting order is controlled by using
+    a) ASC
+    b) DESC
+ - Default it is ascending order "asc".
+ 
+Syntax:
+    SELECT  * FROM  table  ORDER BY  field  ASC | DESC;
+
+    select  * from tblproducts  order by  Price  desc;
+
+Query: Get top 2 rating electronic products from products table.
+
+       select * from tblproducts where Category="Electronics" order by Rating desc limit 2;
+
+GROUP BY:
+  - It allows to group records based on specific set of values after the given expression.
+  - It uses an expression to and returns the group based on group criteria.
+
+Syntax:
+     SELECT  field , (expression)  from  table  group by  field;
+
+Ex:
+      select  count(*)  from tblproducts;        //  3
+
+      select  Category, count(*) from tblproducts group by Category;
+
+       O/P:
+        Electronics  2
+        Fashion        1
+
+Note: The fields used to group must contain similar data in specified field.
+
+IS NULL &  IS NOT NULL:
+- You can query data based on "null".
+- IS NULL refers to all records where specified field is having null value.
+- IS NOT NULL allows to ignore all records that are null.
+
+Syntax:
+    Select * from  table where field  IS NULL;
+    Select * from  table where field  IS NOT NULL;
+
+Ex:
+      SELECT * from tblproducts where Rating is not null;
+      SELECT * from tblproducts where Rating is null;
+
+DISTINCT
+  - It is used to extract only unique records from table.
+  - It allows to ignore the duplicates.
+  - It requires all field with same type of data.
+
+Syntax:
+    SELECT   DISTINCT  from tblproducts;
+
+Summary:
+SELECT
+WHERE
+IN
+BETWEEN
+ORDER BY
+GROUP BY
+LIKE
+IS NULL
+IS NOT NULL
+DISTINCT
+
+                          MySQL Functions
+
+- SQL provides several built-in functions for handle different types of data.
+- These functions allows to format and filter the data or evaluate any value by building expression.
+- SQL provides functions for string, number, date etc.
+
+String Functions:
+
+1. ASCII  
+  - It returns the ASCII code of a char.
+        A = 65, Z = 90
+      a = 97, z = 122
+ 
+  Syntax:
+        SELECT  ASCII('A');        // 65
+
+ - If you want to configure a table field name, then you have to defined the field name
+   that returns a string.
+ - It can read and return the ASCII of first char in the value.
+
+Ex:
+     SELECT Name, ascii(Name) from tblproducts
+
+2. CHAR_LENGTH
+  - It returns the total count of chars in specified field.
+   
+Ex:
+    SELECT Name, char_length(Name) from tblproducts
+
+     SELECT  char_length('Welcome to MySQL');
+
+3. SUBSTRING
+ - It returns the specified number of chars from given index in a string.
+
+Syntax:
+     SELECT  substring('string', startIndex, count_of_chars);
+
+Ex:
+     SELECT Name, substring(Name, 1, 3) from tblproducts
+
+     Note: The start index is 1. [ not zero ]
+
+4. SUBSTR
+ - It is alias of "substring".
+ - You can use as shorthand technique.
+
+Syntax:
+    SELECT  SUBSTR('string', startIndex, count_of_chars)
+
+
+5. TRIM
+ - It removes the leading spaces in a string.
+ 
+Syntax:
+    SELECT  TRIM('  string  ');
+
+6. CONCAT
+  - It is used to combine multiple string.
+  - It returns a single string that concat multiple strings.
+
+Syntax:
+    SELECT  CONCAT('string1', 'string2')
+
+Ex:
+       select  FirstName, LastName,  concat(FirstName, LastName) as 'Full Name' from tblproducts;
+
+Note: It is always mandatory to define the field name in query before you configure in
+      expression.
+
+      select  char_length(Name) from tblProducts;        // invalid
+      select Name, char_length(Name) from tblproducts;    // valid
+
+7. UPPER()
+   - It converts all chars to uppercase letters.
+
+8. LOWER()
+   - It converts all chars to lowercase letters.
+
+Syntax:
+     select Name, upper(Name) from tblproducts;
+
+MySQL Number Functions:
+
+1. COUNT()
+ - It returns the count of records that match the given condition.
+ - It requires "*" as wild card to count all records.
+
+Syntax:
+     select count(*)  from tblproducts
+     select count(*)  from tblproducts where (expression);
+
+2. AVG()
+
+3. MIN()
+
+4. MAX()
+
+etc..
+
+Ex:
+select Category, avg(Price) as 'Average Price' from tblproducts group by Category
+
+20/06
+=====
+
+MySQL Functions
+- String Functions
+- Number Functions
+
+                        Date Functions
+
+- You can handle date and time values using date functions.
+- It requires the data with date and time type.
+- Date and Time type allows following format
+
+    "year-month-day  hours : minutes : seconds"
+
+- To configure a field for date and time you have to use date and time type.
+
+Syntax:
+    create  table   tblname
+    (
+        field  DATE,                // yy-mm-dd
+        field  TIME,                // hrs:min:sec
+        field  DATETIME         //  yy-mm-dd  hrs:min:sec
+     )
+
+- Date and time values are inserted into table as string.
+
+Syntax:
+    insert  into  tblname (field)  values ('yy-mm-dd hrs:min:sec');
+
+- To access date and time values from a table you can use the following functions
+
+1. CURRENT_DATE()        : It returns current date value "2025-06-20".
+                          It's alias name is "curdate()".
+
+2. CURRENT_TIME()        : It returns current time value "9:40:33".
+                          It's alias name is "curtime()"
+
+3. NOW()                    : It returns current date and time.
+
+Ex:
+ - Create table
+
+create table logtable
+(
+   LogId int primary key auto_increment,
+   LogTime time
+)
+
+- Insert Record
+
+  insert into logtable (LogTime) values (curtime());
+
+4. WEEKDAY()        : It returns the weekday number  starting with "0=Monday".
+
+                      Syntax:
+                        SELECT  WEEKDAY(CURDATE());    // 4 => Friday
+
+5. DAYNAME()        : It returns the weekday name.
+
+                      Syntax:
+                        SELECT  DAYNAME(CURDATE());    //  Friday
+
+6. WEEK()            : It returns the week number in current year.
+   
+                      Syntax:
+                        select week(curdate());
+
+
+7. MONTH()            : It returns the month number from current date.
+                      1=January
+   
+                      Syntax:
+                          select month(curdate());    //6
+
+8. MONTHNAME()        : It returns the month name.
+
+                       Syntax:
+                        select monthname(curdate()); // June
+
+Query:
+     tblproducts
+         Name     Manufactured        
+     TV        2025-02-20
+     Mobile    2025-04-18
+
+         Get the product name and manufactured month name for all products from table
+     alias name "Manufactured Month"
+
+     Result:
+
+     Name   Manufactured Month
+
+Ex:
+     select Name, monthname(Manufactured) as 'Manufactured Month' from tblproducts
+   
+Query: Get all products that are manufactured after march month
+
+    select Name, monthname(Manufactured) as 'Manufactured Month' from tblproducts where month(Manufactured) > 3;
+
+Query: Get all electronics products that are manufactured between Jan and March.
+
+    select Name, monthname(Manufactured) as Manufactured Month from tblproducts where category='Electronics' and month(Manufactured) is between 1 and 3
+
+9. DATE()        : It returns date value from date and time
+
+10. TIME()        : It returns time value from date and time
+
+11. HOUR()        : It returns hour number.
+
+12. MINUTE()    : It returns minutes number.
+
+13. SECOND()    : It returns seconds number.
+
+14. MICROSECOND():  It returns micro seconds number.
+
+15. YEAR()        : It returns the year number.
+
+Query:
+       LogId   Name   LogTime
+       1        John    9:40:23
+        ...
+        ...
+
+     Get the total session time in minutes for every user.
+
+- Conversion Functions
+- Decision Making
+- Database Functions
+
+21/06
+======
+
+MySQL Converting Types
+
+1. cast()
+
+2. convert()
+
+- They are used to convert one data type to another.
+
+Syntax:
+     SELECT  CAST( 'data' as type);
+     SELECT  CONVERT('data', type);
+
+- CAST is a temporary conversion of type to use in relative location.
+- Convert is used to convert into specific type permanently
+
+Ex:
+     Select  CAST ('2025-02-10'  AS  DATE);    
+     Select  CONVERT ('2025-02-10', DATE);
+
+MySQL Decision Making Function:
+
+1. IF()        : It is decision making function that uses a condition and executes
+              actions on true or false.
+
+             Syntax:
+                SELECT Fields, IF( condition, true, false) from table;
+
+              You can use other operators and commands to filter data along with
+              decision making.
+
+Ex:
+ select Name, Rating, if(Rating>=4, 'Product is Good', 'Product is Average') as 'Reviews' from tblproducts where Rating IS NOT NULL
+
+
+
+2. CASE
+   - It allows to configure multiple conditions.
+   - It can execute exactly the block that matches given condition
+
+Syntax:
+      SELECT  fields,
+    CASE
+          WHEN condition THEN  statement,
+          WHEN condition THEN  statement,
+          ELSE statement
+    END AS aliasName FROM table
+
+Ex:
+select Name, Rating,
+  CASE
+    when Rating>=5 then 'Very Good'
+    when Rating=4 then 'Average'
+    when Rating<4 then 'Poor'
+  END AS 'Reviews'
+ from tblproducts where Rating IS NOT NULL
+
+Query:
+         Name     ShippedTo      
+         ---------------------------
+          TV         DELHI
+          Mobile    HYD
+          Watch    MUMBAI
+
+          if  city is delhi then delivery in 2 days
+                        hyd   then delivery on same day
+                Mumbai then delivery next day.
+
+          Create a new field 'Delivery Status' with delivery time
+
+MySQL Database Admin Functions
+
+1. USER()        : It returns current user
+
+                 Syntax :
+                    SELECT  user();    // root@localhost
+
+2.  Database()        : It returns the current active database
+
+                 Syntax:
+                    SELECT  database();
+
+3.  Version()        : It returns the current active installed version of MySQL
+
+                  Syntax:
+                    SELECT version();
+
+
+                           Updating Data & Tables
+
+- MySQL provides DML UPDATE command that allows to modify the existing details.
+- You can update table data using various operators.
+- Update command requires SET operator to update data in specific field.
+
+     Syntax:
+      UPDATE table SET  field=value  WHERE condition;
+
+Ex:
+    update tblproducts set Rating=4 where ProductId=4;
+
+
+Note: It is always required the match condition using a primary key field.
+      If you want to use a condition without primary key reference then make sure that
+      the "SQL_SAFE_UPDATES" is OFF [set to 0]
+
+            1 = ON        
+            0 = OFF
+
+- Run the following query before updating
+
+    SET SQL_SAFE_UPDATES = 0;
+
+- Now you can update data without KEY field
+
+    update tblproducts set Qty=3 where Price>=4000;
+
+- You can turn ON safe mode any time using
+   
+    SET SQL_SAFE_UPDATES = 1;
+
+23/06
+=====
+
+Select
+Update
+
+FAQ: What is the purpose of  "safe_update" ?
+Ans :  It is default set to ON so that it allows only to modify table data by using
+      key field.
+      If you want to modify data by using any field then you have turn off "safe_update".
+
+Syntax:
+        SET SQL_SAFE_UPDATES = 0;        // turn OFF
+        SET SQL_SAFE_UPDATES = 1;        // turn ON
+
+
+                          Modify Table Structure
+
+- Modifying table structure includes actions like
+    a) adding fields
+    b) changing field name
+    c) changing the field type and constraints
+    d) removing fields
+    e) adding and removing constraints etc.
+
+- SQL provides "ALTER" command with various helpers to modify table structure.
+- Helpers include
+    a) ADD
+    b) MODIFY
+    c) CHANGE
+    d) DROP etc.
+
+1. Adding a new field into data table
+
+- It requires "alter" with "add" helper.
+- It can add new column at specified position.
+- You can define position using "AFTER" and "FIRST" helpers.
+- "FIRST" will add new field as first field in table.
+- "AFTER" will add new field after specified field in table.
+
+Syntax:
+    ALTER  table ADD  new_field  datatype constraint AFTER  existing_field;
+    ALTER  table ADD  new_field  datatype constraint FIRST;
+
+- Alter can modify a table, view, procedure, constraint etc.
+- Hence you have define the reference type while modifying.
+
+Syntax:
+    Alter  table  table_name;
+    Alter      view  view_name;
+    etc.
+
+Ex:
+ALTER  TABLE tblvendors ADD VendorRating int AFTER VendorName;
+
+
+2. Modifying Column Structure
+- You can change the data type and constraints
+- It required MODIFY helper.
+
+Syntax:
+
+    ALTER  TABLE  table_name  MODIFY  field_name  datatype  constraint;
+
+Note: It is not recommended to modify the data type if field contains data.
+
+Ex:
+  ALTER TABLE tblvendors MODIFY VendorName varchar(30) NOT NULL UNIQUE;
+
+Note: You can't modify a foreign key field when it is SET to RESTRICT in another table.
+
+- You can modify multiple field simultaneously at the same time.
+
+Syntax:
+     alter table  table_name  modify  
+        field datatype constraint,
+        field datatype constraint;
+
+3. Changing Column Name
+
+  - If the column is not a foreign key column with restrict access then you can modify
+    the name by using "CHANGE" helper.
+ 
+  - Changing columns requires to define the old and new name using "COLUMN" helper.
+
+  - You can change the position of column while changing name.
+  - Position can be defined using  "FIRST & AFTER".
+
+Syntax:
+      ALTER TABLE table_name CHANGE COLUMN
+      old_name  new_name AFTER  field_name;
+
+  - It is mandatory to define the data type of field when you are changing its name
+    with a new name.
+
+Ex:
+ALTER TABLE tblvendors CHANGE COLUMN VendorRating VendorReviews int AFTER VendorName
+
+
+4. Removing Field from table
+
+- You can use ALTER command with "DROP" helper to remove any specific field.
+- As DROP can drop various component, you have to use COLUMN helper.
+- DROP can be used for table, database, column, constraint, keys etc.
+
+Syntax:
+   ALTER TABLE  table_name  DROP  COLUMN  field_name;
+
+- If it is used as foreign key with "restrict" access then you can't drop the field.
+- If defined as cascade it is removed from all child tables.
+- If defines as null it is set with null in all child tables.
+
+Ex:
+  alter table tblvendors drop VendorReviews
+
+5. Removing Primary Key Field
+
+- Drop helper requires the field name.
+- You have to define primary key field name in order to drop from table.
+- You can also drop primary key directly without specifying the key name.
+
+Syntax:
+    ALTER TABLE  table_name DROP  PRIMARY KEY;
+
+- You can add a new primary key by using "ADD" helper
+
+Syntax:
+     ALTER TABLE  table_name  ADD  PRIMARY KEY(key_field_name);
+
+- Make sure that there is only one primary key.
+- You can define multiple unique keys.
+
+6. Managing Foreign Keys
+
+- You can add a new foreign key by using  "ADD CONSTRAINT".
+
+Syntax:
+    ALTER  TABLE  table_name  ADD CONSTRAINT  
+    constaint_name  FOREIGN KEY(field_name)  REFERENCES  
+    reference_table(fieldname)  
+    ON UPDATE RESTRICT
+    ON DELETE CASCADE
+
+- To remove foreign key
+
+    ALTER TABLE DROP CONTRAINT contraint_name;
+
+               
+                               DELETE
+
+24/06
+=====
+
+Stored Procedure
+DELETE  COMMAND
+
+- It is used to remove records from a table.
+- The DELETE command uses query to find and remove records.
+- You can use various conditions to find by using "WHERE".
+
+Syntax:
+    DELETE   FROM  table  WHERE  condition;
+
+- You can limit the number of records to delete by using LIMIT helper.
+
+Syntax:
+    DELETE   FROM  table  WHERE  condition  LIMIT count;
+
+Ex:
+        delete from tblcategories where CategoryId=4
+
+Query: Delete all electronic products whose rating is less that or equal to 3.
+Ans:
+    DELETE  FROM tblproducts WHERE  (Category='Electronics') AND (Rating<=3);
+
+      DELETE  FROM tblproducts WHERE  (Category='Electronics') AND (Rating<=3) LIMIT 3;
+
+Summary:
+ - Insert
+ - Update
+ - Alter
+ - Delete
+ - Select
+
+FAQ: What is difference between update & alter?
+Ans:  Update is used to modify the data in table.
+     Alter is used to modify the table structure.
+
+
+                          Stored Procedures
+
+- Stored procedure is used to "refactor" the code.
+
+- Refactoring is a technique of encapsulating a set of statement into a reference memory so that you can easily reuse and extend the code.
+
+- Refactoring can be configured using
+
+        a) Function
+        b) Method
+        c) Procedure
+
+- Function refactors the code and finally returns a value.
+- Method refactors the code without any return value. It is always a void type.
+- Procedure is a hybrid type, which can switch between return and void.
+- SQL allows a stored procedure to configure the logic and actions to perform. So that you can access and reuse from various locations.
+- Procedures are required in database programming to reduce "Injection Attacks".
+- SQL Injection is the process of allowing queries to input and execute directly from client. It is not safe always.
+
+Configuring Stored Procedure:
+- Stored procedure can have multiple sets of statements to execute.
+- Hence it requires a DELIMETER  to separate the statements.
+- The default DELIMETER is "$$".
+- MySQL stored procedure configuration starts & end with a DELIMETER.
+
+Syntax:
+     DELIMITER $$        => start
+     
+
+     DELIMITER             => end
+
+- Procedure must be inside the delimiter scope.
+- Procedure can created by using "create" command.
+
+Syntax:
+       DELIMITER $$
+
+          CREATE  PROCEDURE   procedure_name()
+          BEGIN
+             .... statements...
+          END$$
+
+      DELIMITER
+
+- Procedure comprises of 3 basic elements in configuration
+
+    a) Declaration
+    b) Signature
+    c) Definition
+
+- Declaration is used to configure a procedure.
+- Signature is required to call the procedure.
+- Definition specifies the functionality. [actions to be performed]
+
+    create procedure sp_name()            => Declaration
+    sp_name()                        => Signature
+    beign.... end                        => Definition
+
+Ex:
+1. Create a procedure
+
+
+DELIMITER $$
+
+ create procedure GetHighRatedProducts()
+
+  BEGIN
+      select * from tblproducts where Rating>=5;
+  END$$
+ 
+DELIMITER
+
+2. Select the statements and execute in order to create and save procedure by name
+    "GetHighRatedProducts"
+
+3. You can call and run the procedure from any location
+
+    call GetHighRatedProducts();
+
+Parameters in Stored Procedure:
+--------------------------------------------
+
+- Procedure can be parameterized or parameter less.
+- Parameter is used to modify the procedure.
+- It allows to change according state and situation.
+- MySQL parameters are categorized into 3 types
+
+    a) IN
+    b) OUT
+    c) INOUT
+
+- "IN" parameter will not allow to change value in side procedure.
+-  It keeps the value as constant.
+
+Syntax:
+    create procedure sp_name(IN param  datatype)
+    begin
+        ... you can use parameter
+
+    end$$
+
+Ex: IN Parameter
+
+DELIMITER $$
+
+  create procedure GetByCategory(IN categoryName varchar(30))
+  begin
+      select * from tblproducts where Category=categoryName;
+  end$$
+ 
+DELIMITER
+
+- Every parameter is a required parameter.
+- The parameter defined in declaration is known as "Formal Parameter".
+- The parameter defined in call is known as "Actual Parameter".
+
+Syntax:    
+     call  sp_name(value);            // actual parameter
+
+    create sp_name(IN categoryName varchar(20))       // formal parameter
+    begin
+        ....
+    end$$
+
+Ex:
+     call  GetByCategory('Electronics');
+
+25/06
+=====
+
+Stored Procedure
+Parameters
+    - IN
+    - OUT
+    - INOUT
+
+OUT Parameter:
+- It is used to emit the result of any expression inside procedure.
+- It will not allow to pass a new value.
+- It contains a value, which is result of any expression.
+- The value may change according expression.
+- It is configured by using "@reference_name".
+
+Syntax:
+     create procedure spName(out  paramName)
+        Begin
+         ...
+        End$$
+   
+- It is defined with value inside procedure by using  "INTO" operator.
+- INTO assigns a value into the out parameters.
+
+Syntax:
+     call spName(@paramName);    // It can't have a value.
+                                   It must have only reference name.
+
+- The operator INTO will use any expression to store result into out parameter.
+
+Syntax:
+       Begin
+         select  expression  INTO  out_param ;
+       End$$
+
+- You can print the value of out parameter using "select".
+
+Syntax:
+       select @out_param;
+
+Ex:
+1. Create a procedure with out parameter
+
+DELIMITER $$
+
+ create procedure GetAvgPrice(out avgprice int)
+ begin
+    select avg(Price) into avgprice from tblproducts;
+ end$$
+ 
+DELIMITER
+
+2. Execute to save the procedure
+
+3. Call the procedure with reference of out parameter.
+   
+4. Select the out parameter to view result
+   
+    call  GetAvgPrice(@avgprice);
+    select @avgprice;
+
+Ex:
+
+DELIMITER $$
+
+ create procedure GetAvgPrice(in category varchar(20), out avgprice int)
+ begin
+    select avg(Price) into avgprice from tblproducts where Category=category;
+ end$$
+ 
+DELIMITER
+
+call GetAvgPrice('Fashion',@avgprice);
+select @avgprice as 'Average Price';
+                   
+Query:  Create a procedure to search products by rating above specified value, and get the count of products that match the condition.
+
+            GetProductsCount(4, @count); // must return how many products are
+                                           having rating above 4
+            GetProductsCount(3, @count);
+
+
+
+                        Variables in Procedure
+- Variables are storage locations in memory, where you can store a value and use it as a part of any expression.
+- SQL allows to configure variables inside procedure in order to store values and use with in the scope of procedure.
+- Variables are defined by using  "DECLARE" keyword.
+
+Syntax:
+            DECLARE   variable_name  datatype;
+
+- Variable configuration have 3 phases.
+
+    a) Declaring
+    b) Assignment
+    c) Initialization
+
+- Declaring comprises of variable name and type
+
+     DECLARE  total int;
+
+- You can assign into variable by using "SET" operator
+
+     SET  total = 200;
+
+- You can initialize into variable by using "DEFAULT".
+
+    DECLARE total int  DEFAULT 10;
+Ex:
+
+DELIMITER $$
+
+ create procedure AvgPrice(out result int)
+ begin
+     
+      declare avgprice int default 0;
+     
+      select avg(Price) into avgprice from tblproducts;
+     
+      set result = avgprice;
+     
+ end$$
+ 
+DELIMITER
+
+call  AvgPrice(@result);
+select @result;
+
+Conditional Statements:
+- You can use "IF" and "CASE" for conditions.
+- A stored procedure can configure statements to handle complex operations.
+
+Syntax:
+     If  condition  then
+       statements;
+    elseif  condition then
+       statements;
+    else
+       statements;
+    end if;
+
+Query: Create a procedure GetReview()
+        It gets specific product review based on Id.
+
+        GetReview(in id int, out review varchar(20))
+        begin
+
+           variable msg;   // it must store review message
+           variable rating;
+
+           if rating >=5   => good
+           if rating = 4    => average
+           if rating <4     => poor
+
+           store msg in @review;
+
+           print @review;
+
+
+
+Ex:
+
+DELIMITER $$
+
+ create procedure GetReview(in id int, out review varchar(20))
+ 
+ begin
+      declare rate int default 0;
+      declare msg varchar(20);
+     
+      select Rating into rate from tblproducts where ProductId=id;
+     
+      if rate>=5 then
+        set msg = 'Good';
+      elseif rate=4 then
+        set msg='Average';
+      elseif rate<4 then
+        set msg = 'Poor';
+     end if;
+     
+     set review = msg;
+   
+ end$$
+ 
+DELIMITER
+
+26/06
+======
+
+Ex:
+
+DELIMITER $$
+
+ create procedure GetReview(in id int, out review varchar(20))
+ 
+ begin
+      declare rate int default 0;
+      declare msg varchar(20);
+     
+      select Rating into rate from tblproducts where ProductId=id;
+     
+      if rate>=5 then
+        set msg = 'Good';
+      elseif rate=4 then
+        set msg='Average';
+      elseif rate<4 then
+        set msg = 'Poor';
+     end if;
+     
+     set review = msg;
+   
+ end$$
+ 
+DELIMITER
+
+call GetReview(1, @review);
+select @review;
+
+Summary:
+- Stored Procedure
+- Params [ In, Out]
+- Variables
+- Statements
+
+                             SQL Joins
+- Joins are used to compare values from two different tables.
+- You can compare data in tables by creating a Join.
+- Joins are categorized in to various types
+    a) Inner Join
+    b) Left Join
+    c) Right Join
+    d) Cross Join
+
+- Join is used to match data from left and right tables and return result according to the JOIN type defined.
+
+- It uses a select query to fetch data from multiple tables and create a join.
+
+Syntax:
+    SELECT  fields_form_both_tables AS alias_name from  LEFT_TABLE  
+    JOIN_TYPE  RIGHT_TABLE   ON  matching_query;
+
+
+    Inner Join        : It finds and returns only the matching data in both tables.
+
+    Left  Join            : It returns all records of left table, and all records of right
+                      table. However it set null into the right table if relative
+                      left table content is not found.
+
+    Right Join        : It returns all records of right table and set null into left
+                      table if matching data is not found.
+
+    Cross Join        : It sets null in both tables when matching data is not found.
+
+Syntax:
+1. Create 2 tables
+
+    allvendors
+   
+        VendorId        VendorName
+        1            Bajaj
+        2            Reliance
+        3            Chroma    
+        4.             BigC
+
+     hydvendors
+
+        VendorId        VendorName
+        1            Chroma
+        2            Bajaj
+
+2. Write the query
+
+SELECT allvendors.VendorId, allvendors.VendorName AS 'All Vendors',
+
+hydvendors.VendorId, hydvendors.VendorName AS 'Hyd Vendors' FROM
+
+allvendors INNER JOIN hydvendors ON
+
+allvendors.VendorName=hydvendors.VendorName;
+
+
+                         SQL Views
+- View is a virtual table
+- It can query content and save the result in the form a virtual table.
+- You can access and use the virtual table.
+- However your can't modify the data in view.
+- It is automatically updated from the physical the tables.
+
+Syntax:    
+    create  view   view_name  as query;
+
+- You can access the data from view using select command
+
+Syntax:
+    select  * from  view_name;
+
+Ex:
+create view electronic_products as select * from tblproducts where Category='Electronics';
+
+create view high_rated_products as select * from tblproducts where Rating >= 4;
+
+
+
+
+
+
+Summary:
+ MongoDB
+ MySQL

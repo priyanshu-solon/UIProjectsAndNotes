@@ -1,0 +1,5608 @@
+02/06
+=====
+
+Array Purpose
+Array Configuration
+Meta Character & Constructor
+ [ ]  , Array()
+Array Elements & Properties
+
+Reading Array Elements:
+
+1. toString()        returns all array elements separated with "," delimiter.
+
+
+2. join()            returns all array elements separated with custom delimiter.
+
+
+Syntax:
+    var values = ["A", "B", "C"];
+    values.toString();                //    A,B,C
+    values.join(' > ' );                //    A > B > C
+
+Ex:
+<script>
+     var menu = ["Home", "Electronics", "Mobiles", "Apple"];
+     document.write(menu.join( " / "));
+</script>
+
+
+3. forEach()        returns all array elements using synchronous technique.
+                It is an iterator with value and index.
+
+Syntax:
+    data.forEach(function(value, index){
+   
+        // use value & index
+
+    })
+
+4. map()            It returns all array elements using async technique.
+                It uses unblocking technique.
+
+Syntax:
+    data.map(function(value, index){
+   
+        // use value & index
+
+    })
+
+Ex:
+<script>
+     var menu = ["Home", "Electronics", "Mobiles", "Apple"];
+     menu.map(function(value, index){
+          document.write(`<li> [${index}]${value}</li>`);
+     })
+</script>
+
+
+
+5. You can use explicit iterators
+   
+    a) for..in        It reads and returns every property
+    b) for..of        It reads and returns every value
+
+
+Syntax:
+    for(var property in data)
+    {
+    }
+
+    for(var value of data)
+    {
+    }
+
+Ex:
+<script>
+     var menu = ["Home", "Electronics", "Mobiles", "Apple"];
+     for(var property in menu){
+          document.write(`[${property}] ${menu[property]}<br>`);
+     }
+</script>
+
+6. You can read and return conditional data using
+    a) find()
+    b) filter()
+
+    - find() returns the first occurrence value that matches given condition.
+    - filter() returns all values that match the given condition.
+
+Syntax:
+     data.find(function(value){
+
+        returns  condition;    
+
+    })
+
+    data.filter(function(value){
+
+        returns condition;
+   
+    })
+
+Ex:
+<script>
+     var sales = [45000, 70000, 24500, 67000, 25000];
+
+     var result = sales.filter(function(value){
+          return value >= 60000;
+     });
+
+     document.write(result);
+</script>
+
+Adding elements into array:
+
+1. push()            Adds new element(s) as last item(s).
+
+2. unshift()        Adds new element(s) as first item(s).
+
+3  splice()        Adds new element(s) at specified position.
+
+Syntax:
+    data.push("item1", "item2");
+    data.unshift("item1", "item2");
+    data.splice(startIndex, deleteCount,  Item1, Item2,..);
+
+Note: Delete count for slice must be zero, while adding elements without removing
+      existing elements.
+
+Ex:
+<script>
+     var categories = ["Kids","Women"];
+
+     categories.splice(1, 1 ,"Men", "Mobiles");
+     categories.map(function(category, i){
+          document.write(`[${i}] : ${category}<br>`);
+     })
+     
+</script>
+
+Removing elements from array:
+
+1. pop()        It removes and returns the last item.
+
+2. shift()        It removes and returns the first item.
+
+3. splice()    It removes specific item(s) from given index.
+
+4. slice()        It extracts items between specified index without removing.
+
+Syntax:
+    data.pop()
+    data.shift()
+    data.splice(startIndex,deleteCount)
+    data.slice(startIndex, endIndex)
+
+
+Sorting Array elements
+
+1. sort()        It arranges elements in ascending order.
+
+2. reverse()    It arranges elements in reverse order.
+
+Syntax:
+    data.sort().reverse()
+
+Note: Array sorts in a string format, it requires explicit methods to convert into number
+     and sort.
+
+
+Array de-structure:
+- It is the process of separating array elements into individual reference.
+- De-structure can be defined by using spread operator "..."
+
+Syntax:
+    var list1 = [ "A", "B"];
+    var list2 = [ "C", "D"];
+ 
+    var list3 = [ list1, list2] ;        // 2 elements
+    var list3 = [ ...list1, list2];        // 3 elements     [A, B, [C, D]];
+    var list3 = [ ...list1, ...list2];    // 4 elements      [A,B,C,D]
+
+Dynamically adding elements into page:
+
+1. Create html element by using  the document method   "createElement()".
+
+    Syntax:
+        document.createElement("p, h2, div, span, img, ...");
+
+2. Configure a reference for dynamically created element.
+
+    Syntax:
+   
+        var ref = document.creatElement("img");
+
+3. Configure the properties for element
+       
+    Syntax:
+            ref.property = value;
+
+4. Append element into page, you can append to body and any container in body.
+
+    Syntax:
+        document.querySelector("body").appendChild(ref);
+       
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script>
+          function UploadClick(){
+               var img = document.createElement("img");
+               img.width = "200";
+               img.height = "200";
+               img.src = "../public/images/women-fashion.jpg";
+               document.querySelector("div").appendChild(img);
+          }
+     </script>
+</head>
+<body>
+     <button onclick="UploadClick()">Upload Photo</button>
+     <br><br>
+     <div>
+     
+     </div>
+</body>
+</html>
+
+3/06
+====
+
+Ex: Presenting array elements
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var categories = ["All", "Electronics", "Footwear", "Kids Fashion", "Women Fashion"];
+        function bodyload(){
+            categories.map(function(category){
+                  var li = document.createElement("li");
+                  li.textContent = category;
+                  document.querySelector("ol").appendChild(li);
+
+                  var option = document.createElement("option");
+                  option.text  = category;
+                  option.value =  category;
+                  document.querySelector("select").appendChild(option);
+
+                  var navItem = document.createElement("span");
+                  navItem.innerHTML = `<a href='${category}.html'> ${category} </a>`;
+                  navItem.style.marginRight = "30px";
+
+                  document.querySelector("nav").appendChild(navItem);
+
+                  var ulLi = document.createElement("li");
+                  ulLi.innerHTML = `<input type="checkbox"> <label>${category}</label>`;
+                  document.querySelector("ul").appendChild(ulLi);
+
+            })
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <ol>
+
+    </ol>
+    <select>
+
+    </select>
+    <nav>
+        <h2>Amazon</h2>
+    </nav>
+    <ul>
+
+    </ul>
+</body>
+</html>
+
+Ex: Array Manipulations
+
+1. src/scripts/array.js
+
+
+var movies = [
+    "MISSION : IMPOSIBLE",
+    "FINAL DESTINATION"
+];
+
+function LoadMovies(){
+    document.getElementById("lstMovies").innerHTML = "";
+    movies.map(function(movie){
+         var option = document.createElement("option");
+         option.text  = movie;
+         option.value = movie;
+         document.getElementById("lstMovies").appendChild(option);
+    })
+    document.getElementById("lblCount").innerHTML =  `Total Count of Movies : ${movies.length}`;
+}
+
+function AddClick(){
+    var movieName = document.getElementById("txtMovie").value;
+    if(movies.indexOf(movieName.toUpperCase())===-1) {
+         movies.push(movieName.toUpperCase());
+        alert(`${movieName} Added to list`);
+        LoadMovies();
+        document.getElementById("txtMovie").value  = "";
+    } else {
+        alert(`${movieName} Exists`);
+    }
+}
+
+function SortAsc(){
+    movies.sort();
+    LoadMovies();
+}
+function SortDsc(){
+    movies.sort();
+    movies.reverse();
+    LoadMovies();
+}
+function DeleteClick(){
+    var selectedMovieName = document.getElementById("lstMovies").value;
+    var selectedMovieIndex = movies.indexOf(selectedMovieName);
+    var choice = confirm(`Delete ${selectedMovieName}\nAre you sure want to delete?`);
+    if(choice===true){
+        movies.splice(selectedMovieIndex, 1);
+        LoadMovies();
+    }
+}
+function ClearAll(){
+    movies.length = 0;
+    LoadMovies();
+}
+function EditClick(){
+    var movieName = document.getElementById("lstMovies").value;
+    document.getElementById("txtEditMovie").value = movieName;
+}
+function SaveClick(){
+    var newMovieName = document.getElementById("txtEditMovie").value;
+    var selectedMovieName = document.getElementById("lstMovies").value;
+    var selectedMovieIndex = movies.indexOf(selectedMovieName);
+
+    movies[selectedMovieIndex] = newMovieName;
+    LoadMovies();
+}
+
+2. array-manipulation.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="../src/scripts/array.js"></script>
+</head>
+<body class="container-fluid" onload="LoadMovies()">
+    <h2 class="bi bi-ticket text-center text-danger"> Book My Show - Admin Dashboard</h2>
+    <div class="w-25 mt-4">
+        <h2>Manage Movies</h2>
+        <div class="my-2 input-group">
+            <input class="form-control" id="txtMovie" type="text" placeholder="New Movie"> <button onclick="AddClick()" class="btn btn-primary">Add Movie</button>
+        </div>
+        <div class="mt-4">
+            <div class="my-2">
+                <button onclick="SortAsc()" class="btn btn-success bi bi-sort-alpha-down"></button>
+                <button onclick="SortDsc()" class="btn btn-success bi bi-sort-alpha-up mx-3"></button>
+            </div>
+            <select size="3" id="lstMovies" class="form-select"></select>
+            <div class="mt-2">
+                <span id="lblCount" class="fw-bold"></span>
+            </div>
+            <div class="mt-4">
+                <button onclick="EditClick()" data-bs-target="#edit" data-bs-toggle="modal" class="btn btn-warning bi bi-pen-fill"> Edit </button>
+                <div class="modal fade" id="edit">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Edit Movie</h3>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" class="form-control" id="txtEditMovie">
+                            </div>
+                            <div class="modal-footer">
+                                <button onclick="SaveClick()" data-bs-dismiss="modal" class="btn btn-success">Save</button>
+                                <button data-bs-dismiss="modal" class="btn btn-danger mx-2">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="DeleteClick()" class="btn btn-danger mx-3 bi bi-trash-fill"> Delete </button>
+                <button onclick="ClearAll()" class="btn btn-outline-danger bi bi-trash"> Clear </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+Ex: Tasks
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script>
+        var tasks = [];
+        function LoadTasks(){
+            tasks.map(function(task){
+                 
+                 var div = document.createElement("div");
+                 div.className = "alert alert-dismissible alert-success";
+                 div.innerHTML = `<div class="d-flex justify-content-between"> <span>${task}</span> <button class="bi bi-trash btn btn-danger"></button> </div>`;
+                 document.getElementById("tasksContainer").appendChild(div);
+            });
+        }
+        function AddClick(){
+            var task = document.getElementById("txtTask").value;
+            tasks.push(task);
+            LoadTasks();
+            document.getElementById("txtTask").value = "";
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="LoadTasks()">
+    <div class="w-50">
+        <h3>Add Task</h3>
+        <div class="input-group">
+            <input type="text" id="txtTask" class="form-control" placeholder="New Task">
+            <button class="btn btn-primary" onclick="AddClick()">Add</button>
+        </div>
+        <div class="mt-4" id="tasksContainer">
+
+        </div>
+    </div>
+</body>
+</html>
+
+                              Object Type
+
+4/06
+====
+
+Object Type
+
+- Object in computer programming is used to keep all relative data and logic together.
+- It enables easy reusability, extensibility and separation.
+- "Alan kay" introduced the concept of object in early 1960's.
+- JavaScript object is a key and value collection enclosed in a block { }.
+
+        {
+          key: value,
+          key: value
+        }
+
+- Key is always string type and value can be any type.
+
+Syntax:
+    var obj = {
+              id : 1,
+              name: "TV",
+              cities: [ "Delhi", "Hyd" ],
+              stock: true,
+              rating: { rate: 3.5, count: 500 },
+                  total : function() { }
+            }
+
+- You can access the values inside object using "this" keyword and outside object using object name.
+
+        obj.id
+        obj.total()
+
+Ex:
+<script>
+    var product = {
+        Name : "Samsung TV",
+        Price : 45000,
+        Qty : 1,
+        Total: function(){
+            return this.Qty * this.Price;
+        },
+        Print: function(){
+            document.write(`Name=${this.Name}<br>Price=${this.Price}<br>Qty=${this.Qty}<br>Total=${this.Total()}<br>`);
+        }
+    }
+    product.Print();
+    document.write("<hr>");
+    product.Name = "iPhone 16";
+    product.Price = 70000;
+    product.Qty = 2;
+    product.Print();
+</script>
+
+- If object comprises of only data representation without any logic then it is referred as "JSON". [JavaScript Object Notation].
+
+- JSON formatted data is
+    a) Light weight
+    b) Faster in communication
+    c) Not infected with virus
+    d) Not blocked by firewalls
+    e) Safe and secured
+
+Object Manipulations:
+
+1. How to read all keys from object?
+A.
+    a) Object.keys()        : It returns array of all keys in specified object
+    b) for..in                : It is an explicit iterator to read all keys
+
+Ex:
+<script>
+    var product = {
+        Name: "TV",
+        Price: 45000,
+        Stock: true,
+        Rating: 4.2
+    }
+    for(var key in product)
+    {
+        document.write(`${key}: ${product[key]}<br>`);
+    }
+</script>
+
+Ex:
+<script>
+    var product = {
+        Name: "TV",
+        Price: 45000,
+        Stock: true,
+        Rating: 4.9
+    }
+    Object.keys(product).map(function(key, index){
+         document.write(`${key}: ${product[key]}<br>`);
+    })
+</script>
+
+2. How to hide any key?
+A. By using JavaScript primitive data type "symbol".
+    Key is hidden over iterations, but accessible individually.
+
+Syntax:
+      var  id  = Symbol();
+   
+      var product = {
+        [id] : 1,
+        name: "TV"
+       }
+
+       Symbol type keys are defined in "[ ]".
+
+Ex:
+<script>
+    var Id = Symbol();
+    var product = {
+        [Id]: 2,
+        Name: "TV",
+        Price: 45000,
+        Stock: true,
+        Rating: 4.9
+    }
+    Object.keys(product).map(function(key, index){
+         document.write(`${key}: ${product[key]}<br>`);
+    })
+
+    document.write(`You are accessign product with Id=${product[Id]}`);
+</script>
+
+3. How to remove a key from object?
+A. By using JavaScript "delete" operator.
+
+Syntax:
+        delete  object.Key;
+
+Ex:
+<script>
+    var Id = Symbol();
+    var product = {
+        [Id]: 2,
+        Name: "TV",
+        Price: 45000,
+        Stock: true,
+        Rating: 4.9
+    }
+    delete product.Rating;
+    Object.keys(product).map(function(key, index){
+         document.write(`${key}: ${product[key]}<br>`);
+    })
+
+    document.write(`You are accessign product with Id=${product[Id]}`);
+</script>
+
+4. How to find a key?
+A. By using JavaScript "in" operator.
+
+Syntax:
+        if ("key"  in object)        => returns true if object contains given key.
+
+Ex:
+<script>
+    var Id = Symbol();
+    var product = {
+        [Id]: 2,
+        Name: "TV",
+        Price: 45000,
+        Stock: true,
+        Rating: 4.9
+    }
+    // delete product.Rating;
+    if("Rating" in product){
+        console.log(`Rating=${product.Rating}`);
+    } else {
+        console.log(`Rating not found`);
+    }
+    Object.keys(product).map(function(key, index){
+         document.write(`${key}: ${product[key]}<br>`);
+    })
+
+    document.write(`You are accessing product with Id=${product[Id]}`);
+</script>
+
+Note: You can't delete the built in properties or keys of JavaScript.
+
+        delete  name.length;        // invalid
+        delete  Math.PI;            // invalid
+
+
+                              JavaScript  Ajax
+
+- Ajax is "Asynchronous JavaScript And XML".
+- It allows browser to load new details into your page without reloading the complete page.
+- It enables "Partial Post Back".
+- It can post only specific portion of page, without posting entire page.
+- It improves the performance of application.
+- JavaScript AJAX request from browser is made by using "XMLHttpRequest" object of browser window.
+
+1. Configure the request by using XMLHttpRequest object
+
+    var  http = new XMLHttpRequest();
+
+2. Open the request by defining target content location & request type.
+
+     http.open("method", "url", async:true);
+
+     method     => GET, POST, PUT, PATCH, DELETE
+
+3. Send the request to process
+
+      http.send();
+
+4. Execute the request in process by using "onreadystatechange()" function.
+
+       http.onreadystatechange = function() {
+
+
+        }
+
+5. Execution of Ajax request in done in 4 phases
+   
+        1        Initial
+        2        Success
+        3        Complete
+        4        Ready
+
+6. You have to access data when it is ready[4].
+
+7. The response data is returned in HTML, Text or XML format.
+
+        http.responseText
+              .responseXML
+
+8. If your data is in any another format then you have to convert the data in to native format from text.
+
+          JSON.parse(string);
+
+Ex:
+1. Create a new folder "data"
+
+2. Add a new file "db.json"
+
+{
+    "title": "Apple iPhone 16 (White, 128 GB)",
+    "price": 69999,
+    "rating": {"rate":4.6, "ratings":16988, "reviews":717 },
+    "offers": [
+        "Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit CardT&C",
+        "Special PriceGet extra ₹9901 off (price inclusive of cashback/coupon)T&C"
+    ],
+    "image": "../public/images/iphone-white.jpg"
+}
+
+<script>
+    var http = new XMLHttpRequest();
+
+    http.open("get", "../data/db.json", true);
+    http.send();
+
+    http.onreadystatechange = function(){
+
+         if(http.readyState===4){
+              console.log(JSON.parse(http.responseText));
+         }
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+Ex:
+Ajax-demo.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+        function bodyload(){
+            var product = {title:'', price:0, image:'', rating:{ratings:0, rate:0, reviews:0}, offers:[]};
+
+            var http = new XMLHttpRequest();
+            http.open("get", "../data/db.json", true);
+            http.send();
+
+            http.onreadystatechange = function(){
+
+                 if(http.readyState===4){
+                     product = JSON.parse(http.responseText);
+                     document.getElementById("imgProduct").src = product.image;
+                     document.getElementById("lblTitle").innerHTML= product.title;
+                     document.getElementById("lblRating").innerHTML = product.rating.rate;
+                     document.getElementById("lblReviews").innerHTML = `${product.rating.ratings.toLocaleString()} ratings & ${product.rating.reviews} reviews`;
+                     document.getElementById("lblPrice").innerHTML = product.price.toLocaleString('en-in', {style:"currency", currency:"INR", minimumFractionDigits:0});
+
+                     product.offers.map(function(offer){
+                          var li = document.createElement("li");
+                          li.className = "bi bi-tag-fill text-success my-2";
+                          li.innerHTML = ` <span class="text-secondary">${offer}</span>`;
+                          document.getElementById("offers").appendChild(li);
+                     })
+
+
+                 }
+
+            }
+
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <div class="mt-4 row">
+            <div class="col-3">
+                <img id="imgProduct" width="100%">
+            </div>
+            <div class="col-9">
+                <div class="fw-bold fs-4" id="lblTitle"></div>
+                <div class="mt-2">
+                    <span class="badge bg-success"> <span id="lblRating"></span> <span class="bi bi-star-fill"></span> </span>
+                    <span id="lblReviews" class="text-secondary fw-bold"></span>
+                </div>
+                <div class="fs-1 mt-4 fw-bold" id="lblPrice">
+
+                </div>
+                <div class="mt-4">
+                    <ul class="list-unstyled" id="offers">
+
+                    </ul>
+                </div>
+            </div>
+    </div>
+</body>
+</html>
+
+5/06
+=====
+
+Object
+Object Manipulations
+JSON Type
+AJAX Request using XHMLHttpRequest  object
+
+Issues with XMLHttpRequest:
+
+- It not async implicitly.
+- It requires explicitly async to configure.
+- It returns data in text or xml format.
+- It requires explicit parsing for other type of data.
+- It is not good in error handling.
+- It have CORS issues. [Cross Origin Resource Sharing]
+- It have security issues like XSRF. [Cross Site Request Forgery]
+
+
+                           Fetch API
+
+- JavaScript ES5+ versions introduced a "fetch()" API.
+- It is a JavaScript promise to make XMLHttpRequest.
+- Promise is async by default.
+- It provides data in binary format.
+- You have to convert the binary into required format.  [parsing required]
+- It is good in handling XSRF & CORS.
+- It is better in error handling.
+
+Syntax:
+    fetch("url")
+    .then(function(response){
+        // on success
+    })
+    .catch(function(error){
+        // on error
+    })
+    .finally(function(){
+        // executes always
+    })
+
+- Promise comprises of 2 actions
+    a) resolve
+    b) reject
+
+- Resolve defines actions to perform when request is success.  
+- Reject defines actions to perform when request fails.
+
+        then()        Resolve
+        catch()        Reject
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+        function bodyload(){
+            var product = {title:'', price:0, image:'', rating:{ratings:0, rate:0, reviews:0}, offers:[]};
+
+            fetch("../data/db.json")
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(data){
+                product = data;
+                     document.getElementById("imgProduct").src = product.image;
+                     document.getElementById("lblTitle").innerHTML= product.title;
+                     document.getElementById("lblRating").innerHTML = product.rating.rate;
+                     document.getElementById("lblReviews").innerHTML = `${product.rating.ratings.toLocaleString()} ratings & ${product.rating.reviews} reviews`;
+                     document.getElementById("lblPrice").innerHTML = product.price.toLocaleString('en-in', {style:"currency", currency:"INR", minimumFractionDigits:0});
+
+                     product.offers.map(function(offer){
+                          var li = document.createElement("li");
+                          li.className = "bi bi-tag-fill text-success my-2";
+                          li.innerHTML = ` <span class="text-secondary">${offer}</span>`;
+                          document.getElementById("offers").appendChild(li);
+                     })
+
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+            .finally(function(){
+                console.log(`Request End`);
+            })
+           
+
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <div class="mt-4 row">
+            <div class="col-3">
+                <img id="imgProduct" width="100%">
+            </div>
+            <div class="col-9">
+                <div class="fw-bold fs-4" id="lblTitle"></div>
+                <div class="mt-2">
+                    <span class="badge bg-success"> <span id="lblRating"></span> <span class="bi bi-star-fill"></span> </span>
+                    <span id="lblReviews" class="text-secondary fw-bold"></span>
+                </div>
+                <div class="fs-1 mt-4 fw-bold" id="lblPrice">
+
+                </div>
+                <div class="mt-4">
+                    <ul class="list-unstyled" id="offers">
+
+                    </ul>
+                </div>
+            </div>
+    </div>
+</body>
+</html>
+
+Ex:
+1. data/db.json
+
+[
+    {
+    "title": "Apple iPhone 16 (Pink, 256 GB)",
+    "price": 79999,
+    "rating": {"rate":4.8, "ratings":26988, "reviews":317 },
+    "offers": [
+        "Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit CardT&C",
+        "Special PriceGet extra ₹9901 off (price inclusive of cashback/coupon)T&C",
+        "Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit CardT&C",
+        "Special PriceGet extra ₹9901 off (price inclusive of cashback/coupon)T&C"
+    ],
+    "image": "../public/images/iphone-pink.jpg"
+   },
+   {
+    "title": "Apple iPhone 16 (White, 128 GB)",
+    "price": 60999,
+    "rating": {"rate":4.6, "ratings":16988, "reviews":717 },
+    "offers": [
+        "Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit CardT&C",
+        "Special PriceGet extra ₹9901 off (price inclusive of cashback/coupon)T&C",
+        "Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit CardT&C",
+        "Special PriceGet extra ₹9901 off (price inclusive of cashback/coupon)T&C"
+    ],
+    "image": "../public/images/iphone-white.jpg"
+   },
+   {
+    "title": "Apple iPhone 16 (Pink, 128 GB)",
+    "price": 60999,
+    "rating": {"rate":4.6, "ratings":16988, "reviews":717 },
+    "offers": [
+        "Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit CardT&C",
+        "Special PriceGet extra ₹9901 off (price inclusive of cashback/coupon)T&C",
+        "Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit CardT&C",
+        "Special PriceGet extra ₹9901 off (price inclusive of cashback/coupon)T&C"
+    ],
+    "image": "../public/images/iphone-pink.jpg"
+   }
+]
+
+
+2. demo.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function bodyload(){
+            fetch("../data/db.json")
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(mobiles){
+                 mobiles.map(function(mobile){
+                     var div = document.createElement("div");
+                     div.className="row my-4 border border-4 p-3 m-4";
+                     div.innerHTML = `
+                        <div class="col-2">
+                            <img src=${mobile.image} width="100%">
+                        </div>
+                        <div class="col-8">
+                            <div class="fs-4 fw-bold">${mobile.title}</div>
+                            <div class="my-2"> <span class="badge bg-success rounded rounded-1 text-white"> ${mobile.rating.rate} <span class="bi bi-star-fill"></span> </span> </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="fs-2 fw-bold">${mobile.price}</div>
+                        </div>
+                     `;
+                     document.querySelector("section").appendChild(div);
+                 })
+            })
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <header>
+        <h1>iPhone 16</h1>
+    </header>
+    <section>
+
+    </section>
+</body>
+</html>
+
+Nasa API : [api.nasa.gov]
+
+1. Open   api.nasa.gov
+
+2. Register and get a key to your email.
+
+3. Browse API's and select  "Mars Rover Photos"
+
+https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY
+
+4. Replace DEMO_KEY with your API key. [sent to your email]
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function bodyload(){
+            fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY&#39;)
+            .then(function(response){
+                 return response.json();
+            })
+            .then(function(marsObj){
+                 marsObj.photos.map(function(photo){
+                      var tr = document.createElement("tr");
+
+                      var tdId = document.createElement("td");
+                      var tdPreview = document.createElement("td");
+                      var tdCamera = document.createElement("td");
+                      var tdRover = document.createElement("td");
+
+                      tdId.innerHTML = photo.id;
+                      tdPreview.innerHTML = `<a href=${photo.img_src} target="_blank"><img src=${photo.img_src} width="100" height="100"></a>`;
+                      tdCamera.innerHTML = photo.camera.full_name;
+                      tdRover.innerHTML = photo.rover.name;
+
+                      tr.appendChild(tdId);
+                      tr.appendChild(tdPreview);
+                      tr.appendChild(tdCamera);
+                      tr.appendChild(tdRover);
+
+                      document.querySelector("tbody").appendChild(tr);
+
+                 })
+            })
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <h2>Mars Rover Photos</h2>
+    <table class="table table-hover">
+       <thead>
+          <tr>
+            <th class="bi bi-card-text"> Photo Id</th>
+            <th class="bi bi-card-image"> Preview</th>
+            <th class="bi bi-camera"> Camera Name</th>
+            <th class="bi bi-rocket"> Rover Name</th>
+          </tr>
+       </thead>
+       <tbody>
+
+       </tbody>
+    </table>
+</body>
+</html>
+
+Nasa Data in Card Style
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function bodyload(){
+            fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY&#39;)
+            .then(function(response){
+                 return response.json();
+            })
+            .then(function(marsObj){
+                 marsObj.photos.map(function(photo){
+
+                        var div = document.createElement("div");
+                        div.className = "card m-2 p-2";
+                        div.style.width = "200px";
+                        div.innerHTML = `
+                          <img class="card-img-top" src=${photo.img_src} height="100">
+                          <div class="card-header">
+                             <h3>${photo.id}</h3>
+                          </div>                  
+                          <div class="card-body">
+                            <dl>
+                                 <dt>Camera</dt>
+                                 <dd>${photo.camera.full_name}</dd>
+                                 <dt>Rover</dt>
+                                 <dd>${photo.rover.name}</dd>
+                            </dl>
+                          </div>
+                          <div class="card-footer">
+                              <a href=${photo.img_src} target="_blank" class="btn btn-dark w-100">Preview</a>
+                          </div>
+                        `;
+                        document.querySelector("section").appendChild(div);
+
+                 })
+            })
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <h2>Mars Rover Photos</h2>
+    <section class="d-flex flex-wrap">
+
+    </section>
+</body>
+</html>
+
+9/06
+====
+
+Weather App
+
+1. Visit   https://openweathermap.org/api
+
+2. Register a new free account
+
+3. Go to "API DOCS" in current weather data category
+
+4. Select the option "Built-in API request by city name"
+
+5. Copy the API URL that can query by city name
+
+    https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+
+6. API Key is provided in your profile details.  [ My API Keys ]
+
+    1318ca6725c69160d346c41fc0612596
+
+  https://api.openweathermap.org/data/2.5/weather?q=Hyderabad&appid=    1318ca6725c69160d346c41fc0612596
+
+        { city name }         => Hyderabad
+        { API Key }         => Your API key
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        .bg-style {
+            background-image: url("../public/images/weather.jpg");
+            background-size: cover;
+        }
+    </style>
+    <script>
+        function SearchClick(){
+            var cityName = document.getElementById("txtCity").value;
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=1318ca6725c69160d346c41fc0612596&units=metric`)
+            .then(function(response){
+                 return response.json();
+            })
+            .then(function(weatherObj){
+                document.getElementById("lblCity").innerHTML = weatherObj.name;
+                document.getElementById("lblTemp").innerHTML = `${weatherObj.main.temp} &deg; <sup>c</sup>`
+                document.getElementById("lblDescription").innerHTML = `[${weatherObj.weather[0].description}]`;
+            })
+        }
+    </script>
+</head>
+<body class="container-fluid d-flex justify-content-center align-items-center" style="height:100vh">
+   <div class="border bg-style w-50 border-2 border-warning rounded rounded-2" style="height:300px">
+      <div class="mt-4 d-flex justify-content-center">
+         <div class="input-group w-50">
+              <input type="text" id="txtCity" class="form-control" placeholder="Your city name">
+              <button onclick="SearchClick()" class="btn btn-warning bi bi-search"></button>
+         </div>
+      </div>
+      <div class="mt-2 p-4">
+          <div id="lblCity" class="fs-3 text-center text-white fw-bold"></div>
+          <div id="lblDescription" class="text-center text-white"></div>
+          <div class="mt-3">
+              <div id="lblTemp" class="fs-1 fw-bold text-center text-warning"></div>
+          </div>
+      </div>
+   </div>
+</body>
+</html>
+
+                         
+                                  Fakestore API
+                        (https://fakestoreapi.com)
+
+API Routes [ end points ]
+
+    GET        /products                        [ ] array of products     [ { }, { } ]
+
+    GET        /products/1                    product object             {   }
+                                        by id
+   
+    GET        /products/categories            [ ] of all categories         [ " " ]
+
+     GET    /products/category/electronics    [ ] of specific category  [ { }, { } ]
+                                            products
+Fakestore Product
+
+     {
+        id: 0,
+        title: " ",
+        price: 0,
+        image: " ",
+        description: " ",
+        category: " ",
+        rating: { rate:0, count: 0 }
+     }
+
+Ex: Fakestore API
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script>
+
+        function LoadCategories(){
+            fetch("https://fakestoreapi.com/products/categories&quot;)
+            .then(function(response){
+                 return response.json();
+            })
+            .then(function(categories){
+                categories.unshift("all");
+                categories.map(function(category){
+                      var option = document.createElement("option");
+                      option.text = category.toUpperCase();
+                      option.value = category;
+                      document.getElementById("lstCategories").appendChild(option);
+                })
+            })
+        }
+
+        function LoadProducts(url){
+            document.querySelector("main").innerHTML = "";
+            fetch(url)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(products){
+                 products.map(function(product){
+
+                        var card = document.createElement("div");
+                        card.className = "card m-2 p-2";
+                        card.style.width = "200px";
+                        card.innerHTML = `
+                          <img class="card-img-top" src=${product.image} height="120">
+                          <div class="card-header overflow-auto" style="height:100px">
+                             ${product.title}
+                          </div>
+                          <div class="card-body">
+                            <dl>
+                                <dt>Price</dt>
+                                <dd>${product.price}</dd>
+                                <dt>Rating</dt>
+                                <dd>${product.rating.rate} <span class="bi bi-star-fill text-success"></span> </dd>
+                            </dl>
+                          </div>
+                          <div class="card-footer">
+                            <button class="btn btn-warning w-100 bi bi-cart4"> Add to Cart </button>
+                         </div>
+                        `;
+
+                        document.querySelector("main").appendChild(card);
+ 
+                 })
+            })
+        }
+
+        function bodyload(){
+            LoadCategories();
+            LoadProducts(`https://fakestoreapi.com/products`);
+        }
+
+        function CategoryChange(){
+            var categoryName = document.getElementById("lstCategories").value;
+            if(categoryName==="all"){
+                LoadProducts(`https://fakestoreapi.com/products`);
+            } else {
+                LoadProducts(`https://fakestoreapi.com/products/category/${categoryName}`);
+            }
+        }
+
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <header class="d-flex mt-1 justify-content-between border border-2 p-3">
+        <div class="fw-bold fs-4">Fakestore</div>
+        <div class="fs-5">
+            <span><a>Home</a></span>
+            <span class="mx-4"><a>Electronics</a></span>
+            <span><a>Jewelery</a></span>
+            <span class="mx-4"><a>Men's Fashion</a></span>
+            <span><a>Women's Fashion</a></span>
+        </div>
+        <div>
+            <button class="btn btn-warning bi bi-cart4"></button>
+        </div>
+    </header>
+    <section class="row mt-4">
+        <nav class="col-2">
+            <div>
+                <label class="form-label fw-bold"> Select Category </label>
+                <div>
+                    <select onchange="CategoryChange()" class="form-select" id="lstCategories">
+
+                    </select>
+                </div>
+            </div>
+        </nav>
+        <main class="col-10 overflow-auto d-flex flex-wrap" style="height:450px">
+
+        </main>
+    </section>
+</body>
+</html>
+
+10/06
+=====
+
+Ex: Fakestore API
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script>
+
+        function LoadCategories(){
+            fetch("https://fakestoreapi.com/products/categories&quot;)
+            .then(function(response){
+                 return response.json();
+            })
+            .then(function(categories){
+                categories.unshift("all");
+                categories.map(function(category){
+                      var option = document.createElement("option");
+                      option.text = category.toUpperCase();
+                      option.value = category;
+                      document.getElementById("lstCategories").appendChild(option);
+                })
+            })
+        }
+
+        function LoadProducts(url){
+            document.querySelector("main").innerHTML = "";
+            fetch(url)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(products){
+                 products.map(function(product){
+
+                        var card = document.createElement("div");
+                        card.className = "card m-2 p-2";
+                        card.style.width = "200px";
+                        card.innerHTML = `
+                          <img class="card-img-top" src=${product.image} height="120">
+                          <div class="card-header overflow-auto" style="height:100px">
+                             ${product.title}
+                          </div>
+                          <div class="card-body">
+                            <dl>
+                                <dt>Price</dt>
+                                <dd>${product.price}</dd>
+                                <dt>Rating</dt>
+                                <dd>${product.rating.rate} <span class="bi bi-star-fill text-success"></span> </dd>
+                            </dl>
+                          </div>
+                          <div class="card-footer">
+                            <button value=${product.id} onclick="AddToCartClick(this.value)" class="btn btn-warning w-100 bi bi-cart4"> Add to Cart </button>
+                         </div>
+                        `;
+
+                        document.querySelector("main").appendChild(card);
+ 
+                 })
+            })
+        }
+
+        function bodyload(){
+            LoadCategories();
+            LoadProducts(`https://fakestoreapi.com/products`);
+            GetCartItemsCount();
+        }
+
+        function CategoryChange(){
+            var categoryName = document.getElementById("lstCategories").value;
+            if(categoryName==="all"){
+                LoadProducts(`https://fakestoreapi.com/products`);
+            } else {
+                LoadProducts(`https://fakestoreapi.com/products/category/${categoryName}`);
+            }
+        }
+        var cartItems = [];
+        function GetCartItemsCount(){
+            document.getElementById("lblCount").innerHTML = cartItems.length;
+        }
+        function AddToCartClick(id){
+            fetch(`https://fakestoreapi.com/products/${id}`)
+            .then(function(response){
+                 return response.json();
+            })
+            .then(function(product){
+                 cartItems.push(product);
+                 alert(`${product.title}\nAdded to Cart`);
+                 GetCartItemsCount();
+            })
+        }
+
+       
+        function ShowCartClick(){
+            var total = 0;
+            document.querySelector("tbody").innerHTML ="";
+            cartItems.map(function(item){
+
+                var tr = document.createElement("tr");
+                var tdTitle = document.createElement("td");
+                var tdPrice = document.createElement("td");
+                var tdImage = document.createElement("td");
+
+                tdTitle.innerHTML = item.title;
+                tdImage.innerHTML = `<img width="50" height="50" src=${item.image}>`;
+                tdPrice.innerHTML = item.price;
+
+                tr.appendChild(tdTitle);
+                tr.appendChild(tdImage);
+                tr.appendChild(tdPrice);
+
+                document.querySelector("tbody").appendChild(tr);
+
+            })
+
+            for(var item of cartItems){
+                total += item.price;
+            }
+            document.getElementById("lblTotal").innerHTML = `${total}`.fontsize(4).fontcolor('red').bold();
+
+        }
+
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <header class="d-flex mt-1 justify-content-between border border-2 p-3">
+        <div class="fw-bold fs-4">Fakestore</div>
+        <div class="fs-5">
+            <span><a class="text-decoration-none" href="javascript:LoadProducts('https://fakestoreapi.com/products')">Home</a></span&gt;
+            <span class="mx-4"><a class="text-decoration-none" href="javascript:LoadProducts('https://fakestoreapi.com/products/category/electronics')">Electronics</a></span&gt;
+            <span><a>Jewelery</a></span>
+            <span class="mx-4"><a>Men's Fashion</a></span>
+            <span><a>Women's Fashion</a></span>
+        </div>
+        <div>
+            <button onclick="ShowCartClick()" data-bs-target="#cart" data-bs-toggle="offcanvas" class="btn btn-warning bi bi-cart4 position-relative"><span id="lblCount" class="badge bg-danger rounded rounded-circle position-absolute"></span></button>
+            <div class="offcanvas offcanvas-end" id="cart">
+                <div class="offcanvas-header">
+                    <h4>Your Cart Items</h4>
+                    <button class="btn btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Preview</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td align="center" colspan="2" class="fw-bold fs-4">Total</td>
+                                <td id="lblTotal"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="row mt-4">
+        <nav class="col-2">
+            <div>
+                <label class="form-label fw-bold"> Select Category </label>
+                <div>
+                    <select onchange="CategoryChange()" class="form-select" id="lstCategories">
+
+                    </select>
+                </div>
+            </div>
+        </nav>
+        <main class="col-10 overflow-auto d-flex flex-wrap" style="height:470px">
+
+        </main>
+    </section>
+</body>
+</html>
+
+FAQ: What are the issues with object data type?
+- It comprises of only string type keys.
+- It requires lot of explicit operators for manipulation.
+- Hence it is slow in rendering.
+
+
+                              Map Type
+- It is a key and value collection.
+- Key can be any type.
+- It provides all implicit methods to handle operations.
+- It is faster when compared to object.
+- It is schema less. [structure less]
+
+Syntax:
+    var data = new Map();
+
+    data.set(key,value)                Add a new key with value
+        .get(key)                    Returns the value in key
+        .delete(key)                Removes a key and its value
+        .has(key)                    Verifies the existence of key
+        .keys()                    Returns all keys
+        .values()                    Returns all values
+        .entries()                    Returns all entries [keys and values]
+        .clear()                    Removes all keys
+        .size                        Returns count of keys
+
+Ex:
+<script>
+    var data = new Map();
+    data.set(1, "TV");
+    data.set("Mobile", "Apple iPhone 16 Pro");
+    data.set(2, ["Delhi", "Hyd"]);
+
+     data.delete(2);
+
+    if(data.has(2)){
+        document.write(data.get(2));
+    } else {
+        alert('2 Not Found');
+    }
+
+    document.write(`${data.get("Mobile")}<br>`);
+
+    for(var item of data.entries()){
+        document.write(`${item}<br>`);
+    }
+
+    document.write(`Total Count of Keys : ${data.size}`);
+</script>
+
+
+FAQ: What is difference between object & map data types?
+Ans:
+        Object                Map
+        ----------------------------------------------
+        Structured                 Structure Less
+        Explicit methods        Implicit Methods
+        Slow                          Fast
+        Keys only string        Keys can be any type
+
+                   
+                            Date Type
+- Date type values are stored in memory by using "Date()" constructor.
+- It allocates memory to handle date type.
+
+Syntax:
+    var now = new Date();        It stores current date and time into memory reference.
+
+
+- You can store specific date and time by using the following format
+
+    "year-month-day hours:minutes:seconds.milliSeconds"
+
+Syntax:
+    var mfd = new Date("2025-04-22 15:30:42.774");
+
+- JavaScript provides various date and time methods to read date & time values.
+
+    getHours()            It returns hours number 0 to 23
+    getMinutes()            0 to 59
+    getSeconds()            0 to 59
+    getMilliSeconds()        0 to 999
+    getDate()                1 to 28, 29, 30, 31
+    getDay()                It returns weekday number 0=Sunday
+    getMonth()            It returns month number 0=January
+    getFullYear()            It returns full year.
+    toLocaleString()        It returns both date & time
+    toDateString()            
+    toLocaleDateString()
+    toTimeString()
+    toLocaleTimeString()
+
+Ex:
+<script>
+    var mfd = new Date("2025-04-22 15:30:24.876");
+   
+    var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    var months = ["Jan", "Feb", "March", "April", "May", "June", "July", "August"];
+
+    document.write(`${weekdays[mfd.getDay()]} ${mfd.getDate()} , ${months[mfd.getMonth()]} ${mfd.getFullYear()}`)
+</script>;
+
+- Showing date & time values requires 3rd party libraries like
+    a) dayjs
+    b) moment
+    c) luxon  etc..
+
+- JavaScript provides setter methods to set date and time value
+   
+    setHours()
+    setMinutes()
+    setSeconds()
+    setMilliSeconds()
+    setDate()
+    setTime()
+    setMonth()
+    setFullYear()
+    etc..
+
+Ex:
+<script>
+    var now = new Date();
+   
+    now.setHours(19)
+
+    var hrs = now.getHours();
+   
+    if(hrs>=0 && hrs<=12) {
+        document.write(`Good Morning !!<br><img src="../public/images/morning.gif" width="200" height="200">`);
+    }
+    else if(hrs>=13 && hrs<=16) {
+        document.write(`Good Afternoon <br><img src="../public/images/afternoon.gif" width="200" height="200">`);
+    } else {
+        document.write(`Good Evening ! <br><img src="../public/images/evening.gif" width="200" height="200">`);
+    }
+</script>
+
+11/06
+=====
+
+Date Type
+- get & set function
+- formatting date
+
+                        Timer Events
+1. setTimeout()
+2. clearTimeout()
+3. setInterval()
+4. clearInterval()
+
+
+setTimeout()
+- It is used to handle "debounce".
+- Debounce allows to delay any task by specified duration.
+- It loads task into memory and locks the task or keeps it inactive for specific duration.
+- So that it can allow other tasks to perform.
+
+Syntax:
+    setTimeout(function(){ }, interval)
+
+clearTimeout()
+- It is used to clear the task from memory.
+- You can remove task from memory before it is released into process.
+
+
+Syntax:
+    clearTimeout(refName);
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+
+        function v1(){
+            document.getElementById("lblVolume").innerHTML = "Increased by 20%";
+        }
+        function v2(){
+            document.getElementById("lblVolume").innerHTML = "Increased by 70%";
+        }
+
+        function v3(){
+            document.getElementById("lblVolume").innerHTML = "Volume Full";
+        }
+
+        var t1, t2, t3;
+        function IncreaseVolume(){
+            t1 = setTimeout(v1, 3000);
+            t2 = setTimeout(v2, 8000);
+            t3 = setTimeout(v3, 15000);
+        }
+        function CancelClick(){
+            clearTimeout(t2);
+        }
+    </script>
+</head>
+<body>
+    <button onclick="IncreaseVolume()" class="bi bi-volume-up"></button>
+    <button onclick="CancelClick()">Cancel 70%</button>
+    <br><br>
+    <span id="lblVolume"></span>
+</body>
+</html>
+
+setInterval()
+- It is used to control "throttle".
+- "Throttle" is a mechanism of executing given task repeatedly at regular time intervals.
+- It is used to configure continuous operations.
+
+Syntax:
+    setInterval(function(){ }, interval)
+
+clearInterval()
+- It is used to stop throttle.
+- It removes the task from memory.
+- It requires a memory reference name.
+
+Syntax:
+    clearInterval(refName);
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+        function Time(){
+            var now = new Date();
+            var time = now.toLocaleTimeString();
+            document.querySelector("h1").innerHTML = time;
+        }
+        var thread;
+        function bodyload(){
+           thread = setInterval(Time,1000);
+        }
+        function StartClick(){
+            thread = setInterval(Time,1000);
+        }
+        function StopClick(){
+            clearInterval(thread);
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <h1 align="center"></h1>
+    <button onclick="StartClick()">Start</button>
+    <button onclick="StopClick()">Stop</button>
+</body>
+</html>
+
+
+Ex: Stop Watch
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 600px;
+            display: grid;
+            grid-template-columns: 3fr 3fr 3fr 3fr;
+            height: 60px;
+            margin-top: 200px;
+        }
+        .container div {
+            border:1px solid gray;
+            padding: 20px;
+            font-family: Arial;
+            font-size: 30px;
+            color:gray;
+        }
+    </style>
+    <script>
+        var ms = 0;
+        var s = 0;
+        var m = 0;
+        var h = 0;
+        function StopWatch(){
+            ms++;
+            if(ms===999){
+                s++;
+                ms=0;
+            }
+            if(s===59){
+                m++;
+                s=0;
+            }
+            if(m===59){
+                h++;
+                m=0;
+            }
+            document.getElementById("lblMilliSec").innerHTML = ms + "ms";
+            document.getElementById("lblSec").innerHTML = s + "s";
+            document.getElementById("lblMin").innerHTML = m + "m";
+            document.getElementById("lblhrs").innerHTML = h + "h";
+        }
+        var thread;
+        function StartClick(){
+           thread = setInterval(StopWatch,1);
+        }
+        function ClearClick(){
+            clearInterval(thread);
+            s=0;
+            ms=0;
+            h=0;
+            m=0;
+            document.getElementById("lblMilliSec").innerHTML = ms + "<sub>ms</sub>";
+            document.getElementById("lblSec").innerHTML = s + "<sub>s</sub>";
+            document.getElementById("lblMin").innerHTML = m + "m";
+            document.getElementById("lblhrs").innerHTML = h + "h";
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div class="container">
+        <div>
+            <span  id="lblHrs">00 <sub>h</sub></span>
+        </div>
+        <div >
+            <span id="lblMin">00<sub>m</sub></span>
+        </div>
+        <div >
+            <span id="lblSec">00<sub>s</sub></span>
+        </div>
+        <div >
+            <span id="lblMilliSec">000<sub>ms</sub></span>
+        </div>
+       </div>
+       <br><br>
+       <button onclick="StartClick()">Start</button>
+       <button onclick="ClearClick()">Clear</button>
+    </div>
+</body>
+</html>
+
+Ex: setInterval
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        var i=1;
+        function StartProgress(){
+            i++;
+            document.getElementById("progress").value = i;
+            document.getElementById("lblStatus").innerHTML = `${i}% completed`;
+            if(i===100){
+                document.getElementById("imgContainer").style.display = "block";
+                document.getElementById("progressContainer").style.display = "none";
+                clearInterval(thread);
+            }
+        }
+        var thread;
+        function LoadClick(){
+            document.getElementById("btnContainer").style.display = "none";
+            document.getElementById("progressContainer").style.display = "block";
+            thread = setInterval(StartProgress,100);
+        }
+
+    </script>
+    <style>
+        @keyframes Fade {
+            from {
+                opacity: 0;
+                transform: scale(0.1) rotate(0deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(360deg);
+            }
+        }
+        img {
+            animation-name: Fade;
+            animation-duration: 5s;
+        }
+    </style>
+</head>
+<body class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="text-center">
+        <div id="btnContainer">
+            <button class="btn btn-primary" onclick="LoadClick()">Load Image</button>
+        </div>
+        <div id="progressContainer" style="display: none;">
+            <progress id="progress" min="1" max="100" style="width: 400px; height: 30px;"></progress>
+            <p id="lblStatus"></p>
+        </div>
+        <div id="imgContainer" style="display: none;">
+            <img src="../public/images/women-fashion.jpg" width="400" height="400">
+        </div>
+    </div>
+</body>
+</html>
+
+12/06
+=====
+
+setTimeout
+clearTimeout
+setInterval
+clearInterval
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+
+        function LoadProduct(id){
+            fetch(`https://fakestoreapi.com/products/${id}`)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(product){
+                document.getElementById("lblTitle").innerHTML = product.title;
+                document.getElementById("imgProduct").src = product.image;
+                document.getElementById("lblPrice").innerHTML = product.price.toLocaleString('en-us',{style:'currency', currency:'USD'});
+            })
+            document.getElementById("lblStatus").innerHTML = "(Slide Show - Manual)";
+        }
+        function LoadProductAuto(){
+            productId++;
+             fetch(`https://fakestoreapi.com/products/${productId}`)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(product){
+                document.getElementById("lblTitle").innerHTML = product.title;
+                document.getElementById("imgProduct").src = product.image;
+                document.getElementById("lblPrice").innerHTML = product.price.toLocaleString('en-us',{style:'currency', currency:'USD'});
+            })
+            document.getElementById("lblStatus").innerHTML = "(Slide Show - Auto)";
+            document.getElementById("trackBar").value = productId;
+        }
+        var productId = 1;
+        function NextClick(){
+            productId++;
+            LoadProduct(productId);
+            document.getElementById("trackBar").value = productId;
+           
+        }
+        function PrevClick(){
+            productId--;
+            LoadProduct(productId);
+            document.getElementById("trackBar").value = productId;
+        }
+        function TrackbarChange(){
+            LoadProduct(document.getElementById("trackBar").value);
+            productId = document.getElementById("trackBar").value;
+        }
+        var thread;
+        function PlayClick(){
+            thread = setInterval(LoadProductAuto, 5000);
+            document.getElementById("lblStatus").innerHTML = "(Slide Show - Playing)";
+        }
+        function PauseClick(){
+            clearInterval(thread);
+            document.getElementById("lblStatus").innerHTML = "(Slide Show - Paused)";
+        }
+    </script>
+</head>
+<body onload="LoadProduct(1)" class="container-fluid d-flex justify-content-center">
+    <div class="card p-2 mt-4 w-50">
+        <div class="card-header text-center">
+            <div id="lblTitle"></div>
+            <div id="lblStatus"></div>
+        </div>
+        <div class="card-body row" >
+            <div class="col-1 d-flex flex-column justify-content-center align-items-center">
+                <button onclick="PrevClick()" class="btn btn-dark bi bi-chevron-left"></button>
+            </div>
+            <div class="col-10 position-relative">
+                <div id="lblPrice" class="badge p-2 bg-danger text-white top-0 end-0 rounded rounded-circle position-absolute"></div>
+                <img height="300" id="imgProduct" width="100%">
+                <div class="mt-3">
+                    <input type="range" onchange="TrackbarChange()" value="1" min="1" max="20" class="form-range" id="trackBar">
+                </div>
+                <div class="mt-3 text-center">
+                    <button onclick="PlayClick()" class="btn btn-success mx-2 bi bi-play"></button>
+                    <button onclick="PauseClick()" class="btn btn-danger bi bi-pause"></button>
+                </div>
+            </div>
+            <div class="col-1 d-flex flex-column justify-content-center align-items-center">
+                <button onclick="NextClick()" class="btn btn-dark bi bi-chevron-right"></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+Summary
+- Variables
+- Data Types
+    a) Primitive
+        number, string, Boolean, null, undefined, symbol, big int.
+    b) Non Primitive
+        array, object, map
+
+- Date & Date Methods
+- Timer Events
+- Regular Expression Type  " /   / "
+
+
+                        JavaScript Operators
+1. Arithmetic Operators
+
+        +         Addition
+        -        Subtraction
+        *        Multiplication
+        /        Division
+        %        Modulus Division
+        **        Exponent
+        ++        Increment
+        --        Decrement
+
+2. Comparison & Logical Operators
+
+        ==        Equal
+        ===        Strict Equal / Identical Equal
+        !=        Not Equal
+        !==        Not Identical
+        >        Greater than
+        >=        Greater than or equal
+        <        Less than
+        <=         Less than or equal
+
+        &&        AND
+        ||        OR
+        !        NOT
+
+
+3. Assignment Operators
+
+        +=        Add and Assign
+        -=        Subtract and Assign
+        *=        Multiply and Assign
+        /=        Divide and Assign
+        %=        Modulus and Assign
+
+Note: JavaScript provides following methods to access multiple elements.
+
+        a) document.getElementsByTagName()
+        b) document.getElementsByClassName()
+        c) document.getElementsByName()
+
+      These methods return an array [ ] of elements.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+       
+        function SubmitClick(){
+            var courses = "";
+            var checkboxes = document.getElementsByName("Course");
+            for(var checkbox of checkboxes){
+                if(checkbox.checked){
+                    courses += checkbox.value + "<br>";
+                }
+            }
+            document.getElementById("lblList").innerHTML = courses;
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div><input type="checkbox" name="Course" value="HTML"> <label>HTML</label> </div>
+        <div><input type="checkbox" name="Course" value="Java"> <label>Java</label> </div>
+        <div><input type="checkbox" name="Course" value="Python"> <label>Python</label> </div>
+        <div><input type="checkbox" name="Course" value=".NET"> <label>.NET</label> </div>
+    </div>
+    <button onclick="SubmitClick()">Submit</button>
+    <p id="lblList"></p>
+</body>
+</html>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+       
+        function SubmitClick(){
+            var courses = "";
+            var checkboxes = document.getElementsByName("Course");
+            for(var checkbox of checkboxes){
+                if(checkbox.checked){
+                    courses += checkbox.value + "<br>";
+                }
+            }
+            document.getElementById("lblList").innerHTML = courses;
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div><input onchange="SubmitClick()" type="checkbox" name="Course" value="HTML"> <label>HTML</label> </div>
+        <div><input onchange="SubmitClick()" type="checkbox" name="Course" value="Java"> <label>Java</label> </div>
+        <div><input onchange="SubmitClick()" type="checkbox" name="Course" value="Python"> <label>Python</label> </div>
+        <div><input onchange="SubmitClick()" type="checkbox" name="Course" value=".NET"> <label>.NET</label> </div>
+    </div>
+    <button onclick="SubmitClick()">Submit</button>
+    <p id="lblList"></p>
+</body>
+</html>
+
+
+
+
+Ex: Add and Assign data from checkboxes
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+       
+        function SubmitClick(){
+            var courses = "";
+            var courseFee = 0;
+            var checkboxes = document.getElementsByName("Course");
+            for(var checkbox of checkboxes){
+                if(checkbox.checked){
+                    courses += checkbox.value + "-" + checkbox.id +  "<br>";
+                    courseFee += parseInt(checkbox.id) ;
+                }
+            }
+            document.getElementById("lblList").innerHTML = `Selected Courses : <br> ${courses} <br>Total Fee Amount : ${courseFee}`;
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div><input id="1200" onchange="SubmitClick()" type="checkbox" name="Course" value="HTML"> <label>HTML</label> </div>
+        <div><input id="4000" onchange="SubmitClick()" type="checkbox" name="Course" value="Java"> <label>Java</label> </div>
+        <div><input id="2000" onchange="SubmitClick()" type="checkbox" name="Course" value="Python"> <label>Python</label> </div>
+        <div><input id="5000" onchange="SubmitClick()" type="checkbox" name="Course" value=".NET"> <label>.NET</label> </div>
+    </div>
+    <button onclick="SubmitClick()">Submit</button>
+    <p id="lblList"></p>
+</body>
+</html>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var position = 1;
+        function MoveRight(){
+            position *= 2;
+            var img = document.querySelector("img");
+            img.style.marginLeft = position + "px";
+        }
+         function MoveLeft(){
+            position /=2;
+            var img = document.querySelector("img");
+            img.style.marginLeft = position + "px";
+        }
+    </script>
+</head>
+<body>
+    <button onclick="MoveLeft()"> < </button>
+    <button onclick="MoveRight()"> > </button>
+    <br><br>
+    <img src="../public/images/women-fashion.jpg" width="200" height="200">
+</body>
+</html>
+
+
+
+4. Special Operators
+
+   
+ a) Ternary Operator "?:"
+
+        (condition) ? true : false
+
+ b) Delete operator    : It removes a key from object.
+
+        delete   object.key;
+
+ c) In operator    : It finds a key in object.
+
+        "key"  in  object;        // true if found
+
+ d) New operator:  It is dynamic memory allocating operator.
+
+        var ref  = new Array();
+
+ e) TypeOf Operator:  It returns the data type of a reference.
+
+        var  x = 10;
+        var  y = true;
+
+        typeof  x;        // number
+        typeof  y;        // boolean
+
+Ex:
+<script>
+     fetch(`https://fakestoreapi.com/products/1`)
+     .then(function(response){
+        return response.json();
+     })
+     .then(function(product){
+          Object.keys(product).map(function(key){
+               document.write(`${key} [${typeof product[key]}] <br>`);
+          })
+     })
+</script>
+       
+                        JavaScript Statements
+1. Selection Statements
+    if, else, switch, case, default
+
+2. Jump Statements
+    return, break, continue
+
+3. Iteration Statements
+    for..in, for..of
+
+4. Looping Statements
+    for, while, do while
+
+5. Exception Handling
+    try, catch, throw, finally
+
+13/06
+=====
+
+Looping Control Statements
+
+- Looping is the process of executing a set of statement repeatedly based on given condition.
+- You can create loops using
+    a) for
+    b) while
+    c) do while
+
+The "For" loop:
+- It is a looping control statement used when we are sure about the number of iterations and iteration counter will not change dynamically.
+- It requires initialization, condition and counter.
+
+Syntax:
+    for (initialization; condition; counter)
+    {
+       statements;
+    }
+
+Ex:
+    for(var i=1;  i<=10; i++)
+    {
+         console.log(i);
+    }
+
+EX:
+    var i=1;
+    for(  ; i<=10; i++)            for( i<=10; i++) { }        // invalid
+    {
+    }
+
+Syntax:    
+    var values = ["A", "B", "C", "D"];
+
+    for(var i=0; i<values.length; i++)
+    {
+        console.log(values[i] + "<br>");
+    }
+   
+Task1: Write a function that takes any number input and print a multiplication table for that number.
+
+        function MultiplicationTable(n)
+        {
+            for(var i=1; i<=10; i++)
+            {
+                document.write(`${n} X ${i} = ${n*i}<br>`);
+            }            
+        }
+        MultiplicationTable(5);
+
+        // Output
+
+        5 X 1 = 5
+        5 X 2 = 10
+        ...
+        5 X 10 = 50
+
+Ex:
+<script>
+     function MultiplicationTable(n){
+          for(var i=1; i<=10; i++){
+               document.write(`${n} X ${i} = ${n*i}<br>`);
+          }
+     }
+     MultiplicationTable(parseInt(prompt("Enter Number")));
+</script>
+
+
+Task-2: Write a program to print all even numbers between 1 to 20.
+              even is calculated   n%2===0
+
+        function PrintEven()
+        {
+            for(var i=1; i<=20; i++){
+                  if(i%2===0) {
+                    document.write(i + "<br>");
+                }
+            }            
+        }
+        PrintEven();
+
+
+Task-3: Write a program to print the factorial of given number
+           
+        5!  => 5 x 4 x 3 x 2 x 1
+        var fact = 1;
+        function Factorial(n)
+        {
+            // logic
+        }
+
+        Factorial(5);
+
+        Output:
+            Factorial is 120    
+
+Ex:
+<script>
+     var fact = 1;
+     function Factorial(n)
+     {
+          for(var i=1; i<=n; i++){
+               fact*=i;
+          }
+          document.write(`Factorial of ${n} is ${fact}`);
+     }
+     Factorial(parseInt(prompt("Enter number")));
+</script>
+
+Ex:
+<script>
+     var str = "Welcome to JavaScript Language";
+     var count = 0;
+     for(var i=0; i<str.length; i++){
+          if(str[i]==="e"){
+               count++;
+          }
+     }
+     document.write(`Total number of occurrence for "e" char is ${count}`);
+</script>
+
+EX:
+ // Write a program to count the vowels in given string. a,e,i,o,u
+
+     var str = "Welcome to JavaScript Language";
+     // var vowels = ["a", "e", "i", "o", "u"];
+     var count = 0;
+     for(var i=0; i<str.length; i++){
+          if(str[i]==="a"||str[i]==="e"||str[i]==="i"||str[i]==="o"||str[i]==="u"){
+               count++;
+          }
+     }
+     document.write(`Total number of vowels in string are ${count}`);
+
+Ex:
+<script>
+     /*
+         *
+         *  *
+         *  *  *
+         *  *  *  *
+     */
+     function PrintPattern(n){
+          for(var i=1; i<=n; i++){
+               for(var j=1; j<=i; j++){
+                 document.write(`*&nbsp;&nbsp;`);    
+               }
+               document.write("<br>");
+          }
+     }
+     PrintPattern(parseInt(prompt("Enter Number")));
+</script>
+
+14/06
+======
+
+Jump Statements in Loop:
+
+    a) break        It ends the current block but continue to execute the function.
+
+    b) return        It terminates the block and execution
+
+    c) continue    It skips the current counter and continue to next.
+
+Ex:
+<script>
+     for(var i=1; i<=10; i++){
+          if(i===5 || i===8) {
+               continue;
+          }
+          document.write(`${i}<br>`);
+
+     }
+</script>
+
+Ex:
+<script>
+     fetch(`https://fakestoreapi.com/products`)
+     .then(function(response){
+           return response.json();
+     })
+     .then(function(products){
+          for(var i=0; i<products.length; i++){
+               if(products[i].category==="electronics" || products[i].category==="jewelery"){
+                    continue;
+               }
+               document.write(`${products[i].title} - <b>${products[i].category}</b><br>`);
+          }
+     })
+</script>
+
+Ex:
+<script>
+     var values = [[10, 20, 30], [40, 50, 60]];
+
+     /*
+        Print the values in martix format using for
+
+        10      20      30              values[0][0]      values[0][1]   values[0][2]
+
+        40      50      50              values[1][0]      values[1][1]   values[1][2]
+
+     */
+
+      for(var i=0; i<values.length; i++){
+
+           for(var j=0; j<values[i].length; j++){
+                document.write(`${values[i][j]}&nbsp;&nbsp;`)
+           }
+           document.write("<br><br>");
+      }
+
+</script>
+
+Ex: using map
+
+<script>
+     var values = [[10, 20, 30], [40, 50, 60]];
+
+     /*
+        Print the values in martix format using map
+
+        10      20      30              values[0][0]      values[0][1]   values[0][2]
+
+        40      50      50              values[1][0]      values[1][1]   values[1][2]
+
+     */
+
+     values.map(function(value){
+         value.map(function(item){
+            document.write(`${item}&nbsp;&nbsp;&nbsp;`);
+         })
+         document.write("<br><br>");
+     })
+
+</script>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script>
+          var data = [
+               {Category:"Electronics", Products:["TV", "Mobile"]},
+               {Category:"Footwear", Products:["Casuals", "Boots", "Sneakers"]}
+          ];
+
+          function bodyload(){
+               data.map(function(item){
+                    var li = document.createElement("li");
+                    li.innerHTML = item.Category;
+                    item.Products.map(function(product){
+                         var ul = document.createElement("ul");
+                         ul.type = "square";
+                         var ul_li = document.createElement("li");
+                         ul_li.innerHTML = product;
+                         ul.appendChild(ul_li);
+                         li.appendChild(ul);
+                         document.querySelector("ol").appendChild(li);
+                    })
+               })
+          }
+     </script>
+</head>
+<body onload="bodyload()">
+     <ol>
+
+     </ol>
+</body>
+</html>
+
+Ex:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script>
+          var data = [
+               {Category:"Electronics", Products:["TV", "Mobile"]},
+               {Category:"Footwear", Products:["Casuals", "Boots", "Sneakers"]}
+          ];
+
+          function bodyload(){
+              for(var i=0; i<data.length; i++)
+              {
+                   var li = document.createElement("li");
+                   li.innerHTML = data[i].Category;
+                   for(var j=0; j<data[i].Products.length;j++){
+                        var ul = document.createElement("ul");
+                        ul.type = "square";
+                        var ul_li = document.createElement("li");
+                        ul_li.innerHTML = data[i].Products[j];
+                        ul.appendChild(ul_li);
+                        li.appendChild(ul);
+                        document.querySelector("ol").appendChild(li);
+                   }
+
+              }
+          }
+     </script>
+</head>
+<body onload="bodyload()">
+     <ol>
+
+     </ol>
+</body>
+</html>
+
+Task: Create a pin verification screen.
+
+        Pin : [ textbox ] [submit]      => actual pin = 3456
+
+        1st time =>  3223        => O/P  Invalid PIN 2 attempts left
+        2nd time => 4223        => O/P  Invalid PIN 1 attempt left
+        3rd  time => 5602        => O/P  Card Blocked
+
+        from 1st to 3rd any time Pin=3456  => Verified successfully..
+
+The While Loop:
+- It you are not sure about number of iterations and the counter may change dynamically the you can use the while.
+- It executes statements only when the given condition evaluates to true.
+
+Syntax:
+    while(condition)
+    {
+       statements;
+       counter;
+    }
+Ex:
+    var i = 1;
+    while(i<=10)
+    {
+       console.log(i);
+       i++;
+    }
+
+The "do" statement:
+- It is similar to while but ensures that statements will execute at least once
+  even when the condition evaluates to false.
+
+Syntax:
+    do {
+        statements;
+    } while (condition);
+
+Ex:
+    var i = 1;
+    do {
+           console.log(i);
+        i++;
+     } while(i<=10);
+
+16/06
+=====
+
+Exception Handling Statements
+
+- Computer program encounters 2 types of errors
+
+    1. Compile Time Errors
+    2. Runtime Errors
+
+- Compile time errors are syntactical or block level errors, due to which a program fails to run.
+- Runtime errors occur while using the application, It is the disability of compiler to understand instructions of client at run time of application.
+- If compiler is unable understand the instructions then it leads to abnormal termination of application.
+- Exception handling is required to avoid abnormal termination.
+- Exception handling statements are
+        a) try
+        b) catch
+        c) throw
+        d) finally
+- "try" is monitoring block that contains statements to execute.
+- "catch" will catch the exception and report the error.
+- "throw" is used to throw any exception explicitly.
+- "finally" contains statements to execute always. [on success or on failure]
+
+Syntax:
+    try {
+        // statements to execute    - you can "throw" exception
+    }
+    catch(error)
+    {
+         // report error
+    }
+    finally
+    {
+        // action to perform always
+    }
+
+Ex:
+<script>
+    try {
+      var a = parseInt(prompt("Enter number-1"));
+      var b = parseInt(prompt("Enter number-2"));
+      if(b===0) {
+         throw "Can't Divide By Zero";
+      }
+      if(b>a) {
+         throw "Can't divide with a larger number";
+      }
+      var c = a/b;
+      document.write(`Division=${c}<br>`);
+    }
+    catch(error){
+      document.write(error);
+    }
+    finally {
+      console.log('Program End');
+    }
+</script>
+
+Summary:
+1. Selection
+2. Iteration
+3. Jump
+4. Looping
+5. Exception Handling
+
+   
+                        JavaScript Functions
+
+- Function is used to refactor the code.
+- "Refactor" is the process of extracting a set of statements into a function or file.
+- It allows to cleanly separate, reuse and extend code.
+
+Function Configuration:
+- A function can be configured in 2 ways
+
+    a) Declaration
+    b) Expression
+
+Syntax: Declaration
+
+    function Name()
+    {
+      statements;
+    }
+
+Syntax: Expression
+
+    let  Name = function() {
+       statements;
+    }
+
+Ex:
+<script>
+    var password = prompt("Enter Password");
+    function Hello(){
+       document.write("Hello ! JavaScript<br>");
+    }
+
+   
+    let Welcome = function(){
+       document.write("");
+    }
+
+    if(password==="admin"){
+         Welcome = function(){
+            document.write("Login Success..");
+         }
+    } else {
+         Welcome = function(){
+            document.write("Invalid Password");
+         }
+    }
+
+    Hello();
+    Welcome();
+</script>
+
+FAQ: What is difference between function expression and declaration?
+Ans:   Declaration allocates memory for function where it configures same functionality
+      every time.
+
+      Expression allocates memory where you can change the functionality
+      according to state and situation. You can assign a new functionality.
+
+Function Syntax:
+- A function declaration comprises of
+
+    a) Declaration
+    b) Signature
+    c) Definition
+
+   
+    function  PrintNumbers(n)
+    {
+
+    }
+
+    function PrintNumbers(n)            => Declaration
+    PrintNumbers(n)                    => Signature
+    { }                                => Definition
+
+    Signature is used to access a function.
+    Definition specifies the action performed.
+
+Function Parameters:
+- Function can be parameter less or parameterized.
+- A parameterized function can change the functionality.
+- Parameters allows to modify the function.
+
+Syntax:
+    function  Name(formal_param)
+    {
+    }
+
+    Name(actual_value);
+
+- The parameters defined in declaration are known as formal parameters.
+- The parameters defined while calling function are known as actual parameters.
+
+     formal_param = actual_value;
+
+- Formal Parameter is a memory where you can store any type value
+    a) Primitive
+    b) Non Primitive
+    c) Function
+
+Ex:
+<script>
+     function PrintNumbers(HowMany){
+         for(var i=1; i<=HowMany; i++){
+             document.write(`${i}<br>`);
+         }
+     }
+     PrintNumbers(5);
+     PrintNumbers(10);
+</script>
+
+FAQ: What are higher order functions?
+Ans:  A function that takes another function as parameter is known as Higher order function.
+
+Syntax:
+      function Name(ref)
+      {
+           ref();
+      }
+
+      Name(function() { });
+
+     Higher order functions are mostly used in callback mechanism.
+
+Ex:
+<script>
+     function Validate(success){
+        success();
+     }
+     Validate(function(){document.write("Validation Success..")});
+</script>
+
+17/06
+=====
+
+Function Configuration
+    a) Declaration
+    b) Expression
+Function Signature
+Function Definition
+Function Parameters
+Formal Parameters
+Actual Parameters
+Higher order function
+
+Multiple Parameters:
+
+- A function can have multiple parameters.
+- Every parameter is a required parameter.
+- All parameters have order dependency.
+  [ you have to use in the same order how they are defined ]
+
+Ex:
+<script>
+     function Details(id, name, price, stock){
+         if(price){
+            document.write(`Id=${id}<br>Name=${name}<br>Price=${price}<br>Stock=${stock}`);  
+         } else {
+            document.write(`Id=${id}<br>Name=${name}<br>Stock=${stock}`);
+         }
+         
+     }
+     Details(1, "TV", undefined,true);
+</script>
+
+Default Parameters:
+
+- Every formal parameter can be defined with a default value.
+- It value is not defined while calling the function then it uses the default value instead of using "undefined".
+
+Syntax:
+    function Name(param1, param2=value, param3=value)
+    {
+
+    }
+
+- If value is set to zero then it identifies as undefined.
+- If you defined as undefined then it takes the default value.
+
+Ex:
+<script>
+     function Details(id, name, price=100, stock){
+         if(price){
+            document.write(`Id=${id}<br>Name=${name}<br>Price=${price}<br>Stock=${stock}`);  
+         } else {
+            document.write(`Id=${id}<br>Name=${name}<br>Stock=${stock}`);
+         }
+         
+     }
+     Details(1, "TV",undefined,true);
+</script>
+
+Ex:
+<script>
+     function Details(id=1, name='', price=100, stock=false){
+         if(price){
+            document.write(`Id=${id}<br>Name=${name}<br>Price=${price}<br>Stock=${stock}`);  
+         } else {
+            document.write(`Id=${id}<br>Name=${name}<br>Stock=${stock}`);
+         }
+         
+     }
+     Details();
+</script>
+
+Rest Parameter:
+
+- A function can have max 1024 parameters according to programming standards.
+- Having too many parameters will lead to security issues.
+- JavaScript ES5+ version introduced "Rest" parameter defined using "...param".
+- A single rest parameter can handle multiple values.
+- Rest parameter is array type.
+
+Syntax:
+        function Name(...param)
+        {
+        }
+
+        param[ ]
+
+        Name(1, "TV", 34000);
+
+        param[0] = 1,
+        param[1] = "TV"
+        param[2] = 34000
+
+Ex:
+<script>
+     function Details(...product){
+      var [id, name, price, stock] = product;
+      document.write(`Id=${id}<br>Name=${name}<br>Price=${price}<br>Stock=${stock}`);  
+     }
+     Details(1, "TV", 45000, true);
+</script>
+
+- Every function can have only one "rest" parameter.
+- You can define other parameters with rest parameter.
+- But rest parameter must be the last parameter in formal list.
+
+Syntax:
+    function Name(param1, ...args)
+    {
+
+    }
+    Name(value1, value2, value3, value4);
+
+    param1=value1
+    args[ ]   = [value2, value3, value4]
+
+Ex:
+<script>
+     function Details(title, ...product){
+      var [id, name, price, stock] = product;
+      document.write(`<h2>${title}</h2>Id=${id}<br>Name=${name}<br>Price=${price}<br>Stock=${stock}`);  
+     }
+     Details("Product Details", 1, "TV", 45000, true);
+</script>
+
+Spread Approach:
+- JavaScript allows to spread values of one argument into multiple parameters.
+- The argument type must be array.
+- It can spread by using "..." operator.
+
+Syntax:
+    function Name(param1, param2, param3)
+    {
+    }
+
+    Name( ...[value1, value2, value3] )
+
+    param1=value1,
+    param2=value2
+    param3=value3
+
+Ex:
+<script>
+     function Details(id, name, price, stock){
+     
+      document.write(`Id=${id}<br>Name=${name}<br>Price=${price}<br>Stock=${stock}`);  
+     }
+     var product = [1, "TV", 45000, true];
+
+     Details(...product);
+</script>
+
+FAQ: What is difference between rest & spread?
+Ans:  Rest is about single parameter that allows multiple arguments.
+     Spread is about single argument of array type spreads into multiple parameters.
+
+     Rest is about formal parameter.
+     Spread is about actual parameter.
+
+Anonymous Function:
+
+- A function without name is known as anonymous function.
+- It is mostly used in callback mechanism.
+- Callback allows to execute a function according to state and situation.
+- You have enclose the anonymous function using "()".
+- It is accessed and invoked by using IIFE pattern.
+  [Immediately Invoked Function Expression]
+
+Syntax:
+    (
+      function(){ }
+    )();
+
+Ex:
+<script>
+    (function()
+    {
+       document.write("Anonymous Function");
+    })();
+</script>
+
+Function with Return:
+- Every function by default is "void" type.
+- It removes the memory allocated for function after the end of function.
+- "return" is a jump statement that keep the memory alive even after the end of function.
+- The memory allocated for function can handle the functionality and the values returned by actions in function.
+
+Syntax:
+      function Name()
+      {
+          return  value;
+      }
+
+- A function can return any type of data
+    a) Primitive
+    b) Non Primitive
+    c) Function
+
+Ex:
+<script>
+    function Addition(a, b)
+    {
+      return a + b;
+    }
+    function PrintResult()
+    {
+      document.write(`Addition=${Addition(40,20)}`);
+    }
+    PrintResult();
+</script>
+
+Ex:
+<script>
+    function GetList(){
+        return ["Electronics", "Fashion", "Footwear"];
+    }
+    GetList().map(function(item){
+       document.write(`${item}<br>`);
+    })
+</script>
+
+- If a function returns another function, then it is referred as function currying.
+
+Syntax:
+    function Name()
+    {
+      return function(){ }
+    }
+
+    Name()();
+
+Ex:
+<script>
+    function Demo(){
+       return function(uname){
+           document.write(`Hello ! ${uname}`);
+       }
+    }
+    Demo()('John');
+</script>
+
+Ex:
+<script>
+    function Demo(){
+       return function(a, b){
+           return a + b;
+       }
+    }
+    document.write(`Addition=${Demo()(40,50)}`);
+</script>
+
+- A function can be configured with multiple return statements, which execute according to the state and situation.
+
+- It can be referred as conditional rendering.
+
+Ex:
+<script>
+    function Validate(isValid)
+    {
+         if(isValid===true){
+             return  "Your form is valid and submitted to server";
+         } else {
+             return  "Invalid Form Data - Please verify your details";
+         }
+    }
+    document.write(Validate(false));
+</script>
+
+18/06
+=====
+
+Parameters
+Rest
+Spread
+Higher Order Function
+Function Currying
+Function Return
+Anonymous Function
+
+Function Callback & Promise
+- Callback is a technique where a set of functions are defined to execute.  
+- However functions execute according to state and situation.
+- It uses "Synchronous" technique, where all other functions are blocked while executing specified function.
+
+Syntax:    
+    function Name(callback)
+    {
+    }
+    Name(function(){ })
+
+Ex: Callback
+<script>
+    function FetchData(url, success, failure){
+          if(url==="fakestore"){
+               success('Data Fetched Successfully..');
+               function GetData(){
+                  console.log([{Name:'TV', Price:24000}, {Name:'Mobile', Price:5000}])
+               }
+               GetData();
+               console.log('Response presented successfully..');
+          } else {
+               failure('Invalid URL - Unable to fetch data');
+          }
+    }
+    FetchData(
+        prompt("Enter URL"),
+        function(response) {
+            console.log(`${response}`);
+        },
+        function(error) {
+            console.log(`${error}`);
+        }
+    )
+</script>
+
+- Promise is an alternative for callback.
+- Promise is asynchronous, it used unblocking technique.
+- It can perform the given task without blocking other tasks in process.
+- It is just like are real life promise that have
+    a) resolve
+    b) reject
+- Resolve executes on success
+- Reject executes on failure
+
+Syntax:
+    var  ref = new Promise(function(resolve, reject){
+       
+            resolve(value);
+            reject(error);
+    })
+
+- Every promise comprises of 3 methods
+    a) then()
+    b) catch()
+    c) finally()
+
+- "then()" executes on resolve and collects the response.
+- You can configure multiple then blocks on success.
+- "catch()" executes on reject.
+- "finally()" executes always.
+
+Syntax:
+    ref.then(function(response){}).catch(function(error){}).finally(function(){});
+
+Ex:
+<script>
+    var FetchData = new Promise(function(resolve, reject){
+       
+         var url = prompt("Enter URL");
+
+         if(url==="fakestore"){
+             resolve([{Name:'TV', Price:5000}, {Name:'Mobile', Price:5500}]);
+         } else {
+             reject('Invalid URL - Unable to Fetch Data');
+         }
+    })
+    FetchData.then(function(response){
+         console.log(response);
+    })
+    .then(function(){
+        console.log('Response Presented Successfully..');
+    })
+    .catch(function(error){
+         console.log(error);
+    })
+    .finally(function(){
+        console.log('End of Program');
+    })
+</script>
+
+Async Functions:
+- You can configure a function explicitly as asynchronous that awaits to perform the given task.
+- It can execute without blocking other requests in process.
+- JavaScript implicitly identifies Async functions as promises.
+
+Syntax:
+      function Name()
+      {
+         return  [ ]
+      }
+      Name();            // returns array
+
+     async function Name()
+     {
+         return await [ ];
+     }
+     Name();            // returns promise
+     Name().then().catch().finally()
+
+Ex:
+<script>
+    async function GetData(){
+        return await ["A", "B", "C", "D", "E"]
+    }
+
+    GetData().then(function(data){
+        data.map(function(item){
+             document.write(`${item}<br>`);
+        })
+    })
+</script>
+
+Note: You can configure async functions explicitly in a promise.  It allows to present
+      the response data without blocking.
+
+Syntax:
+      data.map(async function(item){
+        await document.write(item);
+     })
+
+Ex:
+<script>
+     fetch(`https://fakestoreapi.com/products/categories`)
+     .then(async function(response){
+         return await response.json();
+     })
+     .then(function(categories){
+          categories.map(async function(category){
+              await document.write(`<li>${category}</li>`);
+          })
+     })
+     
+</script>
+
+Function Generator:
+- Generator is function used to create iterators.
+- Iterator is a software design pattern used to read elements from a collection in sequential order.
+
+Syntax:
+    function* Name()
+    {
+       yield  value,
+       yield  value
+    }
+
+- Generator "*" refers to zero or more occurrences.
+- It executes zero or more times.
+- It provides an object that returns
+    a) next()        read and continue
+    b) return        to stop
+
+- next() returns
+    a) value          value it contains
+    b) done        true if it is end of list.
+
+Syntax:
+     var obj = GeneratorName();
+     obj.next().value
+     obj.next().done
+
+Ex:
+<script>
+    function* GetList(){
+        yield  10,
+        yield  ["A", "B"],
+        yield  true,
+        yield  {rating:4.5}
+    }
+    var obj = GetList();
+    console.log(obj.next());
+    console.log(obj.next());
+    console.log(obj.next());
+    console.log(obj.next());
+    console.log(obj.next());
+</script>
+
+19/06
+=====
+
+Function Callback
+Function Promise
+Async Function
+Function Generator
+
+Function Recursion:
+- Recursion is a technique of calling a function within the context of same function.
+- It creates a indefinite loop which executes statements repeatedly based on given condition.
+
+Syntax:
+    function f1()
+    {
+      f1();
+    }
+
+Ex:
+<script>
+    function Factorial(n){
+        if(n===1){
+            return 1;
+        } else {
+            return n * Factorial(n-1);
+        }
+    }
+
+    document.write(`Factorial of 6 is ${Factorial(6)}`);
+</script>
+
+Task:
+  - Write a function with recursion to print number from 1 to 10.
+  - Write a function with recursion to print all even numbers between 1 to 20.
+  - Write a function with recursion to print multiplication table for given number.
+
+Arrow Functions:
+
+- Arrow is a short hand technique of writing function expression.
+- It can minify the code and improve the performance.
+
+    ()          function
+
+    =>          return
+
+    =>{ }          definition
+
+Syntax:
+     const  hello = function() {
+        document.write("Hello !");
+     }
+
+     const hello = () =>  document.write("Hello !");
+
+     
+     const add = function(a,b) {
+        return a + b;
+      }
+
+      const add = (a,b) => a + b;
+      add(10, 20);
+
+      const hello = function(uname) {
+
+        document.write(`Hello ! ${uname}`);
+
+       }
+
+      const hello = uname => document.write(`Hello ! ${uname}`);
+
+Ex:
+<script>
+    fetch(`https://fakestoreapi.com/products/categories`)
+    .then(response => response.json())
+    .then(categories => {
+        categories.map(category=>{
+             document.write(`<li>${category}</li>`);
+        })
+    })
+</script>
+
+Ex:
+<script>
+    var data = [{Name:'TV', Price:45000}, {Name:'Mobile', Price:34000}, {Name:'Watch', Price: 50000}];
+
+   /*
+    var products = data.filter(function(item){
+         return item.Price >= 40000;
+    })
+
+    products.map(function(product){
+         document.write(`${product.Name} - ${product.Price}<br>`);
+    })
+    */
+
+     var products = data.filter(item=> item.Price>=40000);
+     products.map(product=> document.write(`${product.Name}-${product.Price}<br>`));
+     
+</script>
+
+Summary:
+- Function Declaration
+- Function Expression
+- Function Signature
+- Function Definition
+- Function Parameters
+- REST & Spread
+- Function Return
+- Function Callback
+- Function Promise
+- Async Function
+- Anonymous Function
+- Higher Order Function
+- Function Currying
+- Arrow Function
+- Function Generator
+- Function Closure
+
+FAQ: What is a closure?
+Ans:  It is a mechanism where the members of outer function are accessible to inner, but inner members are not accessible to outer.
+
+Ex:
+<script>
+    function Outer(){
+         var x = 10;
+         function Inner(){
+            var y = 20;
+            return x + y;
+         }
+         document.write(`Addition=${Inner()}`);
+    }
+    Outer();
+</script>
+
+FAQ: What is function Chaining?
+Ans:  It is a mechanism of accessing a function with reference of another function.
+
+        string.bold().italic().fontsize(4).fontcolor('red');
+
+        array.sort().reverse()
+
+Task:
+       function A(){ }
+
+        A().B().C();
+        A().C().B()
+
+Ex:
+<script>
+    function A(){
+        return {
+            B(){
+              document.write(`B<br>`);
+              return this;
+            },
+            C(){
+              document.write(`C<br>`);
+              return this;
+            }
+        }
+    }
+    A().C().B();
+</script>
+
+Ex: Object Reference
+
+<script>
+    function A(){
+        return {
+            B(){
+              document.write(`B<br>`);
+              return this;
+            },
+            C(){
+              document.write(`C<br>`);
+              return this;
+            }
+        }
+    }
+    let obj = A();
+    obj.B().C();
+</script>
+
+Task:
+    Calculator.Add(10, 20).Sub(5).Mul(2)  
+
+        30 - 5  = 25 * 2 = 50
+
+
+                        JavaScript Events
+1. What is Event?
+ - Event is a message sent by sender to its subscriber in order to notify change.
+ - Event follows a software design pattern called "Observer".
+ - Event uses delegate mechanism, which is function pointer mechanism.
+
+    function InsertClick()         => Subscriber
+    {
+    }
+
+    onclick="InsertClick()"        => Sender
+
+ - Subscriber defines the actions to perform.
+ - Sender sends a notification to subscriber.
+ - Sender triggers an action, which notifies the subscriber.
+
+20/06
+=====
+
+Events
+1. What is Event?
+    - Sender
+    - Subscriber
+    - Observer
+    - Delegate
+
+2. What is Event Handler?
+- Every element can use an event.
+- If you are configuring event for element while designing then it requires a handler name starting with "on" keyword.
+
+Syntax:
+        <button onclick="InsertClick()">
+
+          onclick=InsertClick()        => Handler Name
+          onclick                    => Handler Event Name
+          click                    => Event Name
+
+3. What is Event Listener?
+- Event listener allows to configure event for element dynamically.
+- You can use the method "addEventListener()".
+
+Syntax:
+    document.querySelector("button").addEventListener("event", function(){
+
+   })        
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bodyload(){
+            var btn = document.createElement("button");
+            btn.textContent = "Insert";
+            btn.addEventListener("click",()=>{
+                 document.write("Record Inserted..");
+            })
+            document.getElementById("container").appendChild(btn);
+
+            document.getElementById("btnDelete").addEventListener("click",()=>{
+                document.write("Record Deleted..");
+            })
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+   <div id="container">
+     <button id="btnDelete">Delete</button>
+   </div>
+</body>
+</html>
+
+4. What are Event Arguments?
+ - Event arguments carry payload from sender to subscriber.
+ - Payload is the data about event and element.
+ - There are 2 default event arguments
+
+    a) this
+    b) event
+
+  - "this" sends information about current element, which includes element details like
+    id, name, className, href, width, height, src etc..
+
+  - "event" sends information about current event, which includes details like
+    clientX, clientY, keyCode, charCode, which, shiftKey, ctrlKey, etc.
+
+Syntax:
+    <button onclick="Clicked(this)">
+
+     function Clicked(obj)
+     {
+          obj.id, obj.name, obj.value, obj.className..
+     }
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+        function Player(obj){
+            var para = document.querySelector("p");
+
+            switch(obj.name){
+                case "Play":
+                para.innerHTML = "Playing..";
+                break;
+                case "Pause":
+                para.innerHTML = "Paused";
+                break;
+                case "Stop":
+                para.innerHTML = "Stopped";
+                break;    
+            }
+        }
+    </script>
+</head>
+<body>
+    <button onclick="Player(this)" name="Play" class="bi bi-play"></button>
+    <button onclick="Player(this)" name="Pause" class="bi bi-pause"></button>
+    <button onclick="Player(this)" name="Stop" class="bi bi-stop"></button>
+    <p></p>
+</body>
+</html>
+
+Syntax:
+     <button onclick="Clicked(event)">
+
+     function Clicked(e)
+     {
+       e.clientX, e.clientY, e.ctrlKey ..
+     }
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: black;
+        }
+    </style>
+    <script>
+        function BoxClick(e){
+             document.querySelector("p").innerHTML = `
+                 X Position : ${e.clientX} <br>
+                 Y Position : ${e.clientY} <br>
+                 Ctrl Key   : ${e.ctrlKey}
+             `;
+        }
+    </script>
+</head>
+<body onclick="BoxClick(event)">
+    <div class="box" >
+
+    </div>
+    <p></p>
+ 
+</body>
+</html>
+
+ Syntax:
+     <button onclick="InsertClick(this, event)">
+
+     function InsertClick(obj, e)
+     {
+     }
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     
+    </style>
+    <script>
+       function InsertClick(obj, e){
+          console.log(`
+                Button Id : ${obj.id}\n
+                Button Name: ${obj.name}\n
+                X Position : ${e.clientX}
+          `)
+       }
+    </script>
+</head>
+<body>
+    <button id="btnInsert" onclick="InsertClick(this, event)" name="Insert"> Insert </button>
+</body>
+</html>
+
+Syntax:
+     <button onclick="InsertClick(this.id, event.clientX)">
+
+      function InsertClick(buttonId, xPosition)
+      {
+      }
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     
+    </style>
+    <script>
+       function InsertClick(id, x){
+          console.log(`
+                Id = ${id} \n
+                X = ${x}
+          `)
+       }
+    </script>
+</head>
+<body>
+    <button id="btnInsert" onclick="InsertClick(this.id, event.clientX)" name="Insert"> Insert </button>
+</body>
+</html>
+
+- You can send custom arguments of any type
+- You can use Rest parameters or spread approach.
+- You can send custom arguments along with default arguments.
+
+Syntax:
+    <button onclick="Clicked(1, 'TV', [ ], { })">
+
+     function Clicked(id, name, cities, rating) { }
+     function Clicked(...product) { }
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     
+    </style>
+    <script>
+       function InsertClick(obj,...product){
+          var [id, name, price, cities, rating] = product;
+          console.log(`
+              Button Id : ${obj.id}\n
+              Id : ${id}\n
+              Name: ${name}\n
+              Price: ${price}\n
+              Cities: ${cities}\n
+              Rating: ${rating.Rate}
+          `)
+       }
+    </script>
+</head>
+<body>
+    <button id="btnInsert" onclick="InsertClick(this, 1, 'TV', 45000, ['Delhi', 'Hyd'], {Rate:4.2})" name="Insert"> Insert </button>
+</body>
+</html>
+
+23/06
+=====
+Event Handler
+Event Listener
+Event Args
+    this
+    event
+
+Note: Event listener can have only one argument that refers to "event".
+      However listener event allows both element and event details
+           
+Syntax:
+        .addEventListener("event", (e) =>{
+
+              e.clientX, e.clientY, e.ctrlKey;
+
+              e.target.id,  e.target.name, e.target.href, e.target.className;
+       
+        })
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     
+    </style>
+    <script>
+       function bodyload(){
+            document.getElementById("btnInsert").addEventListener("click", (e)=>{
+
+                  console.log(`X Position : ${e.clientX}\nButton Value: ${e.target.value}`);
+
+            })
+       }
+    </script>
+</head>
+<body onload="bodyload()">
+    <button id="btnInsert" value="Insert">Insert</button>
+</body>
+</html>
+
+5. What is Event Bubbling or Event Propagation?
+A. Propagation is a mechanism where the child element event may trigger the parent
+    events. You can stop propagation by using the event method "stopPropagation()".
+
+Syntax:
+     function childEvent(e)
+     {
+         e.stopPropagation();
+     }
+
+    <button onclick="childEvent(event)">
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       nav {
+         border:1px solid black;
+         padding: 20px;
+       }
+    </style>
+    <script>
+        function NavClick(){
+             alert("Navbar Clicked");
+        }
+        function SearchClick(e){
+            e.stopPropagation();
+            alert("Search Clicked");
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <nav onclick="NavClick()">
+         <h2>Amazon</h2>
+         <button onclick="SearchClick(event)">Search</button>
+    </nav>
+</body>
+</html>
+
+6. How to stop the default events?
+A. Several HTML generic elements have pre-defined functionality.
+     When you configure explicit functionality then it performs both default and explicit.
+     You can avoid execution of default functionality by using the event method
+     "preventDefault()"
+
+Syntax:
+    <form onsubmit="SubmitClick(event)">
+
+     function SubmitClick(e)
+     {
+       e.preventDefault();
+     }
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     
+    </style>
+    <script>
+       function RegisterClick(e){
+           e.preventDefault();
+           alert("Form Submitted Successfully..");
+       }
+    </script>
+</head>
+<body>
+    <form onsubmit="RegisterClick(event)">
+         Name <input type="text" name="UserName"> <button>Submit</button>
+    </form>
+</body>
+</html>
+
+7. What is Event Loop?
+A.  It is an implicit concept of JavaScript where it can perform the given task along with
+    the micro task in an async technique.
+     It requires promises or timer events to handle event loop.
+     It is non-blocking technique of executing tasks.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     
+    </style>
+    <script>
+       function GetData(){
+           console.log(["A", "B", "C", "D"]);
+       }
+       function GetClick(){
+          console.log("Request Started");
+
+          setTimeout(GetData, 3000);
+
+          console.log("Request End");
+       }
+    </script>
+</head>
+<body>
+    <button onclick="GetClick()">Get Data</button>
+</body>
+</html>
+     
+
+8. What is Event Profiling?
+A. Event profiling is a technique used by developers to track the performance and identify the issues in events.
+    You can profile using developer tools.
+
+    - Open Browser developer tools  [ right click => inspect ]
+    - Go to performance category
+    - Click on Record to start profiling
+    - Record your activities by clicking or changing etc.
+    - Stop profiling
+    - You can examine the "call-tree" and "events stack".
+
+9. What are various browser events?
+A. Browser events are the members of browser "window" object.
+    You can configure to various elements.
+    They are categorized into different groups
+
+    a) Mouse Events
+    b) Keyboard Events
+    c) Button Events
+    d) Clipboard Events
+    e) Element State Events
+    f) Form Events
+    g) Timer Events
+    h) Touch Events etc.
+
+Mouse Events:
+    onmouseover
+    onmouseout
+    onmousedown
+    onmouseup
+    onmousemove
+
+Mouse Event Args:
+
+        e.clientX
+        e.clientY
+        e.ctrlKey
+        e.shiftKey
+        e.altKey etc.
+
+
+Ex: Down and Up
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       body {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+       }
+       @keyframes Spin {
+           from {
+              transform: rotate(0deg);
+           }
+           to {
+             transform: rotate(360deg);
+           }
+       }
+    </style>
+    <script>
+       function MouseDown(){
+            var img = document.querySelector("img");
+            img.style.animationName = "Spin";
+            img.style.animationDuration = "3s";
+            img.style.animationIterationCount = "infinite";
+            img.style.animationTimingFunction = "linear";
+       }
+       function MouseUp(){
+            var img = document.querySelector("img");
+            img.style.animationName = "Spin";
+            img.style.animationDuration = "10s";
+            img.style.animationIterationCount = "1";
+       }
+    </script>
+</head>
+<body>
+   <img onmousedown="MouseDown()" onmouseup="MouseUp()" src="../public/images/wheel.png" width="200" height="200">
+</body>
+</html>
+
+Ex: mover over and out
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <marquee scrollamount="20" onmouseover="this.stop()" onmouseout="this.start()">
+        <img src="../public/images/a1.jpg" width="200" height="200">
+        <img src="../public/images/a2.jpg" width="200" height="200">
+        <img src="../public/images/a3.jpg" width="200" height="200">
+        <img src="../public/images/a4.jpg" width="200" height="200">
+        <img src="../public/images/a5.jpg" width="200" height="200">
+        <img src="../public/images/a6.jpg" width="200" height="200">
+    </marquee>
+</body>
+</html>
+
+Ex: Mouse Move
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function MouseMove(e){
+            var flag = document.querySelector("img");
+            flag.style.position = "fixed";
+            flag.style.left = e.clientX + "px";
+            flag.style.top = e.clientY + "px";
+        }
+    </script>
+</head>
+<body onmousemove="MouseMove(event)">
+   <div style="height:1000px">
+      Move mouse pointer to test.
+   </div>
+   <img src="../public/images/flag.gif" width="50" height="50">
+</body>
+</html>
+
+Button Events:
+     onclick                single click
+     ondblclick            double click
+     oncontextmenu         right click
+     onselectstart            button drag to select text
+
+FAQ: How to disable right click in page?
+Ans:  By using a function that returns false.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.oncontextmenu = function(){
+             alert("Right Click not allowed");
+             return false;
+        }
+        function DoubleClick(){
+            window.open('../public/images/women-fashion.jpg','Fashion','width=400 height=500');
+        }
+    </script>
+</head>
+<body>
+    <img ondblclick="DoubleClick()" src="../public/images/women-fashion.jpg" width="100" height="100">
+    <p>Double Click to view large</p>
+    <h2>Right Click not allowed</h2>
+</body>
+</html>
+
+Ex: Disable selection
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.oncontextmenu = function(){
+             alert("Right Click not allowed");
+             return false;
+        }
+        function DoubleClick(){
+            window.open('../public/images/women-fashion.jpg','Fashion','width=400 height=500');
+        }
+
+        document.onselectstart = function(){
+             return false;
+        }
+    </script>
+</head>
+<body>
+    <img ondblclick="DoubleClick()" src="../public/images/women-fashion.jpg" width="100" height="100">
+    <p>Double Click to view large</p>
+    <h2>Right Click not allowed</h2>
+</body>
+</html>
+
+24/06
+======
+
+JavaScript OOP
+Mouse Events
+Button Events
+Timer Events
+    setTimeout()
+    clearTimeout()
+    setInterval()
+    clearInterval()
+
+Keyboard Events:
+    onkeyup
+    onkeydown
+    onkeypress
+
+- Keyup & Key down are used to verify the chars.
+- Key press is good for verifying the ASCII code of chars.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function VerifyUser(e){
+            console.log(`Key Code : ${e.charCode}`);
+            var userid = document.getElementById("txtId").value;
+            var lblError = document.getElementById("lblError");
+            fetch(`../data/users.json`)
+            .then(response=> response.json())
+            .then(users => {
+                 for(var user of users)
+                 {
+                     if(user.UserId===userid){
+                          lblError.innerHTML = "User Id Taken - Try Another".fontcolor('red');
+                          break;
+                     } else {
+                         lblError.innerHTML = "User Id Available".fontcolor('green');
+                     }
+                 }
+            })
+        }
+        function VerifyCaps(e){
+            var pwdBlock = document.getElementById("pwdBlock");
+
+            if(e.keyCode>=65 && e.keyCode<=90){
+                pwdBlock.style.display = "block";
+                pwdBlock.style.color = "goldenrod";
+            } else {
+                pwdBlock.style.display = "none";
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+    <h3>Register User</h3>
+    <dl>
+        <dt>User Id</dt>
+        <dd><input type="text" onkeyup="VerifyUser(event)" id="txtId"></dd>
+        <dd id="lblError"></dd>
+        <dt>Password</dt>
+        <dd>
+            <input type="password" onkeypress="VerifyCaps(event)" id="txtPwd">
+        </dd>
+        <dd id="pwdBlock" style="display: none;"> <span class="bi bi-exclamation-triangle"> Warning CAPS ON</span> </dd>
+    </dl>
+</body>
+</html>
+
+Clipboard Events
+   
+    oncut
+    oncopy
+    onpaste
+
+- Clipboard is the temporary memory of your OS.
+- The content that you cut or copy is kept on clipboard.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function VerifyUser(e){
+            console.log(`Key Code : ${e.charCode}`);
+            var userid = document.getElementById("txtId").value;
+            var lblError = document.getElementById("lblError");
+            fetch(`../data/users.json`)
+            .then(response=> response.json())
+            .then(users => {
+                 for(var user of users)
+                 {
+                     if(user.UserId===userid){
+                          lblError.innerHTML = "User Id Taken - Try Another".fontcolor('red');
+                          break;
+                     } else {
+                         lblError.innerHTML = "User Id Available".fontcolor('green');
+                     }
+                 }
+            })
+        }
+        function VerifyCaps(e){
+            var pwdBlock = document.getElementById("pwdBlock");
+
+            if(e.keyCode>=65 && e.keyCode<=90){
+                pwdBlock.style.display = "block";
+                pwdBlock.style.color = "goldenrod";
+            } else {
+                pwdBlock.style.display = "none";
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+    <h3>Register User</h3>
+    <dl>
+        <dt>User Id</dt>
+        <dd><input type="text" oncopy="alert('User Id Copied')" onkeyup="VerifyUser(event)" id="txtId"></dd>
+        <dd id="lblError"></dd>
+        <dt>Password</dt>
+        <dd>
+            <input type="password"  onkeypress="VerifyCaps(event)" id="txtPwd">
+        </dd>
+        <dd id="pwdBlock" style="display: none;"> <span class="bi bi-exclamation-triangle"> Warning CAPS ON</span> </dd>
+        <dt>Verify Password</dt>
+        <dd>
+            <input type="password" onpaste="return false">
+        </dd>
+    </dl>
+</body>
+</html>
+
+Element State Events
+     
+    onchange
+    onblur
+    onfocus
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function VerifyName(){
+            var username = document.getElementById("txtName").value;
+            var lblName = document.getElementById("lblName");
+
+            if(username=="john") {
+                lblName.innerHTML = "User Name Taken - Try Another".fontcolor('red').fontsize(2);
+            } else {
+                lblName.innerHTML = "User Name Available".fontcolor('green').fontsize(2).bold().italics();
+            }
+        }
+        function ChangeCase(){
+            var code = document.getElementById("txtCode").value;
+            document.getElementById("txtCode").value = code.toUpperCase();
+              document.getElementById("lblStatus").innerHTML = "";    
+        }
+        function SetStatus(){
+            document.getElementById("lblStatus").innerHTML = "eg: IDFC00392";
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>User Name</dt>
+        <dd><input type="text" onkeyup="VerifyName()" id="txtName"></dd>
+        <dd id="lblName"></dd>
+        <dt>Bank IFSC Code</dt>
+        <dd><input type="text" id="txtCode" onfocus="SetStatus()" onblur="ChangeCase()"></dd>
+        <dd id="lblStatus"></dd>
+    </dl>
+</body>
+</html>
+
+Form Events
+
+    onsubmit
+    onreset
+
+ - Events used for <form> element.
+ - Define actions to perform when form is submitted or reset.
+
+Syntax:    
+    <form  onsubmit="submit()"     onreset="reset()">
+
+    </form>
+
+Touch Events
+
+    ontouchstart
+    ontouchend
+    ontouchmove
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function GetDetails(msg){
+             document.querySelector("h2").innerHTML = msg;
+        }
+    </script>
+</head>
+<body>
+    <img ontouchstart="GetDetails('Women Fashion 20% SALE')" src="../public/images/women-fashion.jpg" width="200" height="200">
+    <img ontouchstart="GetDetails('Men Fashion SALE Starts on 30 JUNE')" src="../public/images/men-fashion.jpg" width="200" height="200">
+    <img ontouchstart="GetDetails('Kids Accessories SALE Ends Soon')" src="../public/images/kids-fashion.jpg" width="200" height="200">
+
+    <h2></h2>
+</body>
+</html>
+
+                         JavaScript OOP
+
+- Real world application development uses different programming systems.
+   
+    1. POPS
+    2. OBPS
+    3. OOPS
+
+POPS
+ - Process Oriented Programming System
+ - It supports low level features.
+ - It can directly interact with hardware services.
+ - It uses less memory.
+ - It is faster in interactions.
+
+Ex: C, PASCAL
+
+ - Reusability issues
+ - No dynamic memory
+ - Not easy to extend
+ 
+OBPS
+ - Object Based Programming System
+ - It supports reusability
+ - It supports separation
+ - It supports dynamic memory
+
+Ex: JavaScript, VB
+
+ - Limited extensibility
+ - No code level security
+
+OOPS
+- Object Oriented Programming System
+- Code reusability
+- Code extensibility
+- Code separation
+- Code level security
+
+Ex: C++, Java
+
+- It is complex in configuration
+- It uses more memory
+- It is tedious.
+
+Note: JavaScript is not an OOP language. It supports only few features of OOP.
+
+
+                             Modules in OOP
+- Application uses library with "Legacy" type.
+- Legacy will load all functions into memory even when they are not in use.
+- Modular approach allows to load only what is required for the situation.
+- It makes application light weight and faster.
+- To use modules in JavaScript you need various module systems to install.
+- There are various module systems like
+    a) ESModule
+    b) UMD (Universal Module Distribution)
+    c) AMD (Asynchronous Module Distribution)
+    d) Common JS
+    etc.
+
+- Browser uses "ES Module" system but you have to enable by using <script> type set as "module".
+
+Syntax:
+    <script type="module">
+
+    </script>
+
+- Every JavaScript file is considered as a module.
+- Every members of module can be exported to another location. But they must be marked with "export".
+
+        export var name = value;
+        export function name() { }
+        export class name { }
+
+- You can import only what is required from module
+
+        import  { varName, functionName, className } from  "./file.js";
+
+Ex:
+demo.js
+ 
+export function Addition(a, b){
+    return a + b;
+}
+
+export function Hello(){
+    return "Hello ! JavaScript";
+}
+
+export function Multiply(a,b){
+    return a * b;
+}
+
+demo.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module">
+         import { Hello, Addition } from "./demo.js";
+         document.querySelector("h1").innerHTML = Hello();
+         document.querySelector("p").innerHTML = Addition(10, 30);
+    </script>
+</head>
+<body>
+    <h1></h1>
+    <p></p>
+</body>
+</html>
+
+25/06
+=====
+
+OOP
+- Modules
+    a) export
+    b) import
+
+Default Export:
+- Every module can have only one default export.
+- If define an expression or variable, you can't directly export as it leads to strict issues.
+- It requires default export.
+- If you want to configure a function or variable and export later then mark as default.
+
+Syntax:
+          const  name =  () => { } ;
+
+          export default name;
+
+- If any member is marked as "default" then you have to import without block.
+
+          import  name  from "./module";
+          import  name { others } from "./module";
+
+Ex:
+demo.js
+
+export function Addition(a, b){
+    return a + b;
+}
+
+export function Hello(){
+    return "Hello ! JavaScript";
+}
+
+const Multiply = (a,b) => a * b;
+
+export default Multiply;
+
+demo.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module">
+         import Multiply, { Hello, Addition} from "./demo.js";
+         document.querySelector("h1").innerHTML = Hello();
+         document.querySelector("p").innerHTML =`Addition=${Addition(10,50)}<br>Multiply=${Multiply(5,2)}`;
+    </script>
+</head>
+<body>
+    <h1></h1>
+    <p></p>
+</body>
+</html>
+
+FAQ: Can we import components from multiple modules ?
+Ans : Yes.
+
+FAQ: How to handle ambiguity ?
+Ans:  Ambiguity is the issue of having same name members in different module and
+     you are importing into same location.
+
+     You can reduce ambiguity issues by aliasing.
+
+Syntax:
+        import   { name as ref  } from  "module";
+
+Ex:
+1. add files
+   
+    module1.js
+    module2.js
+
+2. module1.js
+
+export function Hello(){
+     return "Hello ! from Module-1";
+}
+
+3. module2.js
+
+export function Hello(){
+    return "Hello from Module-2";
+}
+
+4. demo.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module">
+        import { Hello } from "./module1.js";
+        import { Hello as M2Hello } from "./module2.js";
+
+        document.querySelector("p").innerHTML = `${Hello()}<br>${M2Hello()}`;
+    </script>
+</head>
+<body>
+    <h1></h1>
+    <p></p>
+</body>
+</html>
+
+
+FAQ: How to import all members from a module?
+Ans:  By using "*" as aliasing reference.
+
+Syntax:
+       import * as ref from "module";
+
+       ref.f1();
+       ref.f2();
+
+Ex:
+demo.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module">
+        import { Hello } from "./module1.js";
+        import  * as lib from "./module2.js";
+
+        document.querySelector("p").innerHTML = `${Hello()}<br>${lib.Hello()}`;
+    </script>
+</head>
+<body>
+    <h1></h1>
+    <p></p>
+</body>
+</html>
+
+                           Class in OOP
+- Class is a program template.
+- It provides pre-defined data and logic.
+- It is referred as a Model when it is mapping with data requirements.
+- It is referred as an Entity when it is mapping with business requirements.
+- It enables separation and easy reusability.
+
+Configuring Class:
+1. You can define as expression or use a declaration.
+
+    class Name               => declaration
+    {
+    }
+
+       const Name = class {     => expression
+
+    }    
+
+2. Expression allows to change according to the situation.
+
+
+Class Members:
+- A class member can be any one of the following
+
+    a) Property
+    b) Accessor
+    c) Method
+    d) Constructor
+
+- You can't define variable or function as class member, but you can configure them inside class.
+- Class allows only mutable members. Variable and functions are immutable.
+
+Property:
+ - It is used to store data.
+ - You can store any type of data in a property.
+ - Property is mutable.
+ - It is controlled by using accessors.
+
+Syntax:
+    class Name
+    {
+       property = value;
+    }
+
+ - A property can be static or non static.
+ - If property is static it is accessible inside and outside class by using class name.
+ - If property is non-static then it is accessible inside class using "this" and outside class by using "instance of class".
+
+Syntax:
+      let obj = new ClassName();
+      obj.Property;
+
+Ex:
+<script>
+     class Product
+     {
+         Id = 1;
+         Name = "TV";
+         Cities = ["Delhi", "Hyd"];
+         Rating = { Rate: 4.2 }
+     }
+     let obj = new Product();
+     document.write(`Id=${obj.Id}<br>Name=${obj.Name}<br>Cities=${obj.Cities}<br>Rating=${obj.Rating.Rate}`);
+</script>
+
+FAQ: What is difference between static and non-static?
+Ans:  Static refers to continuous memory.
+      Memory allocated for first object will continue to next.
+
+      Non Static refers to discreet memory.
+      Memory is newly allocated for every object.
+
+      Static members are declared by using "static" keyword.
+      Default without static keyword all members are non-static.
+
+Ex:
+<script>
+     class Demo
+     {
+         static s = 0;
+         n = 0;
+         constructor(){
+            Demo.s = Demo.s + 1;
+            this.n = this.n + 1;
+         }
+         Print(){
+            document.write(`s=${Demo.s} n=${this.n}<br>`);
+         }
+     }
+     let obj1 = new Demo();
+     obj1.Print();
+
+     let obj2 = new Demo();
+     obj2.Print();
+
+     let obj3 = new Demo();
+     obj3.Print();
+</script>
+
+FAQ: What are the new Prefix for class members?
+Ans:  
+        #        to configure private
+        _         to define internal access
+
+       If any member is defined with "#" prefix then it is not accessible outside class.
+       The prefix "_" is just a rule to define the accessibility inside.
+
+Ex:
+<script>
+    class Product
+    {
+         Name = "Samsung TV";
+         #Price = 45000;            // Private
+         _Stock = true;                // Marked to access inside
+    }
+    let obj = new Product();
+   
+</script>
+
+Accessors:
+- Accessor is used to configure a fine grained control over the property.
+- It controls read and write operations on property.
+- There are 2 accessors
+
+    a) Getter    get()        
+    b) Setter    set()
+
+- Getter is used to read and return value of a property.
+
+    get Name()
+    {
+       return value;
+    }
+
+- Setter is used to set and a new value into property
+
+    set  Name(newname)
+    {
+        property = newname;
+    }
+
+Ex:
+<script>
+   var username = prompt("Enter User Name");
+   var role = prompt("Enter your role", "admin|customer");
+   var productname = prompt("Enter Product Name");
+   class Product
+   {
+       _productName;
+
+       get ProductName(){
+          return this._productName;
+       }
+
+       set ProductName(newname){
+           if(role==="admin"){
+            this._productName = newname;
+           } else {
+              document.write(`Hello ! ${username} you are not authorized to set product name`);
+           }
+       }
+
+   }
+   let obj = new Product();
+   obj.ProductName = productname;
+   if(obj.ProductName)
+   {
+       document.write(`Product Name : ${obj.ProductName}`);
+   }
+</script>
+
+26/06
+======
+
+Class Members
+- Property
+- Accessor
+- Static & Non Static
+- Private
+
+Method:
+- It is just like a function.
+- It can return a value or perform any specified functionality.
+
+Syntax:
+      class Name
+      {
+         Method() {
+
+          }
+      }
+
+     let obj = new Name();
+     obj.Method();
+
+- Method can be parameterized or parameter less.
+- It can be void or with return.
+- It is mutable. [ function is immutable ].
+
+Ex:
+<script>
+   class Product
+   {
+       Name = "Samsung TV";
+       Price = 56000;
+       Qty = 2;
+       Total(){
+          return this.Qty * this.Price;
+       }
+       Print(){
+          document.write(`Name=${this.Name}<br>Price=${this.Price}<br>Qty=${this.Qty}<br>Total=${this.Total()}`)
+       }
+   }
+   let tv = new Product();
+   tv.Qty = parseInt(prompt("Enter Qty"));
+   tv.Print();
+</script>
+
+Constructor:
+- It is used to for instantiation.
+- It is responsible for creating an object for class.
+- Every class have a default constructor.
+- You can define explicitly constructor to specify the actions to perform while creating object for class.
+- JavaScript constructor is anonymous.
+- It is defined using constructor keyword.
+
+Syntax:
+    class Name
+    {
+       constructor() { }
+    }
+
+- A constructor will execute automatically for every object.
+- Constructor can execute only once for object.
+- A constructor can be parameterized.
+- Parameterized constructor requires the parameters to pass while allocating memory for object.
+
+Syntax:
+        class Name
+        {
+           constructor(params) { }
+        }
+
+        let obj = new Name(value);
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class Database
+	        {
+            constructor(dbname){
+                document.write(`Connected with ${dbname} Database<br>`);
+            }
+            Insert(){
+                document.write("Record Inserted");
+            }
+            Update(){
+                document.write("Record Updated");
+            }
+            Delete(){
+                document.write("Record Deleted");
+            }
+        }
+        function DbAction(action){
+            switch(action)
+            {
+                case "Insert":
+                     let ins = new Database(document.querySelector("select").value);
+                     ins.Insert();
+                     break;
+                case "Update":
+                      let update = new Database(document.querySelector("select").value);
+                      update.Update();
+                      break;
+                case "Delete":
+                      let del = new Database(document.querySelector("select").value);
+                      del.Delete();
+                      break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <select>
+        <option>Select Database</option>
+        <option>MySQL</option>
+        <option>MongoDB</option>
+    </select>
+    <button onclick="DbAction('Insert')">Insert</button>
+    <button onclick="DbAction('Update')">Update</button>
+    <button onclick="DbAction('Delete')">Delete</button>
+</body>
+</html>
+
+Reusability & Extensibility:
+
+- Reusability and extensibility are primary features of OOP.
+- You can reuse the code of one class in another class by using 2 techniques
+
+    1. Aggregation
+    2. Inheritance
+
+Aggregation:
+- It is the process of accessing the member of one class in another class without configuring any relationship between classes.
+
+- It is referred as "Has-A-Relation" and it uses object to object communication.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class HDFC_Bank_Version1
+        {
+             Personal = "Personal Banking Services";
+             Print(){
+                document.write(`${this.Personal}<br>`);
+             }
+        }
+        class HDFC_Bank_Version2
+        {
+            NRI = "NRI Banking Services";
+            Print(){
+                let obj = new HDFC_Bank_Version1();
+                obj.Print();
+                document.write(`${this.NRI}<br>`);
+            }
+        }
+        class HDFC_Bank_Version3
+        {
+            Loans = "Housing and Car Loans";
+            Print(){
+                let obj = new HDFC_Bank_Version2();
+                obj.Print();
+                document.write(`${this.Loans}<br>`);
+            }
+        }
+        function InstallClick(){
+            var ver = document.querySelector("select").value;
+            switch(ver)
+            {
+                case "ver1":
+                 document.write("<h1>Version-1 Installed</h1>");
+                 let obj1 = new HDFC_Bank_Version1();
+                 obj1.Print();
+                 break;
+                case "ver2":
+                document.write("<h1>Version-2 Installed</h1>");
+                 let obj2 = new HDFC_Bank_Version2();
+                 obj2.Print();
+                 break;
+                 case "ver3":
+                 document.write("<h1>Version-3 Installed</h1>");
+                 let obj3 = new HDFC_Bank_Version3();
+                 obj3.Print();
+                 break;
+                 default:
+                 document.write("<h2>Please select a version</h2>");
+                 break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Install Bank App</h2>
+    <select>
+        <option>Select Version</option>
+        <option value="ver1">Version-1</option>
+        <option value="ver2">Version-2</option>
+        <option value="ver3">Version@latest</option>
+    </select>
+    <button onclick="InstallClick()">Install</button>
+</body>
+</html>
+
+Inheritance:
+- It is the process of reusing and extending the code by configuring relationship between classes.
+- It is referred as "Is-A-Relation".
+- A class can use the features of another class by extending the class.
+
+Syntax:
+    class A
+    {
+    }
+    class  B extends A
+    {
+    }
+
+    A    => Super Class
+    B    => Derived Class
+
+- Super class members are accessible in derived class by using "super" keyword.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class HDFC_Bank_Version1
+        {
+             Personal = "Personal Banking Services";
+             Print(){
+                document.write(`${this.Personal}<br>`);
+             }
+        }
+        class HDFC_Bank_Version2 extends HDFC_Bank_Version1
+        {
+            NRI = "NRI Banking Services";
+            Print(){
+                super.Print();
+                document.write(`${this.NRI}<br>`);
+            }
+        }
+        class HDFC_Bank_Version3 extends HDFC_Bank_Version2
+        {
+            Loans = "Housing and Car Loans";
+            Print(){
+                super.Print();
+                document.write(`${this.Loans}<br>`);
+            }
+        }
+        function InstallClick(){
+            var ver = document.querySelector("select").value;
+            switch(ver)
+            {
+                case "ver1":
+                 document.write("<h1>Version-1 Installed</h1>");
+                 let obj1 = new HDFC_Bank_Version1();
+                 obj1.Print();
+                 break;
+                case "ver2":
+                document.write("<h1>Version-2 Installed</h1>");
+                 let obj2 = new HDFC_Bank_Version2();
+                 obj2.Print();
+                 break;
+                 case "ver3":
+                 document.write("<h1>Version-3 Installed</h1>");
+                 let obj3 = new HDFC_Bank_Version3();
+                 obj3.Print();
+                 break;
+                 default:
+                 document.write("<h2>Please select a version</h2>");
+                 break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Install Bank App</h2>
+    <select>
+        <option>Select Version</option>
+        <option value="ver1">Version-1</option>
+        <option value="ver2">Version-2</option>
+        <option value="ver3">Version@latest</option>
+    </select>
+    <button onclick="InstallClick()">Install</button>
+</body>
+</html>
+
+Note: The basic inheritance rule :  "A derived class constructor must call super class                                   constructor"
+
+Syntax:
+    class A
+    {
+       constructor(){ }
+    }
+    class B extends A
+    {
+       constructor {
+        super();
+        }
+    }
+
+Ex:
+<script>
+    class Super
+    {
+         constructor(){
+            document.write("Super Class Constructor");
+         }
+    }
+    class Derived extends Super
+    {
+        constructor(){
+            super();
+            document.write("Derived Class Constructor");
+        }
+    }
+    let obj = new Derived();
+
+</script>
+
+                           Polymorphism
+- Poly refers to "Many".
+- Morphos refers to "Forms".
+- Polymorphism is a feature that allows one component to handle different actions.
+- Technically a single base class reference can use the memory of multiple derived classes.
+
+Syntax:
+    let obj = new Array(new m1(), new m2(), new m2());
+
+    obj => is handling 3 classes and can switch between them.
+
+Ex:
+<script>
+    class Employee
+    {
+        FirstName;
+        LastName;
+        Designation;
+        Print(){
+            document.write(`${this.FirstName} ${this.LastName} - ${this.Designation}<br>`);
+        }
+    }
+    class Developer extends Employee
+    {
+        FirstName = "Raj";
+        LastName = "Kumar";
+        Designation = "Developer";
+        Role = "Developer Role : Build, Debug, Test";
+        Print(){
+            super.Print();
+            document.write(`${this.Role}`);
+        }
+    }
+    class Admin extends Employee
+    {
+        FirstName = "Kiran";
+        LastName = "Kumar";
+        Designation = "Admin";
+        Role = "Admin : Authorizations";
+        Print(){
+            super.Print();
+            document.write(`${this.Role}`);
+        }
+    }
+    class Manager extends Employee
+    {
+        FirstName = "Tom";
+        LastName = "Hanks";
+        Designation = "Manager";
+        Role = "Manager Role : Approvals";
+        Print(){
+            super.Print();
+            document.write(`${this.Role}`);
+        }
+    }
+
+    let employees = new Array(new Developer(), new Admin(), new Manager());
+    var designation = prompt("Enter Designation");
+
+    for(var employee of employees)
+    {
+         if(employee.Designation===designation){
+             employee.Print();
+         }
+    }
+
+</script>
+
+                            Browser Objects
+1. window
+
+    alert()
+    confirm()
+    prompt()
+    XMLHttpRequest
+    fetch()
+    open()
+    print()
+    etc..
+
+2. document
+
+    write()
+    appendChild()
+    getElementById()
+    querySelector()
+    getElementsByTagName()
+    innerHTML
+    textContent
+    etc..
+
+3. location
+
+    href
+    search
+    host
+    port
+    protocol
+    pathname
+    etc..
+
+27/06
+======
+
+JavaScript Browser Objects
+1. window
+2. document
+3. location
+    host
+    pathname
+    protocol
+    port
+    href
+    search
+    etc..
+
+Ex:
+<script>
+    document.write(`
+          IP : ${location.host} <br>
+          URL : ${location.href} <br>
+          Protocol : ${location.protocol} <br>
+          Port : ${location.port} <br>
+          Path : ${location.pathname} <br>
+          Query String : ${location.search}
+    `)
+</script>
+
+4. navigator
+- It is used to get client browser details.
+- Browser details include
+
+        appName        browser family name
+        appVersion        browser version
+        platform            OS type
+        language            regional language
+        cookieEnabled    true when cookies are enabled
+        geoLocation        It get the current location latitude and longitude
+        etc..
+
+<script>
+    document.write(`
+         Browser Family : ${navigator.appName} <br>
+         Version : ${navigator.appVersion} <br>
+         Cookies Enabled : ${navigator.cookieEnabled}
+    `)
+</script>
+
+
+Syntax: Geo Location
+
+    navigator.geolocation.getCurrentPosition(function(position){
+       
+            position.coords.latitude;
+            position.coords.longitude;
+       
+    })
+
+Ex:
+<script>
+    navigator.geolocation.getCurrentPosition(function(position){
+          fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=1318ca6725c69160d346c41fc0612596&units=metric`)
+          .then(response=>response.json())
+          .then(weatherObj=>{
+              document.write(`
+                  Location : ${weatherObj.name} <br>
+                  Temp     : ${weatherObj.main.temp}
+              `);
+          })
+    })
+</script>
+
+5. history
+  - It provides properties and methods used to access current browsing history
+ 
+      length        : total count of pages visited
+      back()        : moves to previous page in history
+      forward()    : moves to next page in history
+
+Syntax:
+        history.length
+        history.back()
+
+FAQ: How to navigate to any page dynamically?
+Ans:  By using "location.href"
+
+Syntax:
+        location.href = "new_path";
+
+Summary:
+- window
+- location
+- navigator
+- document
+- history
+
+                         State Management
+
+- Web application use "http" as protocol.
+- Http is a state less protocol.
+- State less uses the mechanism of "Go-Get-Forget".
+
+    GO        : Establish connection with server
+    GET        : Get response  from server.
+    FORGET    : Cleanup data from server.
+
+- State less nature of  HTTP is good for application as memory is well managed.
+- However it is not good for continuous operations.
+- You can't carry data from one page to another. It requires various state management techniques.
+- State Management allows to allocate memory so that it can accessed across pages.
+- If memory is allocated on client device then it is called as Client Side State Management.
+- If memory is allocated on server then it is "Server Side State Management".
+- Client Side State is configured using
+
+        1. Query String
+        2. Session Storage
+        3. Local Storage
+        4. Cookies
+
+Query String:
+ - It is appended into URL and stored in address bar.
+ - It is a key and value collection.
+
+        ?key=value&key=value
+
+Ex:
+1. Add a new folder  "state".
+
+2. Add following files
+       
+     login.html
+     dash.html
+
+3. login.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="get" action="./dash.html">
+        User Name : <input type="text" name="uname"> <button>Login</button>
+    </form>
+</body>
+</html>
+
+4. dash.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bodyload(){
+            if(location.search===''){
+                location.href = "./login.html";
+            } else {
+                var params = new URLSearchParams(location.search);
+                document.getElementById("lblName").innerHTML = params.get("uname").toUpperCase();
+            }
+        }
+        function SignoutClick(){
+            location.href = "./login.html";
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <h2>
+        <span id="lblName"></span> <span> - Dashboard</span>
+        <button onclick="SignoutClick()">Signout</button>
+    </h2>
+</body>
+</html>
+
+Session Storage:
+ - It is a browser storage.
+ - It is temporary storage.
+ - It is deleted when browser is close.
+ - It is not accessible across tabs in browser.
+ 
+Syntax:    
+    sessionStorage.setItem("key", value)
+                  .getItem("key")
+                  .removeItem("key")
+                  .clear()
+
+Ex:
+1. login.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function LoginClick(){
+             sessionStorage.setItem("uname", document.getElementById("txtName").value);
+             location.href = "./dash.html";
+        }
+    </script>
+</head>
+<body>
+    <h2>Login</h2>
+     User Name : <input type="text" id="txtName"> <button onclick="LoginClick()">Login</button>
+</body>
+</html>
+
+2. dash.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bodyload(){
+
+            setTimeout(()=>{
+                alert('Your session timed out');
+                location.href = "./login.html";
+            }, 10000)
+
+            if(sessionStorage.getItem("uname")===null){
+                location.href = "./login.html";
+            } else {
+                document.getElementById("lblName").innerHTML = sessionStorage.getItem("uname");
+            }
+        }
+        function SignoutClick(){
+            sessionStorage.removeItem("uname");
+            location.href = "./login.html";
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <h2>
+        <span id="lblName"></span> <span> - Dashboard</span>
+        <button onclick="SignoutClick()">Signout</button>
+    </h2>
+</body>
+</html>
+
+Local Storage:
+- It is browser storage.
+- It is permanent storage.
+- It is available across tabs.
+- It is not deleted even after browser close.
+- You have to explicitly remove.
+
+Syntax:
+        localStorage.setItem()
+                     .getItem()
+                     .removeItem()
+                     .clear()
+
+Ex:
+1. login.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function LoginClick(){
+             localStorage.setItem("uname", document.getElementById("txtName").value);
+             location.href = "./dash.html";
+        }
+    </script>
+</head>
+<body>
+    <h2>Login</h2>
+     User Name : <input type="text" id="txtName"> <button onclick="LoginClick()">Login</button>
+</body>
+</html>
+
+2. dash.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bodyload(){
+
+            if(localStorage.getItem("uname")===null){
+                location.href = "./login.html";
+            } else {
+                document.getElementById("lblName").innerHTML = localStorage.getItem("uname");
+            }
+        }
+        function SignoutClick(){
+            localStorage.removeItem("uname");
+            location.href = "./login.html";
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <h2>
+        <span id="lblName"></span> <span> - Dashboard</span>
+        <button onclick="SignoutClick()">Signout</button>
+    </h2>
+</body>
+</html>
+
+Cookies:
+- Cookie is simple text document.
+- Client details can be stored in a cookie and can be accessed across pages.
+- Cookie can be 2 types
+
+    a) In Memory [  Temporary ]
+    b) Persistent  [  Permanent ]
+
+- To make cookie permanent you have to set expiry date and time.
+
+Syntax:
+        document.cookie = "name=value; expires=dateTime";
+
+Note: To remove cookie from memory you have to define an elapsed date and time.
+
+Ex:
+1. login.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function LoginClick(){
+             document.cookie = `uname=${document.getElementById("txtName").value};expires=Sat, 29 Jun 2025 14:14:19 GMT`;
+             location.href = "./dash.html";
+        }
+    </script>
+</head>
+<body>
+    <h2>Login</h2>
+     User Name : <input type="text" id="txtName"> <button onclick="LoginClick()">Login</button>
+</body>
+</html>
+
+2. dash.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bodyload(){
+            document.getElementById("lblName").innerHTML = document.cookie.slice(document.cookie.indexOf("=")+1);
+        }
+        function SignoutClick(){
+            document.cookie = `uname='';expires=Sat, 25 Jun 2025 14:14:19 GMT`;
+            location.href = "./login.html";
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <h2>
+        <span id="lblName"></span> <span> - Dashboard</span>
+        <button onclick="SignoutClick()">Signout</button>
+    </h2>
+</body>
+</html>

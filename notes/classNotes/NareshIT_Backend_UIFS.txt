@@ -1,0 +1,2641 @@
+
+                              Node JS
+
+FAQ: What is server side scripting?
+Ans:  Server side scripting is a technique where scripts are employed on server in order
+      to generate a response customized to every client request.
+
+     There are various server side scripting technologies like:
+        - CGI
+        - ASP
+        - JSP
+        - PHP
+        - NODE
+        etc.
+
+FAQ: What is Node JS?
+Ans:  It is a JavaScript runtime for developers to build  web applications, servers,
+     command line tools and scripts.
+
+Features of Node JS:
+- It is open source.
+- It is cross platform.
+- It uses JavaScript runtime.
+- It is single threaded.
+- No buffering
+- Modular
+- Async
+
+27/06
+======
+
+What is Node JS?
+Node JS Features
+
+- Node JS uses JavaScript as its language.
+- JavaScript is used with only language features.
+- You can't use DOM & BOM methods.
+
+    * Variables
+    * Data Types
+    * Operators
+    * Statements
+    * Functions
+    * OOP Concepts
+        - Modules
+        - Classes
+
+- Server Side Programming is all about handling various types of objects & techniques.
+- Server Side Objects include
+        a) request
+        b) response
+        c) session
+        d) application
+        e) cookie     etc..
+- Server Side Techniques include
+        a) Caching
+        b) Routing
+        c) Model Binding
+        e) Data Binding
+        f) Event Binding etc.
+
+Creating a server side application using Node JS:
+
+1. Create a new folder on your PC for server application
+
+      D:\server-app
+
+2. Open folder in VS code
+
+3. Run the following commands
+
+    > npm  init  -y                             // generates package.json
+
+    > npm init @eslint/config@latest            // It sets up language analytics
+
+    https://eslint.org/
+
+    ? What do you want to lint  :  JavaScript
+    ? How would you like to use ESLint : To check syntax and find problems
+    ? What type of modules does your project use?  Common JS
+    ? Which framework does your project use : none
+    ? Does your project use TypeScript? No
+    ? Where does your code run? Node
+    ? Would you like to install them [configs] now? Yes
+    ? Which package manager ? npm
+   
+    - This will generate following files into project
+
+        eslint.config.mjs
+        node_modules [folder]
+
+4. Server side programs are written in a JavaScript file with extension ".js , .mjs, .cjs"
+
+5. Add a new file by name "index.js" into root level of project.
+
+                 index.js
+
+        console.log("Welcome to Node JS");
+
+6. Go to package.json file and setup script
+
+"scripts": {
+      ....
+        "start": "node index.js"
+   },
+
+    => node  is a compiler used to compile and run JavaScript files server side.
+
+7. Run the following command from terminal
+
+    > npm run start
+
+
+                           Node Modules
+                          ---------------------
+- Node JS provides several bult-in modules to handle various interactions server side.
+- Module is a set of classes, functions and values.
+
+1. Http Module
+ 
+  - It provides a set of classes and functions that are required to create a server,
+    web application and scripts.
+  - You can create server, handle request from client and send a customized response
+     to the client request.
+  - Http Module provides  "createServer()" method to create a server.
+  - Modules are imported by using "require()" method in CJS system.
+
+Syntax:
+        const  http  = require("http");
+
+        http.createServer(function(request, response){
+
+
+        })
+
+  - Every server comprises of 2 basic objects
+
+    a) Request
+    b) Response
+
+  - Request object is used by server to request data from client, which includes
+    a) Query String
+    b) Cookies
+    c) Local Storage
+    d) Session Storage
+    e) Form Body etc.
+
+ - Response object is used to send response to client, which includes
+    a) Text
+    b) HTML    
+    c)  XML
+    d) JSON
+    e) File etc.
+
+Ex:
+  index.js
+
+ const http = require("http");
+
+ http.createServer(function(request, response){
+       response.writeHead(200,{'content-type':'text/plain'});
+       response.write("Welcome to Node Server");
+       response.end();
+ }).listen(4040);
+
+ console.log(`Server Started : http://127.0.0.1:4040`);
+
+ > npm run start
+
+28/06
+======
+
+HTTP Module
+- createServer()
+
+Syntax:
+    http.createServer(function(req, res){
+        res.writeHead();
+        res.write();
+    })
+
+- writeHead() uses a status code to verify the request.
+- Http status codes will range from 100 to 500.
+
+        1xx            : codes related to the process and action to execute.
+        2xx            : codes related to confirmation.
+        3xx            : codes related to methods & redirection.
+        4xx            : codes related to client side issues.
+        5xx            : codes related to server side issues.
+
+Ex:
+ index.js
+
+ const http = require("http");
+
+ Object.keys(http.STATUS_CODES).map(key=>{
+      console.log(`${key}: ${http.STATUS_CODES[key]}`);
+ })
+
+
+        200 OK        : It is to confirm a successful request and send response.
+
+- writeHead() requires content MIME type to define.  
+- MIME type depends of your response type.
+- Http supports various MIME types
+
+        text/plain                plain text without formats
+        text/html                HTML markup as response
+        application/json        JSON format response
+        application/xml        XML format response
+        application/pdf        PDF file
+        image/jpeg            JPEG file
+        etc..
+
+- Every server application runs on specific port number.
+- Port numbers will range from 1 to 45565.
+
+          1 to 1023            Well known port numbers.
+          1024 to 41591        Registered port numbers.
+           41592 to 65535    Dynamic port numbers.
+
+- For your application always use "registered port" numbers.
+- Your server application listen() on specific registered port number.
+
+Syntax:
+      http.createServer().listen(port)
+
+- You can request application using following  methods
+
+      http://127.0.0.1:port
+            (or)
+      http://localhost:port
+
+- The response content type must be same as the MIME type defined.
+
+        { 'content-type' :  'text/html' }
+
+        res.write("<h2> Welcome </h2>");
+
+Ex: HTML type data
+
+index.js
+
+ const http = require("http");
+
+ http.createServer((req, res)=>{
+
+      res.writeHead(200, { 'content-type': 'text/html' });
+      res.write('<h1>Welcome to Node JS</h1>');
+      res.end();
+ }).listen(5000);
+ console.log(`Server Started http://127.0.0.1:5000`);
+
+Ex: JSON type
+
+index.js
+
+ const http = require("http");
+
+ http.createServer((req, res)=>{
+
+      res.writeHead(200, { 'content-type': 'application/json' });
+      res.write(JSON.stringify([{Name:'TV', Price:45000},{Name:'Mobile', Price:12000}]));
+      res.end();
+ }).listen(5000);
+
+ console.log(`Server Started http://127.0.0.1:5000`);
+
+Node OS module:
+
+- It provides a set of methods that can get information about server operating system.
+- It includes details like
+
+      hostname()        : server name
+      platform            : server OS type
+      freemem        : total free memory available
+      cpus()            : It returns a set of objects that contains CPU details
+                      like processor model, speed etc.
+
+      etc.
+
+Syntax:
+      const  os = require("os");
+
+      console.log(os.platform());
+
+Ex:
+index.js
+
+const os = require("os");
+
+console.log(`Server OS : ${os.platform()}\nServer IP: ${os.hostname()}\nFree Memory : ${os.freemem()}\nProcessor : ${os.cpus()[0].model}`);
+
+FAQ: What is npm run start?
+Ans:  It is a batch program created by developer to run a sequence of actions.
+     You can terminate the batch program using "Ctrl + C".
+
+30/06
+=====
+
+	
+Process, FS, Path modules
+Node Modules
+1. http    
+    - creating server and app
+2. os
+    - get OS details
+
+3. Process Module
+ - Node is single threaded.
+ - It executes tasks simultaneously with background process.
+ - Every task requires a process ID and other details which you can access using process module .
+- Module properties include details like
+
+        a) env    
+        b) getuid
+        c) getgid
+        d) platform
+        e) version
+        f)  freeMemory etc.
+
+Syntax:
+    const process = require("process");
+
+    process.env;
+    process.getuid;
+
+4. Path Module
+- It provides a set of properties and methods used to access file location and other details.
+- It includes name, extension, type, size, root directory etc.
+
+    a) basename           : returns the file name
+    b) dirname           : returns directory name
+    c) extname           : returns the file extension name
+    d) relative           : gets the relative path
+    e) isAbsolute           : returns true if the path is not relative. [is absolute]
+    etc..
+
+Syntax:
+    const  path = require("path");
+    path.extname("file_path");
+
+
+Ex:
+index.js
+
+const path = require("path");
+
+var uploaded_file = "D:\\images\\photo.jpg";
+
+if(path.extname(uploaded_file)===".jpg"){
+     console.log(`File Uploaded Successfully..\nUploaded from ${path.dirname(uploaded_file)} folder`);
+} else {
+     console.log(`Invalid Format - You can upload only JPG files`);
+}
+
+5. File Stream [ FS ]
+- It is used to handle files server side.
+- It provides a set of properties and methods to read and write data into files.
+- Node file stream provides both synchronous and asynchronous methods.
+
+Syntax:
+     var  fs =  require("fs");
+
+      var data = fs.readFileSync("path");
+
+- readFileSync()  uses a blocking technique, that blocks all other task inside process while performing the specified.
+
+Ex: Blocking  - Synchronous
+
+index.js
+
+const fs = require("fs");
+
+console.log(`File Requested`);
+
+let data = fs.readFileSync('./notes.txt');
+console.log(data.toString());
+
+console.log(`File Read Complete`);
+
+- readFile()  is an asynchronous method.
+- It uses unblocking technique, that executes the other tasks in background.
+
+Syntax:
+    fs.readFile("path", function(error, data){
+       
+            if(!error) {
+                // handle data
+            } else {
+                // report error
+            }
+    })
+
+Node Techniques:
+
+1. Event Binding
+
+ FAQ's:
+
+ a) What is Event?
+ b) Which pattern Event follows?
+ c) What is Observer?
+ d) What is Event Handler?
+ e) What are Event Args?
+ f)  What is Event Listener?
+
+1/07
+====
+
+Node Events
+
+1. What is Event?
+A. Event is a message sent by sender to its subscriber in order to notify change.
+     It uses a communication pattern called "Observer".
+
+
+2. What is design pattern?
+A. Design patterns are solutions for software design problems that you encounter in real world application development.
+     Design patterns are categorized into 3 groups.
+   
+    a) Creational
+    b) Structural
+    c) Behavioral
+
+      Note: Observer is a behavioral pattern.
+
+3. What is the role of sender and subscriber?
+A. Sender uses a trigger to send notification.  
+    Subscriber is a function that executes when notified.
+
+           
+        function  InsertClick()            => Subscriber
+        {
+        }
+
+        <button onclick="InsertClick()">    => Sender
+
+4. What is Event handler?
+A. Event handler comprises of event, which is registered for any element.
+     It uses a "Delegate" mechanism, which is a function pointer mechanism.
+
+    "on"        : registers event for element
+    "click"    : refers to event name.
+
+     Every event requires a function pointer, which is a subscriber.
+
+
+5. What is Event Listener?
+A. Event listener registers an event with element dynamically.
+     It can use a function as trigger. So that it can perform the specified functionality.
+     You can add events dynamically by using the method "addEventListener".
+
+
+Custom Events:
+- Node JS allows to create a new event for custom components.
+- The base class for events is "EventEmitter".
+- All events are derived from "EventEmitter" base.
+- You can create a new custom event by inheriting EventEmitter.
+
+1. You have to import events module
+
+    const events = require("events");
+
+2. Create a new object for EventEmitter class.
+
+    let event = new events.EventEmitter();
+
+
+3. Create a new event and subscribe to any function
+
+     event.on("event_name", function_name);
+
+
+4. Event triggers by using  "emit()" method.
+
+     event.emit(event_name);
+
+Note: Emit requires registered event name that triggers specified functionality.
+      It can use both handler and listener.
+
+      a) handler uses "on()"
+      b) listener uses "addEventListener()"
+
+Ex:
+index.js
+
+const events = require("events");
+
+let event = new events.EventEmitter();
+
+let handleSend = function(){
+     console.log(`Message Sent Successfully..`);
+}
+
+let handleGet = function(){
+     console.log([{Name:'TV', Price:2300}, {Name:'Mobile', Price:1200}]);
+}
+
+event.on("send", handleSend);
+event.on("get", handleGet);
+event.emit("send");
+event.emit("get");
+
+Ex:
+index.js
+const events = require("events");
+
+let event = new events.EventEmitter();
+
+let handleSend = function(){
+    console.log(`Message Sent Successfully..`);
+}
+
+
+event.addListener("send", handleSend).emit("send");
+
+
+FAQ: What is difference between event and event handler?
+Ans:  Event is dynamically configured using listener.
+     Handler is statically configured using "on()" method.
+
+Note: Server Side events are configured using "EventEmitter".
+
+
+FAQ: What is Event Loop?
+Ans:  It allows to execute the actions configured for events using async technique.
+
+
+                             Caching
+
+2/07
+====
+
+Caching
+- Caching a technique used in web applications to save round trip.
+- Round trip is the process of accessing requested data always from server.
+- You can cache and save data in memory so that the requested data will be delivered from memory.
+- It reduces burden on server and improves performance of application.
+- Caching can be configured using various techniques
+
+    1. In memory cache
+    2. Distributed cache [redis]
+    3. File Based caching
+
+In memory cache:
+- It uses a local cache library to save the data and use across requests.
+- It is configured to access within application.
+- It usually caches the data from API requests in order save round trip.
+- It requires a "node-cache" library.
+
+        https://www.npmjs.com/
+
+1. Install node-cache
+
+    > npm  install  node-cache --save
+
+2. Import node-cache
+
+    const  nodeCache = require("node-cache");
+   
+3. Create an object for node-cache
+
+    let  cache = new nodeCache();
+
+4. Store your data into cache
+
+    cache.set("key", data, { options } )        
+
+    options refers to TTL. [Time-To-Live]
+
+5. You can access the cache by using the reference of key
+
+    cache.get("key")
+
+6. If cache is removed then it returns "undefined".
+
+Syntax:
+        if(cache.get("key"))
+        {
+            // cache exists;
+        }
+        else
+        {
+           // cache cleared;
+        }
+
+7. You can manually clear the cache
+
+        cache.del("key");
+
+Ex:
+index.js
+
+const nodeCache = require("node-cache");
+
+let cache = new nodeCache();
+
+cache.set('product', {Name:'tv', Price:23300}, 20);
+var now = new Date();
+
+if(cache.get('product')){
+    console.log(cache.get('product'));
+    console.log(now.toLocaleTimeString());
+} else {
+    console.log(`Unable to find the data - Cache deleted`);
+}
+
+function GetData(){
+    if(cache.get('product')){
+    console.log(cache.get('product'));
+    console.log(now.toLocaleTimeString());
+    } else {
+        console.log(`Unable to find the data - Cache deleted`);
+    }
+}
+
+setTimeout(GetData,25000);
+
+
+                    Database Drivers in Node JS
+- Driver is a software library.
+- It is a middleware library used to handle communication between the application and backend database.
+- Every database requires relative driver library.
+
+MongoDB Drivers:
+- It provides a set of classes responsible for handling communication between application and MongoDB database.
+- It comprises of both server and client classes.
+- Server class connects with database modify the structure.
+- Client class connects with database to interact with the data. It handles CRUD operations.
+
+1. Install MongoDB driver
+
+        >npm install  mongodb --save
+
+2. Import MongoClient class
+
+    const  mongoClient  = require("mongodb").MongoClient;
+
+3. Client class provides a connect method to connect with database.
+
+    mongoClient.connect("url").then().catch().finally();
+
+    mongoClient.connect(url, function(err, obj){        // old technique - deprecated
+           err => on reject
+           obj => on resolve
+    })
+
+    URL refers to MongoDB connection string :  mongodb://127.0.0.1:27017
+
+Ex:
+index.js
+
+const mongoClient = require("mongodb").MongoClient;
+
+mongoClient.connect("mongodb://127.0.0.1:27017").then(()=>{
+    console.log('Connected Successfully..');
+})
+.catch(err=>{
+    console.log(err);
+})
+.finally(()=>{
+    console.log("Request End");
+})
+
+3/07
+=====
+
+MongoDB Drivers
+
+connect()  :
+
+    - It uses a connection string to connect with database server.
+    - MongoDB connection string  is "mongodb://127.0.0.1:27017"    
+    - connect() is a JavaScript promise type. It provides then() on resolve, catch() or reject and finally() always.
+    - then() returns a client object, which can connect with specific database in server.
+
+Syntax:
+        mongoClient.connect("url").then(function(clientObj){
+           
+                // clientObj  uses  "db" to access any database.
+        })
+
+
+    - Database requires a reference to load into memory and access the collections.
+
+Syntax:
+        var database = clientObj.db("database_name");
+
+        database.collection("collection_name").find()
+                                        .insertOne()
+                                        .updateOne()            
+                                        .deleteOne()
+
+Reading Data From Database:
+
+- MongoDB client object can access database and collection.
+
+    var database = clientObj.db("database_name");
+
+    database.collection("collection_name")
+
+- To read data from collection you can use the methods
+
+    a) find()            : returns an array
+    b) findOne()        : returns only the first occurrence document that matches
+                      given condition.
+
+
+Syntax:
+    database.collection("name").find({query}).toArray().then(documents=>{
+
+        console.log(documents);        // [ { }, { } ]
+
+    })
+
+    database.collection("name").findOne({query}).then(document => {
+
+         console.log(document);            // { }
+    })
+
+Ex:
+index.js
+
+const http = require("http");
+const mongoClient = require("mongodb").MongoClient;
+
+http.createServer((request, response)=>{
+     response.writeHead(200, { 'content-type': 'application/json'});
+     mongoClient.connect("mongodb://127.0.0.1:27017").then(clientObj=>{
+        var database =  clientObj.db("sampledb");
+        database.collection("fakestore").findOne({id:3}).then(document=>{
+             response.write(JSON.stringify(document));
+             response.end();
+        })
+      });
+}).listen(5200);
+console.log(`Server Started http://127.0.0.1:5200`);
+
+Inserting data:
+ - You can use the database methods
+
+    a) insertOne()
+    b) insertMany()
+
+Syntax:
+    database.collection("name").insertOne({data}).then().catch().finally()
+
+Ex:
+const mongoClient = require("mongodb").MongoClient;
+
+mongoClient.connect("mongodb://127.0.0.1:27017").then(clientObj=>{
+
+    var database = clientObj.db("sampledb");
+
+    var product = {
+        name: "Watch",
+        price: 5000,
+        manufactured: new Date('2025-02-11')
+    }
+
+    database.collection("products").insertOne(product).then(()=>{
+         console.log(`Product Added successfully..`);
+    });
+})
+
+Updating Data:
+ - You can update data into collection by using database update methods
+
+    a) updateOne()
+    b) updateMany()
+
+Ex:
+index.js
+
+const mongoClient = require("mongodb").MongoClient;
+
+mongoClient.connect("mongodb://127.0.0.1:27017").then(clientObj=>{
+
+    var database = clientObj.db("sampledb");
+
+    var product = {
+        name: "Fastrack Watch",
+        price: 4500,
+        manufactured: new Date('2025-02-22')
+    }
+
+    database.collection("products").updateOne({name:"Watch"},{$set:product}).then(()=>{
+         console.log(`Product Updated successfully..`);
+    });
+})
+
+Delete Documents:
+- You can use database delete methods
+   
+    a) deleteOne()
+    b) deleteMany()
+
+Ex:
+index.js
+
+const mongoClient = require("mongodb").MongoClient;
+
+mongoClient.connect("mongodb://127.0.0.1:27017").then(clientObj=>{
+
+    var database = clientObj.db("sampledb");
+
+
+    database.collection("products").deleteOne({name:"Mobile"}).then(()=>{
+         console.log(`Product Deleted successfully..`);
+    });
+})
+
+                          MySQL Drivers
+
+- MySQL drivers will provide a set of properties and methods that are used to handle communication with 'MySQL database'.
+
+1. Install MySQL Drivers
+
+    > npm install  MySQL --save
+
+2. Import MySQL library and create Connection
+
+    const  mysql  = require("mysql");
+
+    const connection = mysql.createConnection({
+         host : "localhost",
+         user: "root",
+         password: "12345",
+         database: "db"
+    });
+    connection.connect();
+    connection.query("select query", (error, records, fields)=>{
+
+    })
+
+Ex:
+index.js
+
+
+const mysql = require("mysql");
+
+var connection = mysql.createConnection({
+     host: "localhost",
+     user: "root",
+     password: "12345",
+     database: "sampledb"
+});
+connection.connect((err)=>{
+      if(!err){
+          console.log("Connected");
+      } else {
+          console.log(err);
+      }
+})
+connection.query("select * from tblproducts",(err, records, fields)=>{
+     if(!err){
+         console.log(records);
+     }
+})
+
+
+
+                        Express JS
+
+4/07
+====
+
+Node JS
+- Node Modules
+    http
+    path
+    process
+    fs
+    os
+- Event Driven
+    custom events
+- Caching
+
+                              Express JS
+- It is a middleware framework.
+- Middleware is a software that enable communication in network based applications.
+- It is a JavaScript based framework.
+- Framework is an software architectural pattern that allows to build the application and control application flow.
+
+1. Install express JS
+
+    > npm install express --save
+
+2. Import express module
+
+     const express = require("express");
+
+3. Create an app using express
+
+      const  app = express();
+
+4. Configure the requests from client
+
+      app.get()        for fetching
+      app.post()        for submit and save
+      app.put()        for update and save
+      app.delete()        for removing
+
+Syntax:
+    app.get("/path", function(request, response){
+
+    });
+
+    request     : It a server object that can request client data from
+              query string, form body, cookies etc.
+
+    response    : It is a sever object that can send response to client, which can be
+              html, text, file, xml, json etc.
+
+Syntax:
+        request.params
+        request.body
+        response.send()
+        response.redirect()
+        response.end() etc..
+
+5. Start application using "listen()" method
+
+        app.listen(port);
+
+
+                        Routing in Express JS
+- Routing a technique used in web applications to enable navigation.
+- Routing can be configured both client and server side.
+- Client side routes enable navigation in client side application.
+- Server side routes are required to handle navigation in API server side.
+- Routes are configures for various HTTP methods like
+
+        GET
+        POST
+        PUT
+        PATCH
+        DELETE
+        PURGE etc.
+- Route comprises of a path defined with request and response.
+
+Syntax:
+        app.get("/path", (request, response) =>{})
+
+        "/"             will respond when user request is not for any specific.
+        "/name"         will respond only to specified name.
+        "*"             will respond when requested path is not found. [only v4]
+
+        > npm install  express@4
+
+05/07
+======
+
+API
+Express 5
+
+Note: Express 5 deprecated the wild card routes with "*". It uses new status method.
+
+        "/"         request is not for any specific
+        "*"         for not found up to version 4.
+
+      Express 5 not found is configured using  response object.
+
+        app.use((req, res)=>{
+            res.status(404, "content_to_render");        // Synchronous
+        })
+
+        app.use((req, res)=>{
+            res.status(404).write("content to render");    // Asynchronous
+            res.end();
+        })
+
+Ex:
+index.js
+
+const express = require("express");
+
+const app = express();
+
+app.get("/", (request, response)=>{
+     response.send("<h2>Welcome to Express JS </h2>");
+     response.end();
+});
+
+app.get("/categories", (req, res)=>{
+      res.send(['Electronics', 'Fashion', 'Footwear']);
+      res.end();
+});
+
+
+
+app.use((req, res)=>{
+    res.status(404).write("Not Found : Path you request not found");
+    res.end();
+})
+
+app.listen(4040);
+console.log(`http://127.0.0.1:4040`);
+
+- You can use regular expression in route path. The regular expression up to version 4 uses a pattern with meta characters and quantifiers.
+
+        app.get("/colou?r", (req, res)=>{        
+
+        })
+
+        /color        
+        /colour
+
+- Express version 5 removed the chars  "?, *, +, [ ], ( )".
+- It supports a binding expression to render view [UI].
+
+Syntax:
+        app.get(`/path{expression}`, (req, res)=>{
+
+        })
+
+                                    API
+                   (Application Programming Interface)
+
+1. What is distributed computing?
+A. Distributed computing allows communication between two applications running on
+     two different machines.
+     It also allows communication between two different objects running in two different
+     process of same machine.
+
+2. Various distributed computing technologies
+    - CORBA        Common Object Request Broken Architecture   14+ languages
+    - DCOM        Distributed Component Object Model               Visual Basic
+    - RMI        Remote Method Invocation                        J2EE
+    - EJB        Enterprise Java Beans                        Java
+    - Web Service     [W3C]                                    All technologies
+    - Remoting                                            .NET
+
+3. Communication Specification in Distributed Architecture
+
+    - SOAP
+    - REST
+    - JSON
+
+    SOAP
+    - It is Service Oriented Architecture Protocol
+    - Consumer will make XML request
+    - Provider sends XML response
+
+        Request:
+            <Products>
+                 <Product>
+                   <Category> Electronics </Category>
+                 </Product>
+            </Products>
+       
+        Response
+            <Products>
+                <Product>
+                    <Id>1</Id>
+                    <Name>TV</Name>
+                    <Category>Electronics</Category>
+                </Product>
+                ...
+                ...
+            </Products>
+
+      REST
+      - Representational State Transfer
+      - Consumer sends a simple query request.
+      - Provider sends an XML response or JSON response.
+
+          Request:
+              http://server.com?category=electronics
+              http://server.com/electronics
+
+        Response:
+              [
+                {
+                Id: 1,
+                Name: "TV",
+                Category: "Electronics"
+                 }
+                  ...
+               ]
+
+    JSON
+    - JavaScript Object Notation
+    - Request in JSON
+    - Response in JSON
+
+4. Issues with Web Services    
+   
+    - It runs only on HTTP protocol
+    - It runs only on Web Server
+    - It uses SOAP for communication
+    - Request in XML & Response XML
+
+5. Web API  
+    - Application Programming Interface
+    - It is an alternative for web service.
+    - It can use any protocol.
+    - It can run on any server.
+    - It uses REST full service.
+    - JSON response.
+
+
+                         Building API to handle CRUD
+
+7/07
+=====
+
+What is API
+API Technologies
+Communication Specification
+    - SOAP
+    - REST
+    - JSON
+Issues with Web Service
+API Features
+
+                         Express JS API
+- Express provides various methods for handling request and response.
+- The request methods include
+   
+        GET            for fetching
+        POST        for saving
+        PUT            for modifying and updating
+        PATCH        for partial update
+        DELETE        for removing
+
+- Express requires CORS library to restrict the methods.
+- CORS is Cross Origin Resource Sharing, that allows to enable or disable specific request method.
+- Express requires a "body-parser" to convert the incoming data.
+- Express latest versions are supported with a body-parser implicitly.
+
+Syntax:
+      const app = express();
+   
+      app.use(cors());
+      app.use(express.urlencoded({extended : true});   // body-parser middleware
+
+- GET method can fetch data using request object.
+- Request is fetching client data from
+    a) Query String  
+    b) Form Body
+
+- GET request can accept route parameters instead of query string, which allows to query the data.
+
+Syntax:
+        app.get("/path/:param1/:param2..", (req, res)=>{
+
+        })
+
+- Parameters are accessed by using "request" object "params" property.
+
+        req.params.param1    
+        req.params.param2
+
+- Parameters are passed in URL
+
+        http://server.com/path/value1/value2
+
+        param1 = value1
+        param2 = value2
+
+Ex:
+const express = require("express");
+const cors = require("cors");
+
+const connectionString = "mongodb://127.0.0.1:27017";
+
+const app = express();
+app.use(cors());
+
+// required for POST, PUT, DELETE
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+
+app.get('/products', (req, res)=>{
+    res.send("GET - Products");
+    res.end();
+});
+
+app.get('/details/:id/:name/:price', (req, res)=>{
+     res.send(`Id=${req.params.id}<br>Name=${req.params.name}<br>Price=${req.params.price}`);
+     res.end();
+});
+
+app.use((req, res)=>{
+    res.status(404).write("Not Found");
+    res.end();
+});
+
+app.listen(8080);
+console.log(`Server Started : http://127.0.0.1:8080`);
+
+
+- To test all API methods you need a Web Debugger like "Postman", "Fiddler", "Swagger" etc.
+
+Ex:
+index.js
+
+const express = require("express");
+const cors = require("cors");
+const mongoClient = require("mongodb").MongoClient;
+
+const connectionString = "mongodb://127.0.0.1:27017";
+
+const app = express();
+app.use(cors());
+
+// required for POST, PUT, DELETE
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+
+app.get('/', (req, res)=>{
+    res.send("API - CRUD");
+    res.end();
+})
+
+app.get('/products', (req, res)=>{
+    mongoClient.connect(connectionString).then(clientObj=>{
+         var database = clientObj.db('api-data');
+         database.collection('products').find({}).toArray().then(documents=>{
+              res.send(documents);
+              res.end();
+         })
+    })
+});
+
+app.get('/product/:id', (req, res)=>{
+   
+      mongoClient.connect(connectionString).then(clientObj =>{
+
+            var database = clientObj.db('api-data');
+            database.collection('products').findOne({id:parseInt(req.params.id)}).then(document=>{
+                 res.send(document);
+                 res.end();
+            });
+      });
+});
+
+app.post('/add-product', (req, res)=>{
+     var product = {
+          id: parseInt(req.body.id),
+          title: req.body.title,
+          price: parseInt(req.body.price),
+          stock: (req.body.stock==="true")?true:false
+     }
+     mongoClient.connect(connectionString).then(clientObj=>{
+          var database = clientObj.db("api-data");
+          database.collection('products').insertOne(product).then(()=>{
+              res.redirect('/products');
+          })
+     })
+});
+
+app.put('/update-product/:id', (req, res)=>{
+    var product = {
+          id: parseInt(req.body.id),
+          title: req.body.title,
+          price: parseInt(req.body.price),
+          stock: (req.body.stock==="true")?true:false
+     }
+     mongoClient.connect(connectionString).then(clientObj=>{
+          var database = clientObj.db("api-data");
+          database.collection('products').updateOne({id:parseInt(req.params.id)},{$set:product}).then(()=>{
+             res.redirect('/products');
+          })
+     })
+});
+
+app.delete('/delete-product/:id', (req, res)=>{
+    mongoClient.connect(connectionString).then(clientObj =>{
+
+            var database = clientObj.db('api-data');
+            database.collection('products').deleteOne({id:parseInt(req.params.id)})
+            .then(()=>{
+                 res.redirect('/products');
+            });
+      });
+});
+
+app.use((req, res)=>{
+    res.status(404).write("Not Found");
+    res.end();
+});
+
+app.listen(8080);
+console.log(`Server Started : http://127.0.0.1:8080`);
+
+
+2. index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bodyload(){
+            fetch('http://127.0.0.1:8080/products')
+            .then(res=>res.json())
+            .then(products=>{
+                 products.map(product=>{
+                    var tr = document.createElement("tr");
+                    var tdTitle = document.createElement("td");
+                    var tdPrice = document.createElement("td");
+                    var tdStock = document.createElement("td");
+                    tdTitle.innerHTML = product.title;
+                    tdPrice.innerHTML = product.price;
+                    tdStock.innerHTML = (product.stock===true)?"Available":"Out of Stock";
+                    tr.appendChild(tdTitle);
+                    tr.appendChild(tdPrice);
+                    tr.appendChild(tdStock);
+                    document.querySelector("tbody").appendChild(tr);
+                 })
+            })
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+</html>
+
+                                jQuery
+
+08/07
+======
+
+API
+API Routes
+Request & Response Types
+
+                            jQuery
+
+- It is a JavaScript library used for handling BOM & DOM interactions.
+- "John Resign" introduced jQuery library in early 2006.
+- The main intention is "Write-Less Do-More".
+- jQuery introduces various built-in functions that make the logic compatible across multiple browsers.
+- It reduces browser compatibility issues.
+
+1. Install jQuery for project
+
+        > npm  install jquery --save
+
+2. Link the jQuery library file to your web page
+
+    <script src="./node_modules/jquery/dist/jquery.js">  </script>
+
+3. All jQuery functions are defined in any anonymous function, which is invoked using
+     "$()" [IIFE]
+
+Syntax:
+        <script>
+            $(function(){
+                // your jQuery logic here..
+            })
+        </script>
+
+4. jQuery uses JavaScript as language, you can use all language features same as in JavaScript
+        - Variables
+        - Data Types
+        - Operators
+        - Statements
+        - Functions
+        - Classes
+        - Modules etc.
+
+jQuery Reference techniques:
+
+- jQuery uses all CSS selectors for referring HTML elements.
+- It includes type, class, id, relational, structural, attribute etc.
+
+Syntax:
+        <img>
+        <p id="para">
+        <button class="btn">
+
+        $("img")
+        $("#para")
+        $(".btn")
+        $("nav+div")
+
+jQuery DOM methods:
+
+        text()        textContent
+        html()        innerHTML
+        val()            value
+        attr()            attribute
+        prop()        property
+        append()        add as suffix
+        prepend()     add as prefix
+        appendTo()    add to specific as suffix
+        prependTo()    add to specific as prefix
+        before()        add left or above
+        after()        add right or below
+        class()        apply CSS class
+        etc..
+
+Syntax:
+        $("h1").text("some text")
+        $("p").html("<> markup </>")
+        $("div").append("<element>");
+        $("<element>").appendTo("div");
+
+        $("#txtName").val("John")        <input type="text" id="txtName">
+       
+        var selectedCity = $("select").val();
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(function(){
+              $("h1").text("jQuery");
+              $("#p1").html("<b><i>Write Less Do More</b></i>");
+              $(".msg").text("It is a JavaScript library.");
+              $(".msg").after("<button>Click Me</button>");
+              $("<button>Print</button>").appendTo("#p1");
+        })
+    </script>
+</head>
+<body>
+    <h1></h1>
+    <p id="p1"></p>
+    <div class="msg"></div>
+</body>
+</html>
+
+Note: All element related attributes are not accessible directly using jQuery methods.
+     You have to use "attr()" for accessing attributes.
+
+      Syntax:
+        $("img").src();                // invalid - src is not an jQuery method
+        $("img").attr("src", "path");
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(function(){
+              $("img").attr("src", "./images/women-fashion.jpg");
+        })
+    </script>
+</head>
+<body>
+    <img width="100" height="100">
+</body>
+</html>
+
+Presenting Complex Data:
+- Complex data includes Array & Object type.
+- jQuery uses DOM methods to access and present complex data.
+- It avoids creating every elements explicitly.
+
+Syntax:
+     data.map(item =>{
+
+        $(`<div>${item}</div>`).appendTo("parent")
+   
+    })
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        var categories = ["All", "Electronics", "Footwear", "Fashion"];
+
+        $(function(){
+           
+            categories.map(category=>{
+                 $(`<li>${category}</li>`).appendTo("ol");
+                 $(`<option>${category}</option>`).appendTo("select");
+                 $(`<tr><td>${category}</td></tr>`).appendTo("tbody");
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <div>
+        <ol></ol>
+    </div>
+    <br><br>
+    <div>
+        <select></select>
+    </div>
+    <br><br>
+    <div>
+        <table border="1" width="150">
+            <thead>
+                <tr>
+                    <th>Categories</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+       
+
+        $(function(){
+           
+            fetch(`https://fakestoreapi.com/products/categories`)
+            .then(response=> response.json())
+            .then(categories =>{
+                 categories.map(category=>{
+                 $(`<li>${category}</li>`).appendTo("ol");
+                 $(`<option>${category}</option>`).appendTo("select");
+                 $(`<tr><td>${category}</td></tr>`).appendTo("tbody");
+                })
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <div>
+        <ol></ol>
+    </div>
+    <br><br>
+    <div>
+        <select></select>
+    </div>
+    <br><br>
+    <div>
+        <table border="1" width="150">
+            <thead>
+                <tr>
+                    <th>Categories</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+       
+
+        $(function(){
+           
+            fetch(`https://fakestoreapi.com/products`)
+            .then(res => res.json())
+            .then(products =>{
+
+                    products.map(product=>{
+                         $(`<tr>
+                              <td>${product.title}</td>
+                              <td><img width="100" height="100" src=${product.image}></td>
+                              <td>${product.price}</td>
+                              <td>${product.rating.rate}</td>
+                            </tr>`).appendTo("tbody");
+                    })
+
+            })
+
+        })
+    </script>
+</head>
+<body>
+   
+    <div>
+        <table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th width="300">Title</th>
+                    <th>Preview</th>
+                    <th>Price</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+09/07
+======
+
+jQuery Reference
+jQuery DOM methods
+
+                        jQuery Events
+- jQuery use event listeners.
+- It is provides a clean separation of design and logic
+
+Syntax:
+        <button></button>
+
+         $("button").click(()=>{
+            // actions on click
+        })
+
+- It provides "event" argument that can access element and event details.
+
+        $("button").click((e)=>{
+            e.clientX;
+            e.clientY;
+            e.keyCode;
+            e.ctrlKey;
+            e.target.id
+            e.target.name
+            e.target.value                
+        })
+
+
+    ${ }            Data Binding Expression
+    $()            jQuery library invoking to access jQuery methods
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+         $(()=>{
+             
+                $("#btnInsert").click((e)=>{
+                      console.log(`
+                            X Position : ${e.clientX}\n
+                            Button Value: ${e.target.value}
+                      `);
+                })
+
+                $("#txtName").keyup(()=>{
+                    $("h2").html(`Hello ! ${$("#txtName").val()}`);
+                })
+
+         })
+    </script>
+</head>
+<body>
+    <button name="Btn-Insert"  value="Insert" id="btnInsert"> Insert </button>
+    <div>
+        <input type="text" id="txtName">
+    </div>
+    <h2></h2>
+</body>
+</html>
+
+Note: You can't define events directly for any element if it is inside a hierarchy of
+      elements.
+
+      You have to search for element in page using  "$(document).on()" method.
+      And configure event dynamically.
+
+Syntax:
+       $(document).on("eventName", "elementRef", (e)=>{
+
+      })
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+
+        var products = ["Television", "Mobile", "Watch"];
+
+         $(()=>{
+             
+            products.map(product=>{
+                  $(`
+                     <div class="card p-2 m-2" style="width:200px">
+                        <div class="card-header"> ${product} </div>
+                        <div class="card-footer">
+                            <button id="btnAdd" class="btn btn-primary w-100 bi bi-cart4"> Add to Cart</button>
+                        </div>
+                     </div>
+                  `).appendTo("body");
+            });
+
+            $(document).on("click", "#btnAdd", ()=>{
+                 console.log('Add Clicked');
+            })
+               
+         })
+    </script>
+</head>
+<body class="container-fluid">
+   
+</body>
+</html>
+
+                             jQuery Ajax
+- JavaScript Ajax methods
+    a) XMLHttpRequest
+    b) fetch()
+- jQuery Ajax methods
+   
+    $.ajax()
+    $.getJSON()
+      .ajaxStart()
+      .ajaxStop()
+      .ajaxSuccess()
+      .ajaxComplete()
+      .ajaxError()
+    etc..
+
+Features:
+- It is async by default.
+- It returns the data in its native format.
+- Conversion of data not required.
+- It provides various life cycle methods that track all performance across requests.
+- It is good in error handling.
+
+Issues:
+- It is not good in handling XSRF, XSS.
+- XSS is Cross Site Scripting Attacks.
+- XSRF is Cross Site Request Forgery
+- It is not good in security.
+- It have CORS issues.
+
+Syntax:
+        $.ajax({
+            method : "get | post | put | delete..",
+            url: "path",
+            data: "data_to_submit_on_post, put",
+            success: (response)=>{  response_data },
+            error: (err)=>{ error details }
+        })
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(()=>{
+
+                var now = new Date();
+                $("p").html(`Page Loaded on : ${now.toLocaleTimeString()}`);
+
+                $("button").click(()=>{
+
+                      $.ajax({
+                         method: "get",
+                         url: "./notes.txt",
+                         success: (data)=>{
+                              $("#notes").html(data);
+                         }
+                      })
+
+                })
+
+        })
+    </script>
+</head>
+<body>
+    <p></p>
+    <button>Load Help</button>
+    <br>
+    <pre id="notes">
+
+    </pre>
+</body>
+</html>
+
+Ajax Life Cycle Methods:
+
+     ajaxStart() => ajaxSuccess() => ajaxComplete()  => ajaxError() => ajaxStop()
+
+  - You can catch the error details using jQueryXHR
+
+Syntax:
+        .ajaxError((e, jXHR)=>{
+
+                jXHR.status;
+                jXHR.statusText;
+
+        })
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(()=>{
+
+                var now = new Date();
+                $("p").html(`Page Loaded on : ${now.toLocaleTimeString()}`);
+
+                $("button").click(()=>{
+
+                      $.ajax({
+                         method: "get",
+                         url: "./note.txt",
+                         success: (data)=>{
+                              $("#notes").html(data);
+                         }
+                      })
+                })
+        })
+        .ajaxStart(()=>{
+              alert('Your request initiated..');
+        })
+         .ajaxSuccess(()=>{
+            alert('Your request successfully sent to server.');
+        })
+        .ajaxComplete(()=>{
+             alert('Your request Processed Succefully..');
+        })
+        .ajaxStop(()=>{
+            alert('Your request completed and response ready');
+        })
+        .ajaxError((e, jXHR)=>{
+            alert(`${jXHR.status} : ${jXHR.statusText}`);
+        })
+    </script>
+</head>
+<body>
+    <p></p>
+    <button>Load Help</button>
+    <br>
+    <pre id="notes">
+
+    </pre>
+</body>
+</html>
+
+Ex: Weather API
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <script src="./node_modules/jquery/dist/jquery.js"></script>
+     <script>
+          $(()=>{
+               
+
+                $("button").click(()=>{
+
+                        var API_ID = "1318ca6725c69160d346c41fc0612596";
+                        var API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${$("#txtCity").val()}&appid=${API_ID}&units=metric`;
+
+                        $.ajax({
+                            method: 'get',
+                            url: API_URL,
+                            success: (weatherObj)=>{
+                                 $("#lblCity").text(weatherObj.name);
+                                 $("#lblTemp").text(weatherObj.main.temp);
+                            }
+                        })
+
+                })
+
+          })
+     </script>
+</head>
+<body>
+     <div>
+        <input type="text" id="txtCity"> <button>Get Weather</button>
+     </div>
+     <br><br>
+     <div>
+        <dl>
+            <dt>City</dt>
+            <dd id="lblCity"></dd>
+            <dt>Temp</dt>
+            <dd id="lblTemp"></dd>
+        </dl>
+     </div>
+</body>
+</html>
+
+10/07
+======
+
+	
+jQuery UI and Plugins
+jQuery UI
+- It provides UI components for better UI design.
+- You can rapidly build interactive UI.
+- It provides
+    a) Effects
+    b) Interactions
+    c) Widgets
+
+1. Download jQuery UI core library
+    https://jqueryui.com/
+
+2. Download "Stable" version
+
+3. Extract the ZIP folder => Copy all files from folder
+
+4. Go to your project => Add a new folder  "jquery-ui"
+
+5. Paste all copied library files
+
+6. Link the following files
+
+    <script src="./node_modules/jquery/dist/jquery.js"> </script>
+    <script src="./jquery-ui/jquery-ui.js"> </script>
+    <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
+
+Syntax: Interactions
+
+    $("ol").sortable()
+    $("img").resizable()
+    $("aside").draggable()
+
+Syntax: Widgets
+   
+    $("#topics").accordion()
+    $("#txt").datepicker()
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
+    <style>
+        aside {
+            border:1px solid black;
+            width: 120px;
+            padding: 10px;
+        }
+    </style>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./jquery-ui/jquery-ui.js"></script>
+    <script>
+        $(function(){
+             $("aside").draggable();
+             $("#pic").resizable();
+             $("ol").sortable();
+             $("#faqs").accordion();
+             $("#dept").datepicker();
+        })
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>Departure</dt>
+        <dd>
+            <input type="text" id="dept">
+        </dd>
+    </dl>
+    <div id="faqs">
+        <h2>What is Netflix?</h2>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum reiciendis facilis nemo impedit iure nihil adipisci, nulla commodi distinctio labore modi veniam praesentium itaque ad debitis in animi, neque sapiente. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos numquam ea eveniet soluta eaque ipsam tempora repudiandae excepturi dolorum incidunt nesciunt aspernatur, repellat aperiam minima debitis pariatur laborum atque aliquid!</p>
+        </div>
+        <h2>How much does Netflix cost?</h2>
+        <div>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam quidem, sed cupiditate at expedita ut officia accusantium tenetur mollitia ipsum vel autem! Quia, voluptatibus hic. Veritatis eum rerum qui rem.</p>
+        </div>
+    </div>
+    <ol>
+        <li>CSS</li>
+        <li>HTML</li>
+        <li>Javacript</li>
+        <li>Bootstrap</li>
+    </ol>
+    <aside>
+        <div>Ads</div>
+        <img src="./images/kids-fashion.jpg" width="100" height="100">
+    </aside>
+    <img src="./images/women-fashion.jpg" width="100" height="100" id="pic">
+</body>
+</html>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
+    <style>
+        aside {
+            border:1px solid black;
+            width: 120px;
+            padding: 10px;
+        }
+    </style>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./jquery-ui/jquery-ui.js"></script>
+    <script>
+        $(function(){
+             $("#list").menu();
+        })
+    </script>
+</head>
+<body>
+    <ul id="list" style="width: 200px;">
+        <li><div>Home</div></li>
+        <li><div>Electronics</div>
+            <ul>
+                <li><div>Televisions</div></li>
+                <li><div>Mobiles</div></li>
+            </ul>
+        </li>
+        <li>
+            <div>Fashion</div>
+            <ul>
+                <li><div>Kids</div></li>
+                <li><div>Women</div></li>
+                <li><div>Men</div></li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
+
+jQuery Plugin's
+- Plugin is an extension for software application.
+- jQuery supports several 3rd party plugins for handling different types of client requirements.
+- You can research on plugins from  "npmjs.com"
+
+Barcode for jQuery:
+
+1. Install the barcode library for project
+
+        >npm install jquery-ean13 --save
+
+2. Link jQuery & jQuery EAN 13 library
+
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/jquery-ean13/dist/jquery-ean13.js"></script>
+
+3. Add a <canvas> element into page, which is used to display diagrams.
+
+     <canvas width="" height="" id="code">
+
+4. Set bar code into canvas
+
+    $("#code").EAN13("12digit_number");
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/jquery-ean13/dist/jquery-ean13.js"></script>
+    <script>
+        $(function(){
+             $("#code").EAN13("991100421119");
+        })
+    </script>
+</head>
+<body>
+    <figure style="width: 200px;">
+        <img src="./images/women-fashion.jpg" width="150px" height="200px">
+        <figcaption>
+            <canvas width="150%" height="50" id="code"></canvas>
+        </figcaption>
+    </figure>
+</body>
+</html>
+
+Data Grid:
+ - Data grid is a table that provides built-in features for sorting, filtering, pagination, updating, inserting and deleting data.
+
+1. Install JS Grid
+
+    > npm install  jsgrid --save
+
+2. Link relative library
+
+        jsgrid.css
+        jsgrid-theme.css
+        jsgrid.js
+
+3. Put a container in page [ div ]
+
+    <div id="data"> </div>
+
+    $("#data").jsGrid({
+
+        // all grid features
+
+    })
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/jsgrid/dist/jsgrid.css">
+    <link rel="stylesheet" href="./node_modules/jsgrid/dist/jsgrid-theme.css">
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/jsgrid/dist/jsgrid.js"></script>
+    <script>
+        $(function(){
+              $("#data").jsGrid({
+                width: "100%",
+                height: "400px",
+           
+                filtering: true,
+                editing: true,
+                sorting: true,
+                paging: true,
+           
+                data: [
+                    {Name:"Samsung TV", Price:56000, Stock: true},
+                    {Name:"Mobile", Price:32000, Stock: true},
+                    {Name:"Watch", Price:1000, Stock: true},
+                ],
+           
+                fields: [
+                    { name: "Name", type: "text", width: 150 },
+                    { name: "Price", type: "number", width: 50 },
+                    { name: "Stock", type: "checkbox", title: "In Stock", sorting: true },
+                    { type: "control" }
+                ]
+            })
+        })
+    </script>
+</head>
+<body>
+    <h2>Products Grid</h2>
+    <div id="data"></div>
+</body>
+</html>
+
+11/07
+======
+
+SASS
+- Syntactically Awesome Style Sheets
+- It is a CSS pre-processor or pre-compiler.
+- It enables separation, reusability and easy extensibility.
+- It is trans-compiled into CSS.
+
+1. Install Sass on your PC
+   
+    - Open Command Prompt
+    - Run the command
+
+        >npm install sass  -g
+
+2. Add a new sass file into project   "index.scss"  
+
+    - Add your scss code
+   
+3. Trans compile sass into CSS.
+
+    >sass   index.scss    index.css  --watch
+
+4. Link index.css to HTML page.
+
+
+Sass Reference Hierarchy:
+
+- You can directly configure child elements inside the parent block.
+- It doesn't require child selectors.
+
+    parent
+    {
+        styles;
+        child {
+        styles;        
+        }
+    }
+
+Ex: index.scss
+
+.container {
+    border:2px solid red;
+    padding: 20px;
+    background-color: rgb(240, 212, 212);
+    h2 {
+        color:rgb(168, 9, 9);
+    }
+    p {
+        color: rgb(108, 4, 4);
+    }
+}
+
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div class="container">
+         <h2>Sass</h2>
+         <p>Syntactically Awesome Style Sheet</p>
+    </div>
+</body>
+</html>
+
+Sass Variables:
+- Variables in sass are used to store a CSS value so that you can reuse across various expressions.
+- Variables a configured by using  "$" and reference name.
+- Values are configured using ":" delimiter.
+
+Syntax:
+        $variableName : value;
+
+- You have to access and use variable using "$" reference.
+
+Syntax:
+        {
+          color : $variableName;
+          border : 2px solid  $variableName;
+        }
+
+Ex:
+index.scss
+
+$fgColor: rgb(2, 146, 76);
+$bgColor: rgb(225, 243, 203);
+
+.alert {
+    border:2px solid $fgColor;
+    padding: 20px;
+    background-color: $bgColor;
+    h2 {
+        color: $fgColor;
+    }
+    p {
+        color: $fgColor;
+    }
+    a {
+        color:$fgColor;
+    }
+    button{
+        background-color:$fgColor;
+        color:white;
+        border:none;
+    }
+}
+
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div class="alert">
+         <h2>Sass</h2>
+         <p>Syntactically Awesome Style Sheet</p>
+         <a href="#">Help</a>
+         <br><br>
+         <button>OK</button>
+    </div>
+</body>
+</html>
+
+Sass Provides Functions & Mixins:
+
+- Mixin is a method of sass.
+- It allows to refactor the code.
+- It will not return any value, it defines a set of actions to perform.
+
+Syntax:
+    @mixin   Name(params)
+    {
+        // statements
+    }
+
+- You can access the mixin and use at any location by using "@include" directive.
+
+Syntax:
+    @include Name(value);
+
+- You can configure conditions by using "@IF" statement
+
+Syntax:
+     @if (condition)
+      {
+         // styles on true;
+      }
+      @else if (condition)
+      {
+        // styles on true;
+      }
+     @else
+      {
+      }
+
+Operators:
+        ==        equal
+        >
+        >=
+        <
+        <=
+        <>        Not Equal
+
+Ex:
+index.scss
+
+$themeColor:green;
+
+@mixin SetTheme($bgColor, $fgColor)
+{
+  .alert {
+        border:2px solid $fgColor;
+        padding: 20px;
+        background-color: $bgColor;
+        h2 {
+            color: $fgColor;
+        }
+        p {
+            color: $fgColor;
+        }
+        a {
+            color:$fgColor;
+        }
+        button{
+            background-color:$fgColor;
+            color:white;
+            border:none;
+        }
+    }
+}
+
+@if ($themeColor==red)
+{
+    @include SetTheme(rgb(245, 214, 214), rgb(141, 7, 7) );
+}
+@else if ($themeColor==green)
+{
+    @include SetTheme(rgb(217, 245, 214), rgb(7, 141, 18) );
+}
+@else if ($themeColor==gold)
+{
+     @include SetTheme(rgb(245, 244, 214), rgb(141, 121, 7) );
+}
+
+12/07
+======
+
+- Sass
+- Nested Elements
+- Variables
+- @mixin
+- @if
+
+Sass Function:
+- Function always returns a value.
+- It is used to build expression.
+ 
+Syntax:
+    @function  name(params)
+    {
+        @return  value|expression;
+    }
+
+Ex:
+$themeColor:green;
+
+@function SetPadding($val){
+    @return $val*2;
+}
+
+@mixin SetTheme($bgColor, $fgColor)
+{
+  .alert {
+        border:2px solid $fgColor;
+        padding: SetPadding(5px);
+        background-color: $bgColor;
+        h2 {
+            color: $fgColor;
+            border:1px dotted $bgColor;
+            padding: SetPadding(6px);
+        }
+        p {
+            color: $fgColor;
+        }
+        a {
+            color:$fgColor;
+        }
+        button{
+            background-color:$fgColor;
+            color:white;
+            border:none;
+        }
+    }
+}
+
+@if ($themeColor==red)
+{
+    @include SetTheme(rgb(245, 214, 214), rgb(141, 7, 7) );
+}
+@else if ($themeColor==green)
+{
+    @include SetTheme(rgb(217, 245, 214), rgb(7, 141, 18) );
+}
+@else if ($themeColor==gold)
+{
+     @include SetTheme(rgb(245, 244, 214), rgb(141, 121, 7) );
+}
+
+Looping Statements
+  @for
+  @each
+  @while
+
+Syntax:
+    @for  ref  from  initial_value  through  final_value
+    {
+         // effects
+    }
+
+    @for  $i  from 1 through 6
+     {
+
+     }
+
+Note: Dynamic value can bind with string by using "#{ }"  binding expression.
+
+Syntax:
+    @each  ref  in  collection
+    {
+
+    }
+
+- Sass Array is configured with value separated with "," delimiter.
+
+Syntax:
+    $collection :  "red", "green", "blue" ;
+
+    @each  $color in $collection
+     {
+        li {
+          color: $color;
+        }
+     }
+
+Ex:
+index.scss
+
+
+@for $i from 1 through 3
+{
+     .box-#{$i} {
+        border:2px solid black;
+        width: 100px;
+        height: 100px;
+        margin-left: $i*100px;
+        transform: skew($i*10deg);
+     }
+}
+
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div class="box-1">
+        <img src="../images/kids-fashion.jpg" width="100" height="100">
+    </div>
+    <div class="box-2">
+        <img src="../images/women-fashion.jpg" width="100" height="100">
+    </div>
+    <div class="box-3">
+        <img src="../images/men-fashion.jpg" width="100" height="100">
+    </div>
+</body>
+</html>
+
+Sass Modules:
+- Modular approach enables easy reusability and extensibility.
+- It reduces the file size, as it allows to import only the styles required for situation.
+- It makes style sheet light weight.
+
+1. Module is defined as a sass file with "_" prefix.
+
+        _moduleName.scss
+
+2. You can import and use the module in any sass file
+
+         @import  "moduleName";
+
+Ex:
+ _button.scss
+
+button {
+    border:none;
+    background-color: yellow;
+    padding: 5px;
+    font-size: 15px;
+    font-family: Arial;
+}
+
+_nav.scss
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-family: Arial;
+    border:1px solid gray;
+    padding: 20px;
+}
+
+index.scss
+
+@import "buttons";
+@import "nav";
+
+                            DO-TO  Project
+1. User can register
+2. User can login
+3. User can add appointments
+4. User can view appointments
+5. User can edit and delete appointments
+
+Backend
+    MongoDB        Database
+    Node/Express        API
+    jQuery            Client Library [UI]
+    Bootstrap
+    Tailwind
+
+Database Design
+   
+    Database Name        : to-do
+    Collections            : users, appointments
+
+    users:
+        user_id : string
+        user_name: string
+        password: string
+        mobile: string
+
+    appointments
+        appointment_id: number
+        title:string
+        date: Date
+        description: string
+        user_id: string [FK - users]
+
+API Routes
+
+ POST        /register-user
+ GET        /users/user_id
+ GET        /appointments/user_id
+ POST        /add-appointment
+ PUT        /edit-appointment/id
+ DELETE        /delete-appointment/id
+
+jQuery Ajax

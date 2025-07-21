@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naresh i Technologies - Youtube</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #0f0f0f;
+            color: white;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        header div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .bi-justify {
+            padding-right: 15px;
+            font-size: 20px;
+            color: rgb(139, 139, 139);
+        }
+
+        .search-container {
+            color: rgb(139, 139, 139);
+        }
+
+        .search-bar {
+            border: 1px solid rgb(48, 48, 48);
+            width: 500px;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .bi-search {
+            padding-left: 7px;
+            color: rgb(139, 139, 139);
+        }
+
+        .bi-mic-fill {
+            padding: 10px;
+            margin-left: 10px;
+            border-radius: 30px;
+            color: rgb(139, 139, 139);
+            background-color: rgb(48, 48, 48);
+        }
+
+        .bi-plus {
+            padding: 7px;
+            margin-right: 15px;
+            border-radius: 30px;
+            background-color: rgb(48, 48, 48);
+        }
+
+        .bi-bell {
+            margin-right: 15px;
+        }
+
+        .bi-person {
+            padding: 8px;
+            border-radius: 30px;
+            background-color: rgb(48, 48, 48);
+        }
+
+        nav {
+            height: 600px;
+            overflow-y: auto;
+        }
+
+        main {
+            height: 600px;
+            overflow: auto;
+            padding-left: 30px;
+        }
+
+        .nav1 {
+            padding-top: 18px;
+            margin-right: 40px;
+            border-bottom: 1.5px solid rgb(48, 48, 48);
+        }
+
+        .nav-icon {
+            font-size: 18px;
+            padding-right: 20px;
+        }
+
+        .nav1 div {
+            padding-bottom: 14px;
+            align-items: center;
+        }
+
+        .nav-text {
+            font-size: 12px;
+        }
+
+        footer {
+            font-size: 12px;
+            color: rgb(139, 139, 139)
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: 2fr 10fr;
+        }
+
+        .banner {
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+
+        .logo img {
+            height: 150px;
+            width: 150px;
+            border-radius: 100%;
+        }
+
+        article {
+            display: grid;
+            grid-template-columns: 2fr 10fr;
+            margin-top: 20px;
+        }
+
+        .article-title {
+            font-weight: bold;
+            font-size: 18px;
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .article-subtitle {
+            margin-bottom: 14px;
+            font-size: 12px;
+        }
+
+        .article-subtitle span {
+            font-size: 15px;
+            color: rgb(139, 139, 139);
+
+        }
+
+        .article-text {
+            font-size: 15px;
+            font-size: 12px;
+            color: rgb(139, 139, 139);
+            margin-bottom: 7px;
+        }
+
+        .article-link {
+            font-size: 12px;
+        }
+
+        .btn-subscribe {
+            font-weight: bold;
+            background-color: white;
+            font-size: 12px;
+            color: black;
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 20px;
+            width: 75px;
+            text-align: center;
+        }
+
+        .services {
+            margin-top: 30px;
+        }
+
+        .services span {
+            padding: 10px;
+        }
+
+        .live-video {
+            display: grid;
+            grid-template-columns: 2fr 10fr;
+            margin-top: 20px;
+            grid-gap: 30px;
+        }
+
+        .live-video iframe {
+            width: 381px;
+            height: 190px;
+        }
+
+        .live-title {
+            font-size: 18px;
+            font-weight: bold;
+            padding-bottom: 20px;
+        }
+
+        .live-subtitle {
+            color: gray;
+        }
+
+        .links {
+            padding-top: 20px;
+            font-size: 14px;
+        }
+
+        .for-you {
+            margin-top: 20px;
+            grid-gap: 30px;
+        }
+        .card{
+            display: grid;
+            grid-template-columns: 4fr 4fr 4fr;
+            grid-gap: 30px;
+        }
+        iframe{
+            border-radius: 15px;
+        }
+        .card-header{
+            font-size: 14px;
+            font-weight: bold;
+            padding-top: 10px;
+        }
+        .card-subtitle{
+            font-size: 12px;
+            padding-top: 5px;
+            color: gray;
+        }
+        .card1 iframe{
+            width: 321px;
+            height: 180px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <span class="bi bi-justify"></span>
+            <img src="./images/youtube-logo.jpg">
+        </div>
+        <div class="search-container">
+            <div class="search-bar"><span>Search</span><span class="bi bi-search"></span></div>
+            <span class="bi bi-mic-fill"></span>
+        </div>
+        <div>
+            <span class="bi bi-plus">Create</span>
+            <span class="bi bi-bell"></span>
+            <span class="bi bi-person"></span>
+        </div>
+    </header>
+
+    <section>
+        <!-- Navigation Section -->
+        <nav>
+            <div class="nav1">
+                <div>
+                    <span class="bi bi-house-door nav-icon"></span>
+                    <span class="nav-text">Home</span>
+                </div>
+                <div>
+                    <span class="bi bi-play nav-icon"></span>
+                    <span class="nav-text">Shorts</span>
+                </div>
+                <div>
+                    <span class="bi bi-play-btn nav-icon"></span>
+                    <span class="nav-text">Subscriptions</span>
+                </div>
+            </div>
+            <div class="nav1">
+                <div>You <span class="bi-chevron-right"></span></div>
+                <div>
+                    <span class="bi bi-clock-history nav-icon"></span>
+                    <span class="nav-text">History</span>
+                </div>
+                <div>
+                    <span class="bi bi-list-task nav-icon"></span>
+                    <span class="nav-text">Playlist</span>
+                </div>
+                <div>
+                    <span class="bi bi-person-video nav-icon"></span>
+                    <span class="nav-text">Your videos</span>
+                </div>
+                <div>
+                    <span class="bi bi-camera-video nav-icon"></span>
+                    <span class="nav-text">Your movies</span>
+                </div>
+                <div>
+                    <span class="bi bi-book nav-icon"></span>
+                    <span class="nav-text">Your courses</span>
+                </div>
+                <div>
+                    <span class="bi bi-clock nav-icon"></span>
+                    <span class="nav-text">Watch Later</span>
+                </div>
+                <div>
+                    <span class="bi bi-hand-thumbs-up nav-icon"></span>
+                    <span class="nav-text">Liked Videos</span>
+                </div>
+            </div>
+            <div class="nav1">
+                <div>Subscriptions</div>
+                <div>
+                    <span class="bi bi-person-badge nav-icon"></span>
+                    <span class="nav-text">NareshIT</span>
+                </div>
+                <div>
+                    <span class="bi bi-person-badge nav-icon"></span>
+                    <span class="nav-text">NareshIT</span>
+                </div>
+                <div>
+                    <span class="bi bi-person-badge nav-icon"></span>
+                    <span class="nav-text">NareshIT</span>
+                </div>
+                <div>
+                    <span class="bi bi-person-badge nav-icon"></span>
+                    <span class="nav-text">NareshIT</span>
+                </div>
+                <div>
+                    <span class="bi bi-person-badge nav-icon"></span>
+                    <span class="nav-text">NareshIT</span>
+                </div>
+                <div>
+                    <span class="bi bi-person-badge nav-icon"></span>
+                    <span class="nav-text">NareshIT</span>
+                </div>
+                <div>
+                    <span class="bi bi-chevron-down nav-icon"></span>
+                    <span class="nav-text">Show more</span>
+                </div>
+            </div>
+            <div class="nav1">
+                <div>Explore</div>
+                <div>
+                    <span class="bi bi-fire nav-icon"></span>
+                    <span class="nav-text">Trending</span>
+                </div>
+                <div>
+                    <span class="bi bi-bag nav-icon"></span>
+                    <span class="nav-text">Shopping</span>
+                </div>
+                <div>
+                    <span class="bi bi-music-note-beamed nav-icon"></span>
+                    <span class="nav-text">Music</span>
+                </div>
+                <div>
+                    <span class="bi bi-camera-video nav-icon"></span>
+                    <span class="nav-text">Films</span>
+                </div>
+                <div>
+                    <span class="bi bi-broadcast nav-icon"></span>
+                    <span class="nav-text">Live</span>
+                </div>
+                <div>
+                    <span class="bi bi-controller nav-icon"></span>
+                    <span class="nav-text">Gaming</span>
+                </div>
+                <div>
+                    <span class="bi bi-newspaper nav-icon"></span>
+                    <span class="nav-text">News</span>
+                </div>
+                <div>
+                    <span class="bi bi-car-front nav-icon"></span>
+                    <span class="nav-text">Sport</span>
+                </div>
+                <div>
+                    <span class="bi bi-book nav-icon"></span>
+                    <span class="nav-text">Courses</span>
+                </div>
+                <div>
+                    <span class="bi bi-handbag nav-icon"></span>
+                    <span class="nav-text">Fashion & beauty</span>
+                </div>
+                <div>
+                    <span class="bi bi-broadcast-pin nav-icon"></span>
+                    <span class="nav-text">Podcast</span>
+                </div>
+            </div>
+            <div class="nav1">
+                <div>
+                    <span class="bi bi-nut nav-icon"></span>
+                    <span class="nav-text">Setting</span>
+                </div>
+                <div>
+                    <span class="bi bi-flag nav-icon"></span>
+                    <span class="nav-text">Report history</span>
+                </div>
+                <div>
+                    <span class="bi bi-question-circle nav-icon"></span>
+                    <span class="nav-text">help</span>
+                </div>
+                <div>
+                    <span class="bi bi-send-exclamation nav-icon"></span>
+                    <span class="nav-text">Send Feedback</span>
+                </div>
+            </div>
+
+            <footer><br>
+                <div class="about">
+                    About Press Copyright <br>Contact us Creator Advertise <br>Developers
+                </div><br>
+                <div class="terms">
+                    Terms Privacy Policy & Safety <br>How YouTube works <br>Test new features
+                </div><br>
+                <div class="copyright">
+                    © 2025 Google LLC
+                </div>
+            </footer>
+        </nav>
+
+        <main>
+            <img class="banner" src="./images/channel_banner.jpg" width="90%">
+            <article>
+                <div class="logo"><img src="./images/nit-logo.jpg" alt=""></div>
+                <div>
+                    <div class="article-title">Naresh i Technologies</div>
+                    <div class="article-subtitle">@NareshIT <span>• 1.32M subscribers • 3.4K videos</span></div>
+                    <div class="article-text">
+                        We are one of the software training organization With a library of 200+ courses, we have ...more
+                    </div>
+                    <div class="article-link">
+                        <a href="instagram.com/nareshitech">instagram.com/nareshitech</a> and 7 more links
+                    </div>
+                    <div class="btn-subscribe">Subscribe</div>
+                </div>
+            </article>
+            <div class="services">
+                <span>Home</span>
+                <span>Videos</span>
+                <span>Shorts</span>
+                <span>Live</span>
+                <span>Playlist</span>
+                <span>Post</span>
+                <span class="bi bi-search"></span>
+            </div>
+            <hr noshade size="0.5" color="gray">
+            <div class="live-video">
+                <div>
+                    <iframe src="https://www.youtube.com/embed/F_LARJNfJz4  "></iframe>
+                </div>
+                <div class="live-content">
+                    <div class="live-title">Playwright Automation | Mr. Sumanth | Naresh IT</div>
+                    <div class="live-subtitle">Naresh i Technologies • 14 watching</div>
+                    <div class="links">https://chat.whatsapp.com/K5VsfaOdAO0BYgLe7JgnFd Introduction to Playwright
+                        Automation | Mr. Sumanth ** For Online Training Registration: https://goo.gl/r6kJbB ► Call:
+                        +91-8179191999...</div>
+                </div>
+            </div>
+            <div class="for-you">
+                <div>For You</div><br>
+                <div class="card">
+                    <div class="card1">
+                        <iframe src="https://www.youtube.com/embed/OzltVfNBKt4"></iframe>
+                        <div class="card-header">
+                            Mastering Centralized Cloud Networking with AWS
+                        </div>
+                        <div class="card-subtitle">
+                            1.1K views Streamed 3 days ago
+                        </div>
+                    </div>
+                    <div class="card1">
+                        <iframe src="https://www.youtube.com/embed/OzltVfNBKt4"></iframe>
+                        <div class="card-header">
+                            Mastering Centralized Cloud Networking with AWS
+                        </div>
+                        <div class="card-subtitle">
+                            1.1K views Streamed 3 days ago
+                        </div>
+                    </div>
+                    <div class="card1">
+                        <iframe src="https://www.youtube.com/embed/OzltVfNBKt4"></iframe>
+                        <div class="card-header">
+                            Mastering Centralized Cloud Networking with AWS
+                        </div>
+                        <div class="card-subtitle">
+                            1.1K views Streamed 3 days ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </section>
+</body>
+
+</html>

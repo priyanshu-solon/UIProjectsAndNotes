@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    <script>
+        currentInput = '';
+        previousInput = '';
+
+        function appendNumber(number){
+            currentInput += number;
+            document.querySelector('input').value =  `${previousInput} ${currentInput}`;
+        }
+        function backspace(number){
+            if (currentInput.length > 0) {
+                currentInput = currentInput.slice(0, -1);
+            }
+            document.querySelector('input').value = `${previousInput} ${currentInput}`;
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <input type="text" width="200px" height="50px" disabled>
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="backspace()">B</button>
+    </div>
+</body>
+</html>
