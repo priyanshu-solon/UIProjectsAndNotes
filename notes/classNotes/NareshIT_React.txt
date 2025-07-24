@@ -1,0 +1,1419 @@
+Summary
+- What is React?
+- How it is different from Angular?
+- Why we need React like technologies?
+- What are challenges in modern web development?
+		Unified UX, Fluid UX, Loosely Coupled..
+- SPA / PWA
+- Why can't we build SPA with JavaScript & jQuery?
+
+
+Features of React:
+1. It uses "Virtual DOM".
+	- It is a copy of actual DOM in memory.
+	- Application update the virtual DOM and later commits with actual DOM.
+	- It makes the rendering appear faster than normal. 
+
+2. It is component based.
+	- It enables easy reusability.
+	- Easy to extend
+	- Make loosely coupled and extensible.
+	- Easy to test 
+
+3. Modular Approach 
+	- It uses only what is required for application.
+	- Application specific framework or library.
+	- It makes application light weight and faster.
+
+4. Server Side Rendering with Framework like Next JS
+	- Components can pre-render on server.
+	- This makes server side interactions faster.
+
+Issues with React:
+1. It is not designed for what you are using.
+2. Hence lot of GAP's.
+3. You need lot of 3rd party plugins. 
+4. Pace of development is very fast.
+5. No proper documentation. 
+
+
+Using React in existing web application:
+
+1. Download and Install  Node JS on your PC
+
+2. Download and Install Visual Studio Code Editor
+
+3. Install Live Server plugin for VS code
+
+4. Create a new project folder
+
+		D:\web-app
+
+5. Open in VS code
+
+6. Create the file system for traditional web application
+
+	> npm  init  -y			[ package.json ]
+
+		D:\web-app
+		|
+		|_package.json
+		|_public
+		|_src
+		|_readme.md
+
+7. Add pages 
+
+		index.html		// at root level
+		home.html		// in public folder
+
+8. React up to version 18x provides a legacy library to import and use in page.
+	- React requires 3 basic libraries
+		a) react
+		b) react-dom
+		c) babel
+	- "react" is a core library that provides access to all react services.
+	- "react-dom" is virtual DOM library.
+	- "babel" is a JavaScript compiler used for React.
+
+Note: You can use CDN links from official sources. 
+	  You can also download using package managers.
+
+Version 17x & 18x:
+
+	- Visit  "https://legacy.reactjs.org/"
+	- Go to "doc" [documentation]
+	- Select CDN links
+	- Copy CDN for production or development 
+
+			react.development.js
+			react-dom.development.js		=> add to your home page
+
+	- Visit "https://babeljs.io/"
+	- Go to "docs"
+	- Go to "Integration Packages"
+	- Select "@babel/standalone"
+	- Copy CDN and paste into your page.
+
+Ex:
+1. index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to Web App</h1>
+    React is working in <a href="./public/home.html"> Home page</a>.
+</body>
+</html>
+
+2. home.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Page</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        /* 17x
+         ReactDOM.render("Welcome to React JS", document.getElementById("root"));
+         */
+         var root = ReactDOM.createRoot(document.getElementById("root"));
+         root.render("Hello ! React 18");
+    </script>
+</head>
+<body>
+    <noscript>Please enable JavaScript on your browser.</noscript>
+    <div id="root"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+React in Existing Application [ React 18 ]
+	- react
+	- react-dom
+	- babel
+
+React up to 17x version:
+
+	ReactDOM.render("Element|Markup", document.getElementById("root"));
+
+React 18x version:
+
+	const  root = ReactDOM.createRoot(document.getElementById("root"));
+	root.render("Element | Markup");
+
+
+Note: ReactDOM is a base for creating "Virtual DOM".
+
+Download Libraries:
+
+1. Open terminal in your project
+
+2. Run the following commands
+
+		> npm  install  react@18   react-dom@18   @babel/standalone  --save
+
+3. All library files are copied into "node_modules".
+
+4. Link the following files to your HTML page
+
+   <script  src="../node_modules/react/umd/react.development.js"> </script>
+   <script  src="../node_modules/react-dom/umd/react-dom.development.js"> </script>
+   <script  src="../node_modules/@babel/standalone/babel.js"> </script>
+
+Note: React uses JavaScript XML [ JSX ] as language. 
+	  JSX can't be translated using JavaScript interpreter in browser.
+	  Hence your script for React requires the MIME type as:
+
+		a) text/jsx
+		b) text/babel
+
+	<script type="text/jsx  or text/babel">
+	</script>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Page</title>
+    <script src="../node_modules/react/umd/react.development.js"></script>
+    <script src="../node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="../node_modules/@babel/standalone/babel.js"></script>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render("Welcome to React 18");
+    </script>
+</head>
+<body>
+    <noscript>Please enable JavaScript on your browser.</noscript>
+    <div id="root"></div>
+</body>
+</html>
+		
+					  React Components
+- React is component based.
+- Components enable easy reusability and extensibility. 
+- A component comprises of 3 basic elements
+
+	1. Presentation		[with HTML]
+	2. Styles				[with CSS]
+	3. Logic				[with JSX or TSX]
+
+- React components are designed by using function or class. 
+- Class components are still supported by React but not recommended in new code.
+
+Function Components:
+
+1. You can configure a function using declaration or expression. 
+
+	Declaration:
+		function Name()
+		{
+		}
+
+	Expression:
+		const Name = function(){ 
+
+		}
+
+
+2. Every component function name must start with uppercase letter.
+
+3. Component function can't be void type.
+
+4. Component function must always return a JSX element. 
+
+Syntax:
+		function  Login()
+		{
+		   return (<JSX></JSX>);
+		}
+
+5. Component function must return only one fragment. 
+
+		function Login()
+		{
+		  return (
+			      <h3>User Login </h3>		=> invalid
+			      <p> Welcome </p>
+			     );
+		}
+
+
+		function Login()
+		{
+		  return (
+			     <div>
+					... your content..		=> valid
+			     </div>
+			    )
+		 }
+
+6. JSX function component can't have elements with void syntax.
+    Every element must have an end token. 
+	
+		<img> </img>		=> valid
+		<img />			=> valid
+		<img>			=> invalid
+		<input type="text" />
+
+7. JSX element can't have attributes, you have to configure only properties.
+
+		<img class="" />		invalid
+		<img className="" />	valid
+
+8. Components are accessed and rendered as JSX elements
+
+		function Login()
+		{
+		  render (<JSX></JSX>);
+		}
+
+		root.render(<Login> </Login>);
+		root.render(<Login />);
+
+Ex:
+home.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Page</title>
+    <style>
+        nav {
+            display: flex;
+            justify-content: space-between;
+            border:1px solid gray;
+            padding: 20px;
+        }
+    </style>
+    <script src="../node_modules/react/umd/react.development.js"></script>
+    <script src="../node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="../node_modules/@babel/standalone/babel.js"></script>
+    <script type="text/babel">
+
+        function Login()
+        {
+            return(
+                <div>
+                    <h2>User Login</h2>
+                    <dl>
+                     <dt>User Name </dt>
+                     <dd><input type="text" /></dd>    
+                     <dt>Password </dt> 
+                     <dd><input type="password" /></dd>
+                    </dl>
+                    <button>Login</button>
+                </div>
+            )
+        }
+
+        function SearchBar(){
+            return(
+                <div>
+                    <input type="text" placeholder="Search Amazon.in" />
+                    <button>Search</button>
+                </div>
+            )
+        }
+        function NavBar(){
+            return(
+                <nav>
+                <span>Amazon </span>
+                <SearchBar />
+                <span>Home</span>
+                <span>About</span>
+                <span>Contact</span>
+                </nav>
+            )
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(
+             <div>
+                <NavBar/>
+                <Login />
+             </div>
+            );
+    </script>
+</head>
+<body>
+    <noscript>Please enable JavaScript on your browser.</noscript>
+    <div id="root"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Summary
+- What is React?
+- How it is different from Angular?
+- Why we need React like technologies?
+- What are challenges in modern web development?
+		Unified UX, Fluid UX, Loosely Coupled..
+- SPA / PWA
+- Why can't we build SPA with JavaScript & jQuery?
+
+
+Features of React:
+1. It uses "Virtual DOM".
+	- It is a copy of actual DOM in memory.
+	- Application update the virtual DOM and later commits with actual DOM.
+	- It makes the rendering appear faster than normal. 
+
+2. It is component based.
+	- It enables easy reusability.
+	- Easy to extend
+	- Make loosely coupled and extensible.
+	- Easy to test 
+
+3. Modular Approach 
+	- It uses only what is required for application.
+	- Application specific framework or library.
+	- It makes application light weight and faster.
+
+4. Server Side Rendering with Framework like Next JS
+	- Components can pre-render on server.
+	- This makes server side interactions faster.
+
+Issues with React:
+1. It is not designed for what you are using.
+2. Hence lot of GAP's.
+3. You need lot of 3rd party plugins. 
+4. Pace of development is very fast.
+5. No proper documentation. 
+
+
+Using React in existing web application:
+
+1. Download and Install  Node JS on your PC
+
+2. Download and Install Visual Studio Code Editor
+
+3. Install Live Server plugin for VS code
+
+4. Create a new project folder
+
+		D:\web-app
+
+5. Open in VS code
+
+6. Create the file system for traditional web application
+
+	> npm  init  -y			[ package.json ]
+
+		D:\web-app
+		|
+		|_package.json
+		|_public
+		|_src
+		|_readme.md
+
+7. Add pages 
+
+		index.html		// at root level
+		home.html		// in public folder
+
+8. React up to version 18x provides a legacy library to import and use in page.
+	- React requires 3 basic libraries
+		a) react
+		b) react-dom
+		c) babel
+	- "react" is a core library that provides access to all react services.
+	- "react-dom" is virtual DOM library.
+	- "babel" is a JavaScript compiler used for React.
+
+Note: You can use CDN links from official sources. 
+	  You can also download using package managers.
+
+Version 17x & 18x:
+
+	- Visit  "https://legacy.reactjs.org/"
+	- Go to "doc" [documentation]
+	- Select CDN links
+	- Copy CDN for production or development 
+
+			react.development.js
+			react-dom.development.js		=> add to your home page
+
+	- Visit "https://babeljs.io/"
+	- Go to "docs"
+	- Go to "Integration Packages"
+	- Select "@babel/standalone"
+	- Copy CDN and paste into your page.
+
+Ex:
+1. index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to Web App</h1>
+    React is working in <a href="./public/home.html"> Home page</a>.
+</body>
+</html>
+
+2. home.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Page</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        /* 17x
+         ReactDOM.render("Welcome to React JS", document.getElementById("root"));
+         */
+         var root = ReactDOM.createRoot(document.getElementById("root"));
+         root.render("Hello ! React 18");
+    </script>
+</head>
+<body>
+    <noscript>Please enable JavaScript on your browser.</noscript>
+    <div id="root"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+React Components
+- Function Components
+- JSX Rules
+
+					Creating a new React SPA
+
+- You can create a new web application manually or by using any bundling tool. 
+- The popular bundling tools for Web are:
+	 - Webpack
+	 - Parcel
+	 - Vite etc.
+
+- Bundling tools provide a scaffold approach where application is configured and file system is designed according to developer requirements. 
+
+Create React App with Vite: 
+
+1. Open any location on your PC where you want to create react app.
+
+2. Run the command [ from command prompt ]
+
+		E:\> npm  create  vite@latest   app_name  -- --  template  react
+
+    Note: The default language for "react" template is JavaScript.
+	
+		> Framework		:  React
+		> Variant 			: JavaScript 
+
+3. Change into project folder and run the command 
+
+		E:\app_name> npm  install
+
+     It will install all dependencies required for project.
+
+4. Open project folder in VS code
+
+5. You can view the following file system
+
+
+	File / Folder		Description
+	------------------------------------------------------------------------------------------------------
+	node_modules 	comprises of all library files installed for project.
+
+	public			comprises of all static resources like, html, images etc.
+
+	src				comprises of all dynamic resources like .js, .jsx, .ts, .css, .scss..
+
+	.gitignore			configures the resources to ignore while publishing to GIT.
+
+	eslint.config.js		It is JavaScript language configuration & analysis tool. 
+
+	index.html		It is the startup page for project.
+
+	package.json		]  comprises of application meta data, you can configure
+	package-lock.json	]  scripts, commands, versions etc.
+
+
+	Readme.md		It is a help document by developers for developers. 
+
+	vite.config.js		It is bundler configuration to plugin various external libraries
+					or frameworks required for application.
+
+6. Run application using the following command
+
+	> npm  run dev			[for development]
+
+
+    Application starts on local server   "http://localhost:5173/".
+
+    You can request from browser.
+
+React High Level Flow:
+1. You can request react application from browser 
+
+		http://localhost:5173
+
+2. Browser uses the event "DOMContentLoaded", which loads static DOM of "Index.html".
+
+3. Index page loads  "main.jsx", which is entry point for react application. 
+
+4. "src/main.jsx" is create a virtual DOM and renders "App" component, which is the default component created for your application. 
+
+	createRoot(document.getElementById("root")).render(
+	   <React.Strict>
+		<App />
+	  </React.Strict>
+
+	Note:  Alias of React.Strict is  <StrictMode>
+
+Creating a custom component:
+
+- Every component in development environment comprises of 3 files
+
+	a) component.jsx		comprises of markup and logic
+	b) component.css		comprises of styles
+	c) component.test.jsx	comprises test cases used for testing component
+
+- Create a new folder "components" and keep in "src".
+
+- Add a folder by name "login" into components with files
+
+		login.jsx
+		login.css
+
+- login.jsx   code
+
+	export  function Login()
+	{
+	   return(
+		   <>
+			... your design ...
+		   </>
+		);
+	}
+
+- Go to "main.jsx" and import login 
+
+	import  { Login } from  "../component/login/login.jsx";
+
+	<StrictMode>
+		<Login />
+	</StrictMode>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Creating React Application using Vite Bundler 
+File System in React JavaScript Template
+Execution Flow - High Level
+
+	index.html => main.jsx => create virtual DOM => render "app" component
+
+Note: You have to import CSS file into JSX component in order to use the styles.
+	  It is always recommended not to use type selector for element styles, until you
+	  want same across all components.
+
+Syntax:
+		login.jsx
+		
+		import  './login.css';
+
+Enable bootstrap for React application:
+
+1. Install bootstrap and icons for application
+
+	> npm  install  bootstrap   bootstrap-icons --save
+
+2. Go to main.jsx  and import following files 
+
+	import '../node_modules/bootstrap/dist/css/bootstrap.css';
+	import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+
+3. You can use icons and bootstrap classes
+
+	<div className='bi bi-person-circle'> User Login </div>
+
+	<input type="text"  className='form-control' />
+
+
+Ex:
+1. Add a new folder into  src/components  by name  "Netflix"
+
+2. Add following component files into Netflix folder
+
+		netflix-index.jsx
+		netflix-header.jsx
+		netflix-section.jsx
+		netflix-main.jsx
+
+		netflix-index.css
+		netflix-section.css
+
+3. Go to main.jsx and setup Netflix Index as startup 
+
+	<StrictMode>
+	   <NetflixIndex />
+	</StrictMode>
+
+
+netflix-index.css 
+
+.banner {
+    background-image: url("/public/netflix-banner.jpg");
+    background-size: cover;
+    height: 100vh;
+}
+.shade {
+    background-color: rgba(0,0,0,0.7);
+    height: 100vh;
+}
+
+netflix-index.jsx
+
+import './netflix-index.css';
+import { NetflixHeader } from './netflix-header';
+import { NetflixSection } from './netflix-section';
+
+export function NetflixIndex(){
+    return(
+        <div className="banner">
+          <div className='shade'>
+              <NetflixHeader />
+              <NetflixSection />
+          </div>
+        </div>
+    )
+}
+
+netflix-header.jsx
+
+
+export function NetflixHeader(){
+    return(
+        <header className="d-flex justify-content-between p-4">
+            <div className="h1 text-danger fw-bold">
+                NETFLIX
+            </div>
+            <div className="d-flex align-items-center justify-content-center">
+                <div>
+                    <div className="input-group">
+                   <span className="bi bi-translate input-group-text"></span> 
+                   <select className="form-select">
+                      <option>Language</option>
+                   </select>
+                    </div>
+                </div>
+                <button className="btn btn-danger mx-4">Sign In</button>
+            </div>
+        </header>
+    )
+}
+
+netflix-section.css 
+
+.section {
+    padding-top: 50px;
+    font-family: Arial;
+}
+.section-title {
+    font-size: 60px;
+    font-weight: bold;
+}
+.section-subtitle {
+    font-size: 25px;
+}
+
+netflix-section.jsx
+
+import { NetflixMain } from './netflix-main';
+import './netflix-section.css';
+
+export function NetflixSection(){
+    return(
+        <section className="text-white section text-center mt-4">
+           <div className="section-title"> Unlimited movies, TV <br/> shows and more </div>
+           <div className="section-subtitle"> Starts at ₹149. Cancel at any time. </div>
+           <NetflixMain />
+        </section>
+    )
+}
+
+netflix-main.jsx
+
+
+
+export function NetflixMain(){
+    return(
+        <main>
+            <p>Ready to watch? Enter your email to create or restart your membership.</p>
+            <div className="d-flex justify-content-center">
+                <div className="mt-3">
+                    <div className="input-group input-group-lg">
+                    <input type="email" className="form-control mx-2" placeholder="Your email address" />
+                    <button className="btn btn-danger"> Get Started <span className="bi bi-chevron-right"></span> </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    )
+}
+
+					 Data Binding & State in Component
+- Data Binding is the process of accessing data from source and binding to UI elements.
+- It also includes identifying changes in data and update back to the source. 
+		
+		
+		Fetching from source and bind to UI		=> One Way Binding
+		Identify changes in UI and update back	=> Two Way Binding
+
+- React implicitly supports only "One Way Binding".
+- You have to explicitly configure "Two Way Binding". 
+- React uses "{ }" as data binding expression. 
+
+Syntax:
+		var uname = "John";
+
+		<p> Hello !  {uname} </p>
+
+		<input type="text"  value={uname}  />
+
+- You can bind dynamic values into a string along with JavaScript binding expression 
+  "${ }". However it is supported only for string enclosed in backtick. 
+
+Syntax:
+		var bgstyle = "bg-danger";
+
+		<p className={`text-white text-center ${bgstyle}`}>
+
+		<p  className={ "text-white text-center " + bgstyle }>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Components Hierarchy 
+Data Binding
+One Way Binding
+Binding Expressing { }   ${ } [backtick]
+
+						    Component State
+
+- Web application uses "http / https" as protocol.
+- They are state less protocols. 
+- They can't remember information between requests. 
+- Hence various state management techniques are required. 
+- It is always recommended to use a state for configuring data in a component. 
+- Variables are immutable hence it is not recommended to handle data with variables. 
+- State is mutable and there are various techniques in React 
+		useState()
+		useReducer()
+		useContext()
+		useRef()
+		useMemo()
+		useCallback()
+		Local Storage
+		Session Storage
+		Cookies 
+		Redux etc..
+
+Component Local State:
+ - Every React component is configured with a local state.
+ - It is created while creating component. 
+ - A component is create when you request the component.
+ - It is destroyed automatically when you move from one component to another. 
+ - It can be used across multiple requests of component, but can't be used across 
+   components. 
+ - React provides "useState()" hook to access and use the local state. 
+
+FAQ: What is a hook in React?
+Ans:   Hook is a service. It is a predefined business logic.
+	  You can access, customize and implement according to requirements. 
+	  It must be configured at high level in a component. 
+	  You can't define inside any another block. 
+
+useState() Hook:
+ - It is a React hook used for accessing component local state.
+ - It allows to access and use the local state with any type of data
+		a) Primitive
+		b) Non Primitive 
+ - It requires a reference for accessing and initializing value into memory
+		a) getter 	[ to access value ]
+		b) setter	[ to initialize value] 
+
+ - It returns a getter and setter, which you have to access using de-structure technique. 
+
+Syntax:
+		const  [getter, setter] = useState(value);
+
+		{ getter }				// to access
+
+		setter(newValue)		// to initialize new value 
+
+		setter = value;			// invalid
+
+FAQ's:
+1. Can we use var and let to configure state?
+A. Yes. But not recommended. 
+
+2. Why developers prefer using "const" for state?
+A. State must be initialized and should not allow assignment. 
+    Hence "const" is good for state, as it will not allow assignment and require initialization.
+
+3. If you use const, then how you will assign a new value into state?
+A. We don't assign values into state, we reinitialize memory for storing a new value.
+
+
+Component Mount Phase:
+- A component is created when user requests the component. 
+- State is configured while creating component. 
+- You can initialize values into state while creating but can't reinitialize directly in 
+  component.
+- It requires a mount phase or any element event to reinitialize new values. 
+- Component mount is configured by using "useEffect()" hook.
+
+Syntax:
+		useEffect(()=>{
+		
+			// actions to perform on mount
+
+		},[ dependencies ]);
+
+- Every component mounts only once, you can mount again by configuring the dependencies. 
+- A component mounts again when ever the dependency detects a change.
+
+Ex:
+data-binding.jsx
+
+import { useEffect, useState } from "react"
+
+export function DataBinding(){
+    
+    const [price, setPrice] = useState(0);
+    const [name, setName] = useState('');
+    
+    useEffect(()=>{
+        setPrice(40500);
+        setName('Samsung TV');
+    },[]);
+
+    return(
+        <div className="container-fluid">
+            <h2 className={`text-center text-warning p-3`}>Data Binding</h2>
+            <dl>
+                <dt>Product Name</dt>
+                <dd>{name}</dd>
+                <dt>Price</dt>
+                <dd>{price}</dd>
+            </dl>
+        </div>
+    )
+}
+
+Binding Various Data Types:
+
+Primitive Types:
+
+1. Number
+
+	const [price] = useState(45000);
+
+	- You can use all JavaScript number functions to handle numbers
+
+		a) toFixed()
+		b) toPrecision()
+		c) toLocaleString()	 => regional language, style : currency, unit, precent 
+		d) parseInt()
+		e) parseFloat()
+		f) isNaN()
+
+Ex:
+import { useEffect, useState } from "react"
+
+export function DataBinding(){
+    
+    const [price, setPrice] = useState(0);
+    const [views] = useState(5600009);
+    
+    useEffect(()=>{
+        setPrice(405000);
+    },[]);
+
+    return(
+        <div className="container-fluid">
+            <h2 className={`text-center text-warning p-3`}>Data Binding</h2>
+            <dl>
+                <dt>Price</dt>
+                <dd>{price.toLocaleString('en-in', { style:'currency', currency:'INR'})}</dd>
+                <dt>Views</dt>
+                <dd>{views.toLocaleString('en-us', {notation:'compact'})}</dd>
+            </dl>
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- useState()
+- useEffect()
+
+1. Number
+
+2. String
+	" "
+	'  '
+	` `  ${ }
+
+3. Boolean 
+	- Boolean handles true or false as keywords.
+	- JSX can't print boolean keywords.
+	- It can't use decision making statements.
+	- Hence you have to handle using operators and functions. 
+
+Syntax:
+	 const [stock] = useState(true);
+
+	 {  (stock===true) ? 'true' : 'false' }
+
+4. Undefined 
+
+	- It specifies that value is not defined at compile time. 
+	- It uses "undefined" keyword. 
+
+Syntax:
+	  const [price , setPrice]  = useState();
+
+	  { (price) ? price : 'price not defined' }
+
+
+5. Null
+
+	- Null is a keyword returned when value is not provided at runtime of application.
+	- It is verified by using null keyword.
+
+Syntax:
+	  const [price] = useState(prompt("Enter Price"));
+
+	  {  (price===null) ? 'Not defined' : price }
+ 
+Note: React application compiles and executes 2 times. One for development and
+	  another for production, you can remove the <StrictMode> to execute only
+	  for development.
+
+Non Primitive Types:
+
+1. Array
+	- All array methods are same in React.
+	- Configuration same as JavaScript.
+	- To present array elements always use the implicit iterator functions.
+		a) map()
+		b) forEach()
+
+	- React Fiber from react 19 recommends all async techniques.
+	- Hence you have to use "map()" as iterator for reading elements.
+	- JSX can dynamically create any element and append to page.
+	- Every repeating element must have a unique "key".
+
+Syntax:
+	const [cities] = useState([ 'Delhi' , 'Hyd' ])
+
+
+	<ol>
+	  {
+	    cities.map((city, index)=> <li key={index}> { city } </li>)
+	  }
+
+Ex:
+data-binding.jsx
+
+import { useEffect, useState } from "react"
+
+export function DataBinding(){
+    
+    const [categories] = useState(['All','Electronics', 'Fashion','Footwear']);
+    
+    useEffect(()=>{
+        
+    },[]);
+
+    return(
+        <div className="container-fluid">
+            <header className="mt-4 p-4 d-flex justify-content-between border border-2">
+                <div className="h3">Amazon</div>
+                <nav>
+                    {
+                        categories.map((category, i)=> <span className="mx-4" key={i}><a href="#">{category}</a></span> )
+                    }
+                </nav>
+                <div>
+                    <span className="bi bi-heart"></span>
+                    <span className="bi bi-cart3 mx-2"></span>
+                </div>
+            </header>
+            <ol>
+                {
+                    categories.map((category,index)=><li key={index}>{category}</li>)
+                }
+            </ol>
+            <select>
+                {
+                    categories.map((category, index)=><option key={index}>{category}</option>)
+                }
+            </select>
+        </div>
+    )
+}
+
+2. Object Type
+	
+	- Object is key and value collection. 
+	- You can access the value with reference of key.
+	- All object manipulations are same as in JavaScript.
+		a) Object.keys()	returns all keys
+		b) delete			removes a key
+		c) in 			verifies key
+		d) typeof			returns value type
+		etc.
+
+Ex:
+data-binding.jsx
+
+import { useEffect, useState } from "react"
+
+export function DataBinding(){
+    
+    const [product] = useState({Name:'Samsung TV', Price: 45000, ShippedTo:['Delhi', 'Hyd'], Rating:{Rate:4.2, Count:600}});
+    
+    useEffect(()=>{
+        
+    },[]);
+
+    return(
+        <div className="container-fluid">
+            <h2>Product Details</h2>
+            <dl>
+                <dt>Name</dt>
+                <dd>{product.Name}</dd>
+                <dt>Price</dt>
+                <dd>{product.Price}</dd>
+                <dt>Shipped To</dt>
+                <dd>
+                    <ul>
+                        {
+                            product.ShippedTo.map(city=><li key={city}>{city}</li>)
+                        }
+                    </ul>
+                </dd>
+                <dt>Rating</dt>
+                <dd>
+                    {product.Rating.Rate} <span className="bi bi-star-fill text-success"></span> [{product.Rating.Count}]
+                </dd>
+            </dl>
+        </div>
+    )
+}
+
+Ex: Array of objects
+
+data-binding.jsx
+
+import { useEffect, useState } from "react"
+
+export function DataBinding(){
+    
+    const [products] = useState([
+         {Name: 'Samsung TV', Price: 45000},
+         {Name: 'Mobile', Price: 23000},
+         {Name: 'Nike Casuals', Price: 2560}
+    ]);
+    
+    useEffect(()=>{
+        
+    },[]);
+
+    return(
+        <div className="container-fluid">
+            <h2>Products Table</h2>
+            <table className="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        products.map((product,index)=><tr key={index}><td>{product.Name}</td><td>{product.Price}</td><td> <button className="btn btn-warning bi bi-pen-fill"></button> <button className="btn btn-danger bi bi-trash mx-2"></button> </td></tr>)
+                    }
+                </tbody>
+            </table>
+        </div>
+    )
+}
+
+
+Ex: Nested Map
+
+data-binding.jsx
+
+import { useEffect, useState } from "react"
+
+export function DataBinding(){
+    
+    const [data] = useState([
+        {Category: 'Electronics', Products: ['Televisions', 'Mobiles']},
+        {Category: 'Fashion', Products: ['Footwear', 'Jeans']}
+    ])
+    
+    useEffect(()=>{
+        
+    },[]);
+
+    return(
+        <div className="container-fluid">
+            <h2>Products</h2>
+            <ol>
+                {
+                    data.map(item=>
+                        <li key={item}>
+                            {item.Category}
+                            <ul>
+                                {
+                                    item.Products.map(product=><li key={product}>{product}</li>)
+                                }
+                            </ul>
+                        </li>
+                    )
+                }
+            </ol>
+            <select>
+                {
+                    data.map(item=>
+                    <optgroup key={item} label={item.Category}>
+                        {
+                            item.Products.map(product=><option key={product}>{product}</option>)
+                        }
+                    </optgroup>)
+                }
+            </select>
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
