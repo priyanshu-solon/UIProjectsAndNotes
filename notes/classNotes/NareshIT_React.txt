@@ -1419,3 +1419,524 @@ export function DataBinding(){
 
 
 
+Bind Data 
+- map()
+- key
+
+Handling Date Type:
+- JavaScript date type is configured using "Date()" constructor. 
+- JavaScript uses a new dynamic memory to allocate date and time values.
+- However React will not allow creating objects as React child.
+- Hence you have to configure date using constructor without "new" operator. 
+
+Syntax:
+	  const  [dept] =  useState(Date());
+
+- React will not allow to present date by using date functions of JavaScript like
+	    toLocaleDateString()
+	    toDateString()
+	    toLocaleTimeString()
+	    toTimeString()
+	    etc..
+
+- React requires 3rd party date libraries to manipulate date and time values
+	a) moment
+	b) dayjs
+	c) luxon  etc.
+
+Setup Moment:
+
+1. Install moment for React
+
+		> npm  install  moment --save
+
+2. Import moment into component
+
+		import   moment  from  "moment";
+
+3. Apply format
+
+	 const  [dept] = useState(Date());
+
+	 {  moment(dept).format( 'string format' )  }
+
+	 Date String Format:
+	
+			dddd		weekday name
+			DD			date number
+			MM			month number
+			MMM		short month format
+			MMMM		long month format
+			yyyy			full year
+
+Ex:
+	       { moment(dept).format('dddd DD, MMMM yyyy) }
+
+
+Regular Expression Type:
+ - Regular expression is enclosed in "/  /".
+ - It comprises of meta characters and quantifiers. 
+ - It uses match() method to compare with a value. 
+
+Ex:
+data-binding.jsx
+
+import { useEffect, useState } from "react";
+import moment from "moment";
+
+export function DataBinding(){
+    
+    const [mobile, setMobile] = useState('');
+    
+    useEffect(()=>{
+        setMobile('+919876543210');
+    },[]);
+
+    return(
+        <div className="container-fluid">
+           <h2>Data Binding</h2>
+           { (mobile.match(/\+91\d{10}/))?'Verified':'Invalid Mobile' }
+        </div>
+    )
+}
+
+			     React AJAX techniques for fetching data from API
+
+- React can use JavaScript AJAX methods like
+	a) XMLHttpRequest
+	b) fetch() 
+
+XMLHttpRequest:
+ - It is the native browser object to make Ajax call from browser. 
+ - It is default synchronous, you have to explicitly make it async. 
+ - It returns only Text and XML response.
+ - It requires explicit parsing methods for other data type.
+ - It is not good in exceptions. 
+ - It is not good in handling security. [ CORS, XSS, XSRF ]
+
+Syntax:
+ 1. Create XMLHttpRequest object
+
+	 var http = new XMLHttpRequest();
+
+ 2. Configure the request
+
+	 http.open("method", "url", async:boolean);
+	 http.send();
+
+3. Execute the request
+
+	http.onreadystatechange = function(){
+
+	}
+
+4. On Ready get the response 
+
+	if (http.readyState === 4)
+	{
+		// http.responseText 
+	}
+
+Ex:
+1. public/product.json
+
+{
+    "title": "Apple iPhone 16 (Pink, 256 GB)",
+    "price": 79900,
+    "image": "iphone-pink.jpg",
+    "rating": {"rate":4.6, "ratings": 19560, "reviews": 5602},
+    "offers": [
+        "Bank Offer5% cashback on Flipkart Axis Bank Credit Card upto ₹4,000 per statement quarter",
+        "Bank Offer5% cashback on Axis Bank Flipkart Debit Card up to ₹750",
+        "Bank OfferFlat ₹10 Instant Cashback on Paytm UPI Trxns. Min Order Value ₹500. Valid once per Paytm account",
+        "Special PriceGet extra ₹5000 off (price inclusive of cashback/coupon)"
+    ]
+}
+
+2. component/databinding
+
+	data-binding.jsx
+
+import { useEffect, useState } from "react";
+
+export function DataBinding(){
+    
+    const [product, setProduct] = useState({title:'', price:0, image:'', rating:{rate:0, ratings:0, reviews:0}, offers:[]});
+    
+    function GetProduct(){
+
+         var http = new XMLHttpRequest();
+         http.open("get","product.json",true);
+         http.send();
+
+         http.onreadystatechange = function(){
+
+               if(http.readyState===4){
+                    setProduct(JSON.parse(http.responseText));
+               }
+
+         }
+
+    }
+
+
+    useEffect(()=>{
+        GetProduct();
+    },[]);
+
+    return(
+        <div className="container-fluid">
+            <div className="row mt-5">
+                <div className="col-3">
+                    <img src={product.image} width="100%" />
+                </div>
+                <div className="col-9">
+                    <div className="fs-4">{product.title}</div>
+                    <div className="mt-2">
+                        <span className="badge bg-success rounded"> {product.rating.rate} <span className="bi bi-star-fill"></span> </span>
+                        <span className="mx-4 fw-bold text-secondary"> {product.rating.ratings.toLocaleString()} ratings & {product.rating.reviews.toLocaleString()} reviews </span>
+                    </div>
+                    <div className="mt-3">
+                        <div className="h1">{product.price.toLocaleString('en-in', { style:"currency", currency:"INR", minimumFractionDigits:0 })}</div>
+                    </div>
+                    <div className="mt-3">
+                        <h5>Available Offers</h5>
+                        <ul className="list-unstyled">
+                            {
+                                product.offers.map(offer=><li className="bi my-3 text-success bi-tag-fill" key={offer}> <span className="text-secondary">{offer}</span> </li>)
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+Fetch Promise: 
+ - It is JavaScript promise. 
+ - Promise is by default async.
+ - It returns the response in binary format. 
+ - It requires explicit conversions. 
+ - It is not good in security.
+
+Syntax:
+	
+      fetch("url")
+		.then(function(response){  convert to json })
+		.then(function(data){  })
+		.catch(function(error){ })
+		.finally(function(){ })
+
+Ex:
+ data-binding.jsx
+
+import { useEffect, useState } from "react";
+
+export function DataBinding(){
+    
+    const [product, setProduct] = useState({title:'', price:0, image:'', rating:{rate:0, ratings:0, reviews:0}, offers:[]});
+    
+    function GetProduct(){
+
+          fetch('product.json')
+          .then(response=> response.json())
+          .then(product=>{
+              setProduct(product);
+          })
+
+    }
+
+
+    useEffect(()=>{
+        GetProduct();
+    },[]);
+
+    return(
+        <div className="container-fluid">
+            <div className="row mt-5">
+                <div className="col-3">
+                    <img src={product.image} width="100%" />
+                </div>
+                <div className="col-9">
+                    <div className="fs-4">{product.title}</div>
+                    <div className="mt-2">
+                        <span className="badge bg-success rounded"> {product.rating.rate} <span className="bi bi-star-fill"></span> </span>
+                        <span className="mx-4 fw-bold text-secondary"> {product.rating.ratings.toLocaleString()} ratings & {product.rating.reviews.toLocaleString()} reviews </span>
+                    </div>
+                    <div className="mt-3">
+                        <div className="h1">{product.price.toLocaleString('en-in', { style:"currency", currency:"INR", minimumFractionDigits:0 })}</div>
+                    </div>
+                    <div className="mt-3">
+                        <h5>Available Offers</h5>
+                        <ul className="list-unstyled">
+                            {
+                                product.offers.map(offer=><li className="bi my-3 text-success bi-tag-fill" key={offer}> <span className="text-secondary">{offer}</span> </li>)
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3rd Party Services for API requests: Axios
+
+- It is asynchronous.
+- It returns data directly in the native format of its source. 
+- Explicit conversions not required. 
+- It is good in handling exceptions. 
+- It returns various status codes. 
+- It can cancel requests. 
+- It is good in security, supports CORS, XSS, XSRF handling. 
+     		CORS	- Cross Origin Resource Sharing
+		XSS		- Cross Site Scripting Attacks
+		XSRF	- Cross Site Request Forgery 
+- It supports handling multiple requests simultaneously at the same time.
+
+
+1. Install axios for project
+
+	> npm  install  axios --save
+
+2. Import axios into component
+
+	import   axios  from  "axios";
+
+3. Make axios request
+
+	axios.get()
+	axios.post()
+	axios.put()	
+	axios.delete() etc.
+
+Syntax:
+	 axios.get("url").then().catch().finally()
+
+	then()		: It is a callback on resolve comprises of a response object with
+				  various details like
+					a) data
+					b) statusCode
+					c) statusText
+					d) header etc.
+
+Syntax:
+	axios.get(url)
+		 .then(function(response){
+ 			response.data;
+			response.status;
+			response.statusText;
+			response.headers;
+		})
+		.catch(function(error){
+			// returns error object
+		})
+		.finally(function(){
+			// always 
+		})
+
+Ex:
+1. public/product.json
+
+{
+    "title": "Apple iPhone 16 (Pink, 256 GB)",
+    "price": 79900,
+    "image": "iphone-pink.jpg",
+    "rating": {"rate":4.6, "ratings": 19560, "reviews": 5602},
+    "offers": [
+        "Bank Offer5% cashback on Flipkart Axis Bank Credit Card upto ₹4,000 per statement quarter",
+        "Bank Offer5% cashback on Axis Bank Flipkart Debit Card up to ₹750",
+        "Bank OfferFlat ₹10 Instant Cashback on Paytm UPI Trxns. Min Order Value ₹500. Valid once per Paytm account",
+        "Special PriceGet extra ₹5000 off (price inclusive of cashback/coupon)"
+    ]
+}
+
+2. data-binding.jsx
+
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+export function DataBinding(){
+    
+    const [product, setProduct] = useState({title:'', price:0, image:'', rating:{rate:0, ratings:0, reviews:0}, offers:[]});
+    
+    function GetProduct(){
+
+         axios.get('product.json').then(response=>{
+              setProduct(response.data);
+         })
+
+    }
+
+
+    useEffect(()=>{
+        GetProduct();
+    },[]);
+
+    return(
+        <div className="container-fluid">
+            <div className="row mt-5">
+                <div className="col-3">
+                    <img src={product.image} width="100%" />
+                </div>
+                <div className="col-9">
+                    <div className="fs-4">{product.title}</div>
+                    <div className="mt-2">
+                        <span className="badge bg-success rounded"> {product.rating.rate} <span className="bi bi-star-fill"></span> </span>
+                        <span className="mx-4 fw-bold text-secondary"> {product.rating.ratings.toLocaleString()} ratings & {product.rating.reviews.toLocaleString()} reviews </span>
+                    </div>
+                    <div className="mt-3">
+                        <div className="h1">{product.price.toLocaleString('en-in', { style:"currency", currency:"INR", minimumFractionDigits:0 })}</div>
+                    </div>
+                    <div className="mt-3">
+                        <h5>Available Offers</h5>
+                        <ul className="list-unstyled">
+                            {
+                                product.offers.map(offer=><li className="bi my-3 text-success bi-tag-fill" key={offer}> <span className="text-secondary">{offer}</span> </li>)
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+						 Class Binding
+- It is the process of binding CSS classes to JSX elements.
+- It requires className property.
+
+Syntax:
+	  <div  className={ `text-success ${dynamic-class}` }> </div>
+
+	  const [dynamic-class] = useState('text-center');
+
+					       Style Binding
+
+- It is the process of binding inline styles to JSX elements.
+- It requires "style" property.
+- Style uses a JavaScript object with style attribute as key and style value as value.
+- Style attribute is always camel case.
+- Style value is always string.
+
+			General				React Property
+			----------------------------------------------------------
+			font-size				fontSize
+			text-align				textAlign
+			color				color
+			background-color		backgroundColor
+			etc..
+Syntax:
+	 <h1  style={ { textAlign:'center', border:'2px solid red'} }>  Text </h1>
+
+Ex:
+	const [ styleObj ]  = useState( { textAlign: 'center', color: 'red' } );
+
+	<h1  style={ styleObj } > Text </h1>
+
+
+						Event Binding
+- What is Event?
+- What is Event Handler?
+- What is Event Listener?
+- Delegate and Observer.
+- Sender and Subscriber.
+- Event Propagation / Bubbling  [ stopPropagation() ]
+- Prevent Default  [ preventDefault() ]
+- Event Arguments 
+	a) Default [this, event]
+	b) Custom
+- Event Looping 
+- Event Profiling 
+
+FAQ: What is Event Looping?
+Ans:  It is the process of executing the tasks on specific event trigger.
+	 Event uses a looping order to execute the given tasks.
+
+	 Synchronous Task => Micro Task => Asynchronous Task
+					     [ Promise ]		[ Async, Await ]
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script>
+          function ClickMe(){
+               console.log("Start Request");
+               setTimeout(function(){
+                    console.log("Async Task");
+               },0);
+               Promise.resolve().then(function(){
+                    console.log("Micro Task");
+               })
+               console.log("End Request");
+          }
+     </script>
+</head>
+<body>
+     <button onclick="ClickMe()">Click</button>
+</body>
+</html>
+						  Event Binding
+					      [Synthetic Events]
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
