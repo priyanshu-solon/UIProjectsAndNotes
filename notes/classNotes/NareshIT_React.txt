@@ -2382,3 +2382,245 @@ Syntax:
 setTimeout(function() { }, interval);
 
 // Use clearTimeout(ref.current) to cancel
+
+
+1/08
+=====
+
+ 1. Event Binding Types
+Event Binding is the process of assigning an event (like a click, keypress, etc.) to a handler function. The common types of events are:
+
+ Mouse Events
+onClick
+
+onMouseOver
+
+onMouseOut
+
+onMouseMove
+
+ Keyboard Events
+onKeyDown
+
+onKeyUp
+
+onKeyPress
+
+ Button Events
+onClick
+
+onDoubleClick
+
+onSubmit (if the button is in a form)
+
+ Element State Events
+onChange
+
+onFocus
+
+onBlur
+
+ Timer Events
+Used to delay or repeat tasks using JavaScript timers.
+
+js
+Copy
+Edit
+setTimeout(callback, delay);
+clearTimeout(reference);
+
+setInterval(callback, interval);
+clearInterval(reference);
+ 2. Throttling in React (Using setInterval)
+ What is Throttling?
+Throttling is the process of invoking a function repeatedly at regular intervals to limit the execution rate.
+
+Executes at fixed intervals using setInterval().
+
+Can be stopped using clearInterval().
+
+ Syntax:
+js
+Copy
+Edit
+let ref = setInterval(() => {
+   // task
+}, 1000);
+
+clearInterval(ref);
+Throttle Demo: throttle-demo.jsx
+jsx
+Copy
+Edit
+import { useEffect, useState } from "react"
+
+export function ThrottleDemo() {
+    const [clock, setClock] = useState();
+
+    function GetTime() {
+        var now = new Date();
+        setClock(now.toLocaleTimeString());
+    }
+
+    useEffect(() => {
+        setInterval(GetTime, 1000);
+    }, [])
+
+    return (
+        <div>
+            <h1 className="text-center">{clock}</h1>
+        </div>
+    );
+}
+ 3. useRef() Hook
+🔸 What is useRef()?
+Used to create mutable values that persist across renders.
+
+Commonly used to store timers, DOM references, or counters.
+
+Do not use useRef() values for direct rendering in the UI.
+
+🔸 Syntax:
+js
+Copy
+Edit
+const ref = useRef(null);
+ref.current = value;
+ 4. Stopwatch Example using useRef()
+stop-watch.jsx
+jsx
+Copy
+Edit
+import { useRef, useState } from "react"
+
+export function StopWatch() {
+    const [hrs, setHours] = useState(0);
+    const [min, setMin] = useState(0);
+    const [sec, setSec] = useState(0);
+    const [milliSec, setMilliSec] = useState(0);
+
+    let thread = useRef(null);
+
+    var ms = 0, s = 0, m = 0, h = 0;
+
+    function StartTimer() {
+        ms++;
+        setMilliSec(ms);
+        if (ms === 999) {
+            s++;
+            setSec(s);
+            ms = 0;
+        }
+    }
+
+    function handleStartClick() {
+        thread.current = setInterval(StartTimer, 1);
+    }
+
+    function handleClearClick() {
+        clearInterval(thread.current);
+        setMilliSec(0);
+        setSec(0);
+        setMin(0);
+        setHours(0);
+    }
+
+    return (
+        <div className="container-fluid p-4">
+            <div className="d-flex justify-content-center">
+                <div className="w-50 fs-4">
+                    <div className="row">
+                        <div className="col p-3 border border-1"><span>{hrs} h</span></div>
+                        <div className="col p-3 border border-1"><span>{min} m</span></div>
+                        <div className="col p-3 border border-1"><span>{sec} s</span></div>
+                        <div className="col p-3 border border-1"><span>{milliSec} ms</span></div>
+                    </div>
+                    <div className="mt-3">
+                        <button onClick={handleStartClick} className="btn btn-primary">Start</button>
+                        <button onClick={handleClearClick} className="btn mx-2 btn-secondary">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+ 5. API Interaction with useRef(): Carousel Example
+🔸 API Used:
+https://fakestoreapi.com/products/1
+
+carousel-demo.jsx
+jsx
+Copy
+Edit
+import axios from "axios"
+import { useEffect, useRef, useState } from "react"
+
+export function CarouselDemo() {
+    const [product, setProduct] = useState({ id: 0, title: null, description: null, image: null, category: null, price: 0, rating: { rate: 0, count: 0 } });
+
+    let productId = useRef(1);
+
+    function LoadProductManually(id) {
+        axios.get(`https://fakestoreapi.com/products/${id}`)
+            .then(response => setProduct(response.data));
+    }
+
+    function handleNextClick() {
+        productId.current += 1;
+        LoadProductManually(productId.current);
+    }
+
+    function handPreviousClick() {
+        productId.current -= 1;
+        LoadProductManually(productId.current);
+    }
+
+    function handleSeekbarChange(e) {
+        productId.current = e.target.value;
+        LoadProductManually(productId.current);
+    }
+
+    useEffect(() => {
+        LoadProductManually(1);
+    }, []);
+
+    return (
+        <div className="container-fluid d-flex justify-content-center">
+            <div className="card w-50 p-2 mt-4">
+                <div className="card-header text-center">{product.title}</div>
+                <div className="card-body">
+                    <div className="row">
+                        <div className="col-1 d-flex flex-column justify-content-center align-items-center">
+                            <button onClick={handPreviousClick} className="btn btn-dark bi bi-chevron-left"></button>
+                        </div>
+                        <div className="col-10">
+                            <img src={product.image} width="100%" height="400" />
+                            <div className="mt-2">
+                                <input type="range" onChange={handleSeekbarChange} min="1" max="20" value={productId.current} className="form-range" />
+                            </div>
+                        </div>
+                        <div className="col-1 d-flex flex-column justify-content-center align-items-center">
+                            <button onClick={handleNextClick} className="btn btn-dark bi bi-chevron-right"></button>
+                        </div>
+                    </div>
+                </div>
+                <div className="card-footer text-center">
+                    <button className="btn btn-success bi bi-play"></button>
+                    <button className="btn btn-danger mx-2 bi bi-pause"></button>
+                </div>
+            </div>
+        </div>
+    );
+}
+ Summary Flow (Learning Order):
+Event Binding → Learn all types: Mouse, Keyboard, Button, State.
+
+Timer Events → setTimeout, clearTimeout, setInterval, clearInterval.
+
+Throttle Concept → Use setInterval to control frequency.
+
+useRef() Hook → Learn how to use useRef for timers or process control.
+
+Stopwatch App → Apply useRef() and setInterval() for a timer UI.
+
+API with useRef → Control API calls (e.g., carousel) using useRef().
